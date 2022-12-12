@@ -1,8 +1,8 @@
 {
-    "name": "october/pensoft-restcoast-theme",
+    "name": "october/pensoft-mambo-theme",
     "type": "october-theme",
-    "description": "Pensoft REST COAST October CMS theme",
-    "keywords": ["october", "cms", "restcoast", "theme"],
+    "description": "Pensoft MAMBO October CMS theme",
+    "keywords": ["october", "cms", "mambo", "theme"],
     "authors": [
         {
             "name": "Kremena Kaleva",
