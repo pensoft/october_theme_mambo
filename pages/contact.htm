@@ -4,34 +4,34 @@ title = "Contact"
 is_hidden = 0
 robot_index = "index"
 robot_follow = "follow"
+header_image = "contact.jpg"
 
 [siteSearchInclude]
-
-[jumbotron]
-jumbotron = "contact"
-background = "#ffffff"
-templates = "template2"
-description_limit = 0
 ==
 <?php
 use Pensoft\Cardprofiles\Models\Profiles;
 
 function onStart(){
-	$this['profiles'] =  Profiles::where('category_id', 1)->get();
+	$this['profiles'] =  Profiles::where('category_id', 2)->get();
 }
 ?>
 ==
 {% component 'siteSearchInclude' %}
 
 <div class="container">
-	<h1 class="page_heading ml-1 mb-4">Contact</h1>
-	<div class="row">
+	<div class="row profile-item-container">
 		{% for profile in profiles %}
 			<div class="col-xs-12 col-md-6 profile-item">
 				<div class="contact_info row">
-					<div class="col-md-5 col-xs-12 coordinator_image aos-init aos-animate" data-aos="fade-up"><img src="{{profile.avatar.thumb(307, 307, {'mode':'crop'})}}" class="fr-fic fr-dii"></div>
-					<div class="col-md-7 col-xs-12 coordinator_info">
-						<h3>{{profile.names}}</h3>
+					<div class="col-md-5 col-xs-12 coordinator_image aos-init aos-animate" data-aos="fade-up">
+                        {% if profile.avatar %}
+                        <img src="{{profile.avatar.thumb(307, 307, {'mode':'crop'})}}" class="fr-fic fr-dii">
+                        {% else %}
+                        <img alt="{{ profile.names }}" src="{{ 'avatar.svg'|media }}" class="no-image">
+                        {% endif %}
+                    </div>
+					<div class="col-md col-xs-12 coordinator_info">
+						<h2>{{profile.names}}</h2>
 						{% if profile.position %}<p class="card_title">{{profile.position}}</p>{% endif %}
 						{% if profile.department %}<p class="contact_affiliation">{{profile.department}}</p>{% endif %}
 						{% if profile.address %}<p class="contact_address"><i class="pr big p-location"></i>{{profile.address}}</p>{% endif %}

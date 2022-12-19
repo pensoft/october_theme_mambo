@@ -4,6 +4,7 @@ title = "Newsletters"
 is_hidden = 0
 robot_index = "index"
 robot_follow = "follow"
+header_image = "media.jpg"
 
 [builderList mediaNewsletterList]
 modelClass = "pensoft\Media\Models\Newsletters"
@@ -24,7 +25,7 @@ function onStart(){
 	if(get('download')){
 		$file = File::find((int)get('download'));
 		$file_name = $file->getLocalPath();
-$recordName = get('file_name') ? get('file_name') : 'REST-COAST_newsletter';
+$recordName = get('file_name') ? get('file_name') : 'MAMBO_newsletter';
 $ext= $file->getExtension();
 
 if (file_exists($file_name)) {
@@ -48,9 +49,6 @@ return Redirect::to('/media-center/newsletters');
 ?>
 ==
 <div class="container">
-	<a href="/media-center" class="back-to"> &#10094; Back to Media center</a><br><br>
-
-	<h1 class="page_heading">Newsletters</h1>
 	<div class="row">
 		{% set records = mediaNewslettersList %}
 		{% set displayColumn = mediaNewslettersList.displayColumn %}
@@ -64,9 +62,9 @@ return Redirect::to('/media-center/newsletters');
 		{% spaceless %}
 		{% if record.newsletter_image %}
 		<div class="col-md-2 col-xs-12">
-			<div class="card-container text-center">
-				<span class="card_image_container" style="background: url({{record.newsletter_image.thumb(243,243,{'mode':'crop'})}}) center center no-repeat;" title="{{record.name}}"></span>
-				<span class="card_title" style="min-height: 100px;">{{record.name}}, {{record.date |date('F Y')}}, {{record.file.size}}</span>
+			<div class="text-center">
+				<span class="card_image_container" style="background: url({{record.newsletter_image.thumb(220,220,{'mode':'crop'})}}) center center no-repeat;" title="{{record.name}}"></span>
+				<span class="card_title" style="min-height: 100px;">{{record.name}}, {{record.date |date('F Y')}}</span>
 				<br><br><a href="{{ record.file.path }}#{{record.file.file_name}}" target="_blank" title="{{record.name}}" class="btn btn-primary">Download</a>
 			</div>
 		</div>

@@ -1,6 +1,7 @@
 url = "/pilots"
 layout = "default"
-title = "Pilots"
+title = "Demonstration sites"
+header_image = 'demonstration-sites.jpg'
 
 [siteSearchInclude]
 
@@ -25,16 +26,15 @@ templates = "template4"
 ==
 {% component 'siteSearchInclude' %}
 <div class="container pilots_background_container">
-    <h1 class="page_heading ml-1 mb-4">Pilots</h1>
     <div class="row top-xs">
         <div class="col-md-6 col-xs-12">
-        {% component 'accordion' %}
+            {% component 'accordion' %}
         </div>
         <div class="col-md-6 col-xs-12">
-			<div class="pilots_svg_map_container">
-				<span class="tooltiptext" id="tooltip">Bulgaria</span>
-				{% partial 'components/pilots_map' %}
-			</div>
+            <div class="pilots_svg_map_container">
+                <span class="tooltiptext" id="tooltip">Bulgaria</span>
+                {% partial 'components/pilots_map' %}
+            </div>
         </div>
     </div>
 </div>

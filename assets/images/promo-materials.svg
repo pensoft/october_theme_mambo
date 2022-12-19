@@ -1,0 +1,16 @@
+<svg id="Group_14751" data-name="Group 14751" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="87.815" height="68.792" viewBox="0 0 87.815 68.792">
+  <defs>
+    <clipPath id="clip-path">
+      <rect id="Rectangle_3444" data-name="Rectangle 3444" width="87.815" height="68.792" fill="rgba(0,0,0,0)" stroke="#707070" stroke-width="2"/>
+    </clipPath>
+  </defs>
+  <g id="Group_14659" data-name="Group 14659" clip-path="url(#clip-path)">
+    <path id="Path_28520" data-name="Path 28520" d="M1.5,14.224v51.45a2.376,2.376,0,0,0,3.26,2.208L24.271,59a1.709,1.709,0,0,0,1-1.555V4.02a1.708,1.708,0,0,0-2.342-1.585L4.487,9.81A4.754,4.754,0,0,0,1.5,14.223ZM30.028,57.316a1.708,1.708,0,0,0,1.167,1.62l16.8,5.6,8.31,2.771a1.708,1.708,0,0,0,2.248-1.621V12.237a1.708,1.708,0,0,0-1.167-1.62l-4-1.333L32.276,2.247a1.708,1.708,0,0,0-2.248,1.621ZM83.817,1.67,64.306,10.55a1.709,1.709,0,0,0-1,1.555V65.532a1.708,1.708,0,0,0,2.342,1.585l18.439-7.375a4.754,4.754,0,0,0,2.987-4.414V3.878A2.378,2.378,0,0,0,83.813,1.67Z" transform="translate(-0.38 -0.38)" fill="rgba(0,0,0,0)" stroke="#fff" stroke-width="2"/>
+    <line id="Line_52" data-name="Line 52" x2="18.134" y2="5.06" transform="translate(34.585 12.138)" fill="none" stroke="#fff" stroke-linecap="round" stroke-width="2"/>
+    <line id="Line_53" data-name="Line 53" x2="18.134" y2="5.06" transform="translate(34.585 20.652)" fill="none" stroke="#fff" stroke-linecap="round" stroke-width="2"/>
+    <line id="Line_54" data-name="Line 54" y1="4.535" x2="10.943" transform="translate(69.99 53.324)" fill="none" stroke="#fff" stroke-linecap="round" stroke-width="2"/>
+    <line id="Line_62" data-name="Line 62" y1="4.535" x2="10.943" transform="translate(69.99 45.109)" fill="none" stroke="#fff" stroke-linecap="round" stroke-width="2"/>
+    <path id="Path_28521" data-name="Path 28521" d="M22.311,30.709,7.841,37.285a.773.773,0,0,1-1.061-.764v-17.7a.829.829,0,0,1,.493-.774l14.47-5.961a.774.774,0,0,1,1.037.774V29.945a.832.832,0,0,1-.469.764" transform="translate(-1.717 24.387)" fill="#44d0bd" stroke="#fff" stroke-width="2"/>
+    <path id="Path_29797" data-name="Path 29797" d="M19.8,29.158,7.67,35.189c-.423.21-.89-.158-.89-.7V18.259a.767.767,0,0,1,.413-.71l12.132-5.467c.419-.189.869.178.869.71V28.458a.773.773,0,0,1-.393.7" transform="translate(62.033 -3.046)" fill="#44d0bd" stroke="#fff" stroke-width="2"/>
+  </g>
+</svg>

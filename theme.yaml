@@ -272,6 +272,7 @@ form:
                     sofia: Sofia-Pro
                     oswald: Oswald
                     poppins: Poppins
+                    lato: Lato
             background:
                 label: Background color
                 comment: Select a custom color to use as background

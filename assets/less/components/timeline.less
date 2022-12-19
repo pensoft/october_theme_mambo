@@ -13,7 +13,8 @@
 .timeline {
     margin: 30px auto 50px auto;
     padding: 0 3px;
-
+    position: relative;
+    height: 400px;
 
     &.vertical {
         display: flex;
@@ -23,58 +24,59 @@
         //align-items: baseline;
 
         .timeline-item {
-          flex-basis: 32%!important;
-          max-width: 32%!important;
+          flex-basis: 200px!important;
+          max-width: 200px!important;
           display: flex;
           flex-direction: column;
+          text-align: center;
+          position: absolute;
 
-          box-shadow: 0 6px 27px rgba(0, 0, 0, 0.3);
-            .timeline-header {
-                display: block;
-                width: 100%;
-                padding: 0  0 0 @timeline-body-padding+30;
-                box-sizing: border-box;
-                margin: 0 auto;
-                border: none;
-                font-family: Oswald;
+          &:nth-of-type(1){
+            left: 250px;
+            top: 0;
+          }
+          &:nth-of-type(2){
+            left: 370px;
+            top: 250px;
+          }
+          &:nth-of-type(3){
+            left: 490px;
+            top: 20px;
+          }
+          &:nth-of-type(4){
+            left: 610px;
+            top: 200px;
+          }
+          &:nth-of-type(5){
+            left: 730px;
+            top: -50px;
+          }
+          &:nth-of-type(6){
+            left: 850px;
+            top: 250px;
+          }
+          &:nth-of-type(7){
+            left: 960px;
+            top: 20px;
+          }
+          &:nth-of-type(8){
+            left: 1080px;
+            top: 320px;
+          }
 
-                &:first-of-type{
-                  .rounded-tl(10px);
-                  .rounded-tr(10px);
-                  padding-top: 15px;
-                  background: @dark-color url(../../assets/images/calendar.svg) left no-repeat;
-                  background-position: 33px 20px;
-                  background-size: 16px;
-                  height: 20%;
-                  min-height: 45px;
-                }
-                &:nth-of-type(2){
-                  background: @dark-color url(../../assets/images/location.svg) left no-repeat;
-                  background-position: 33px 10px;
-                  background-size: 15px;
-                  padding-top: 6px;
-                  padding-bottom: 20px;
-                  height: 20%;
-                  min-height: 45px;
-                }
-            }
+          .timeline-header{
+            display: none;
+          }
 
             .timeline-body {
-                color: @white-color;
-                height: 60%;
-                font-family: Oswald;
-                min-height: 100px;
-              font-size: 22px;
-                .breakpoint-small-down({
-                  font-size: 20px;
-                })
+                color: #102441;
+              font-size: 18px;
+              font-weight: bold;
+                //.breakpoint-small-down({
+                //  font-size: 20px;
+                //})
             }
 
-          .breakpoint-small-down({
-            flex-basis: 100%!important;
-            max-width: 100%!important;
-            margin-bottom: 30px;
-          })
         }
 
       .breakpoint-small-down({
@@ -83,23 +85,4 @@
       })
     }
 
-    .timeline-item {
-        //padding: @timeline-item-padding-y @timeline-item-padding-x;
-        box-shadow: 0 6px 27px rgba(0, 0, 0, 1);
-        background: #4c6b9a;
-        .rounded(10px);
-
-        .timeline-body {
-            background-color: @timeline-bg-message-box;
-            padding: @timeline-body-padding/2 @timeline-body-padding;
-            /*word-break: break-all;*/
-            box-sizing: border-box;
-            //overflow: hidden;
-            .rounded();
-        }
-    }
-
-    .timeline-item:hover{
-      box-shadow: none;
-    }
 }

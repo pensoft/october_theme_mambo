@@ -1,13 +1,39 @@
-<div class="see_all_partners_link">
-	<a href="/partners"> &#10094; All partners</a>
-</div>
 {% for partner in partners %}
-	<div class="col-lg-3 col-sm-6 col-xs-12 partner-item">
-		<div class="partner_logo">
-			{% if partner.cover %}
-			<a href="{{partner.instituion_url}}" target="_blank"><img alt="{{ partner.institution }}" src="{{partner.cover.thumb(auto,70,{'mode':'crop'})}}"></a>
-			{% endif %}
-		</div>
-		<div class="partner_description">{{partner.content|raw}}</div>
+	<div class="col-xs-12 partner-item">
+		<div class="row">
+            <div class="col-xs-12 col-md-8 partner_title mb-2">{{partner.instituion}}</div>
+            <div class="col-xs-8 col-md-4 end-md start-xs partner_link mb-2"><a href="{{partner.instituion_url}}" target="_blank">Visit website</a></div>
+		    <div class="col-xs-12 partner_description">{{partner.content|raw}}</div>
+        </div>
+        {% if insider_members.getIM(partner.id).count > 0 %}
+        <div id="accordion-insider-members">
+            <div class="accordion-border">
+                <div class="row middle-xs accordion-toggle">
+                    <span class="plusminus"><span>Members</span><div class="plus"></div></span>
+                </div>
+                <div class="accordion-content" style="display: none;">
+                    <div class="row top-xs">
+                        {% for profile in insider_members.getIM(partner.id) %}
+                            <div class="contact_info row">
+                                <div class="col-md-2 col-xs-12 coordinator_image">
+                                    {% if profile.avatar %}
+                                    <img alt="{{ profile.names }}" src="{{profile.avatar.thumb(197,197,{'mode':'crop'})}}">
+                                    {% else %}
+                                    <img alt="{{ profile.names }}" src="{{ 'avatar.svg'|media }}" width="197" height="197" class="no-image">
+                                    {% endif %}
+                                </div>
+                                <div class="col-md-10 col-xs-12 coordinator_info">
+                                    <h3>{{ profile.names }}</h3>
+                                    <div class="body">{{ profile.content|raw }}</div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endif %}
 	</div>
+
 {% endfor %}
+

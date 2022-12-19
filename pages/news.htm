@@ -4,13 +4,8 @@ title = "News"
 is_hidden = 0
 robot_index = "index"
 robot_follow = "follow"
+header_image = "news.jpg"
 
-[list]
-maxItems = 15
-templates = "template3"
-thumb_width = 506
-thumb_height = 311
-no_records_message = "Stay tuned for upcoming news!"
 ==
 <?php
 use Pensoft\Articles\Models\Article;
@@ -20,7 +15,9 @@ function urlencode($string){
 }
 function onStart()
 {
-    $this['article'] = Pensoft\Articles\Models\Article::where('slug', $this->param('id'))->first();
+$this['records'] = Article::news()->where('published_at', '<=', 'now()')->where('published', 'true')->orderBy('published_at', 'DESC')->paginate(15, ['*'], 'p');
+
+$this['article'] = Pensoft\Articles\Models\Article::where('slug', $this->param('id'))->where('published', 'true')->first();
 $this['is_detail_page'] = $this['article'] ? true : false;
 $this['allow_share'] = $this['article']['allow_share'] == 'yes' ? true : false;
 if($this['is_detail_page'] and $this['allow_share']){
@@ -75,41 +72,80 @@ $this['related'] = $related;
 ?>
 ==
 <div class="container">
-
-	{% if is_detail_page %}
-	<div class="row single-news-item">
-		<div class="col-xs-12 col-md-5">
-			{% if article.cover %}
-			<img class="content left" src="{{ article.cover|crop_image|resize(673, auto, { mode: 'crop' }) }}" />
-			{% endif %}
-			{% if article.allow_share == 'yes' %}
-				<div class="btn btn-primary share-btn" id="share-{{article.slug}}">Share</div>
-			{% endif %}
-		</div>
-
-		<div class="col-xs-12 col-md-7">
+    {% if is_detail_page %}
+    <div class="row single-news-item">
 
 
-			<div class="news-title">
-				<h1 class="single-new-title">{{article.title}}</h1>
+        <div class="col-xs-12 col-md-7">
 
-			</div>
 
-			<div class="text-published">{{article.pretty_published_at}}</div>
-			<div class="content">
-				{{article.content|raw}}
-			</div>
-		</div>
-	</div>
-	<script>
-        createCustomTippy('#share-{{article.slug}}', {content: '<div class="icons">{% if this.theme.facebook %}<a class="fb-xfbml-parse-ignore pr p-facebook" href="https://www.facebook.com/sharer/sharer.php?u={{page_url}}&amp;src=sdkpreparse" target="_blank" ></a>{% endif %}{% if this.theme.twitter %}<a class="pr p-twitter" href="https://twitter.com/intent/tweet?text={{encoded_title}}{{page_url}}" target="_blank"></a>{% endif %}{% if this.theme.linkedin %}<a class="pr p-linkedin" href="https://www.linkedin.com/sharing/share-offsite/?url={{page_url}}" target="_blank"></a>{% endif %}</div>'})
-	</script>
-	{% else %}
-	<h1 class="page_heading mb-2" style="margin-left: 5px;">News</h1>
-	<div class="row">
-		<div class="col-xs">
-			{% component 'list' %}
-		</div>
-	</div>
-	{% endif %}
+
+            <div class="news-title">
+                <h1 class="single-new-title">{{article.title}}</h1>
+            </div>
+            <div class="text-published">{{article.pretty_published_at}}</div>
+            <div class="content">
+                {{article.content|raw}}
+            </div>
+        </div>
+        <div class="col-xs-12 col-md-5">
+            {% if article.cover %}
+            <div class="row">
+                <img class="content left" src="{{ article.cover|crop_image|resize(673, 411, { mode: 'crop' }) }}" />
+            </div>
+            {% endif %}
+            <div class="row share_container middle-xs">
+                <div class="col-cx-2 start-xs">Share</div>
+                <div class="col-cx-10 end-xs">
+                    {% if this.theme.twitter %}
+                    <a href="http://twitter.com/share?text={{article.title}}&url={{page_url}}" target="_blank" class="btn p-primary pr p-twitter normal"></a>
+                    {% endif %}
+                    {% if this.theme.facebook %}
+                    <a href="https://www.facebook.com/sharer/sharer.php?u={{page_url}}&amp;src=sdkpreparse" target="_blank" class="btn pr p-primary p-facebook normal"></a>
+                    {% endif %}
+                    {% if this.theme.linkedin %}
+                    <a href="https://www.linkedin.com/sharing/share-offsite/?url={page_url}" target="_blank" class="btn pr p-primary p-linkedin normal"></a>
+                    {% endif %}
+                    </div>
+            </div>
+
+        </div>
+    </div>
+
+    {% else %}
+
+    <div class="row">
+        {% for record in records %}
+        {% spaceless %}
+        <div class="col-xs-12 news-item">
+            <div class="row news_column">
+                <div class="text-published">{{record.published_at | date('d F Y') }}</div>
+                <a href="{{'news'|page}}/{{record.slug}}">
+                    {% if record.cover %}
+                    <div class="news-image col-xs-12 center-xs">
+                        <img class="news-img-top" src="{{record.cover.getThumb(379, 305, {'mode': 'crop'})}}">
+                    </div>
+                    {% endif %}
+                    <div class="news-container col-xs-12">
+
+                        <div class="news-title">
+                            <h3 class="card-title">{{record.title}}</h3>
+                        </div>
+
+                        <div class="body">{{ record.content|length > 450 ? record.content|striptags|slice(0, 450) ~ '...' : record.content|raw  }}</div>
+                    </div>
+                </a>
+            </div>
+
+        </div>
+
+        {% endspaceless %}
+        {% else %}
+        No news
+        {% endfor %}
+    </div>
+    <div class="row container">
+        {{ records.render|raw }}
+    </div>
+    {% endif %}
 </div>

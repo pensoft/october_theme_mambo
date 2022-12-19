@@ -16,8 +16,7 @@
 
 .navbar-loggedin-user ul li{
   display: inline;
-  padding: 0 20px 0 0;
-  font-size: 16px;
+  padding: 0 20px;
   .breakpoint-small-down({
     padding: 0 10px;
   })
@@ -25,6 +24,8 @@
 
 .navbar-loggedin-user ul li a{
   color: @white-color;
+  max-width: 150px;
+  padding: 10px;
   .breakpoint-small-down({
     padding: 0;
     font-size: 16px;
@@ -71,23 +72,23 @@
   });
 }
 
-#menuToggle{
-  .breakpoint-huge-down({
-    order: 3;
-  });
-  .breakpoint-small-down({
-    order: 2;
-  });
-}
-
-.navbar-brand{
-  .breakpoint-huge-down({
-    order: 1;
-  });
-  .breakpoint-small-down({
-    order: 1;
-  });
-}
+//#menuToggle{
+//  .breakpoint-huge-down({
+//    order: 3;
+//  });
+//  .breakpoint-small-down({
+//    order: 2;
+//  });
+//}
+//
+//.navbar-brand{
+//  .breakpoint-huge-down({
+//    order: 1;
+//  });
+//  .breakpoint-small-down({
+//    order: 1;
+//  });
+//}
 //
 //.search{
 //  .breakpoint-huge-down({

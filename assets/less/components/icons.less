@@ -40,7 +40,7 @@
       .font-size(0.80);
     }
     &.normal {
-      .font-size(1.5);
+      .font-size(1.2);
     }
     &.big {
       .font-size(2);
@@ -50,7 +50,7 @@
     }
 
     &.medium {
-      .font-size(3);
+      .font-size(2.7);
     }
     &.large {
       .font-size(3.5);
@@ -61,45 +61,45 @@
     &.p-primary {
       color: @button-background-color!important;
       background-color: @white-color!important;
-      padding: 10px!important;
-      line-height: 64px;
-      width: 84px;
-      height: 84px;
-      text-align: center;
+        width: 71px;
+        height: 71px;
+        display: flex;
+        align-items: center;
+        border: none;
+        margin-bottom: 16px;
       .rounded(50%);
+
+      &.subscribe_home{
+        .rounded(50px);
+        width: fit-content;
+        padding: 10px 50px 0 50px!important;
+        font-family: Muli;
+        font-weight: bold;
+        .breakpoint-small-down({
+          font-size: 16px;
+        });
+      }
     }
     &.p-primary:hover {
-      opacity: 0.7!important;
+      box-shadow: none;
     }
 
     &.p-facebook{
-      color: #4D6C9C!important;
+        color: @link-color!important;
     }
     &.p-twitter{
       color: @link-color!important;
     }
 
     &.p-secondary {
-      background: @dark-color!important;
-      color: @white-color!important;
-      border: 1px solid @white-color!important;
-      font-weight: 600;
-      padding: 5px!important;
-      .rounded(50%);
       line-height: 1em!important;
     }
     &.p-secondary:hover {
-      background: @white-color!important;
-      color: @dark-color!important;
-      border: 1px solid @white-color!important;
-      line-height: 1em;
-      font-weight: 600;
-      padding: 5px!important;
-      opacity: 1!important;
+      opacity: 0.7!important;
     }
-  
+
     &.p-search {
-      color: #4D6C9C;
+      color: @white-color;
     }
     &.p-success {
       color: @success-color;
@@ -182,120 +182,118 @@
 }
 
 
+
 .p-researchgate:before {
-  content: "\e900";
+    content: "\e900";
 }
 .p-location:before {
-  content: "\e90a";
+    content: "\e90c";
 }
 .p-time:before {
-  content: "\e901";
+    content: "\e901";
 }
 .p-gearwheel:before {
-  content: "\e902";
+    content: "\e902";
 }
 .p-country-ch:before {
-  content: "\e903";
+    content: "\e903";
 }
 .p-country-de:before {
-  content: "\e904";
+    content: "\e904";
 }
 .p-country-fr:before {
-  content: "\e905";
+    content: "\e905";
 }
 .p-country-pl:before {
-  content: "\e900";
+    content: "\e900";
 }
 .p-search:before {
-  content: "\ea82";
+    content: "\ea82";
 }
 .p-facebook:before {
-  content: "\eaeb";
+    content: "\eaeb";
 }
 .p-instagram:before {
-  content: "\eaec";
+    content: "\eaec";
 }
 .p-linkedin:before {
-  content: "\eaed";
+    content: "\eaed";
 }
 .p-mail:before {
-  content: "\e900";
+    content: "\e900";
 }
 .p-website:before {
-  content: "\e903";
+    content: "\e903";
 }
 .p-organisation:before {
-  content: "\e911";
+    content: "\e911";
 }
 .p-phone:before {
-  content: "\e904";
+    content: "\e906";
 }
 .p-mendeley:before {
-  content: "\eaef";
+    content: "\eaef";
 }
 .p-reddit:before {
-  content: "\eaf0";
+    content: "\eaf0";
 }
 .p-RSS:before {
-  content: "\eaf1";
+    content: "\eaf1";
 }
 .p-twitter:before {
-  content: "\eaf2";
+    content: "\eaf2";
 }
 .p-youtube:before {
-  content: "\eaf3";
+    content: "\eaf3";
 }
 .p-subscribe:before {
-  content: "\e907";
-}
-.p-subscribe2:before {
-  content: "\e902";
+    content: "\e901";
 }
 .p-mail:before {
-  content: "\e900";
+    content: "\e900";
 }
 .p-key:before {
-  content: "\eaf4";
+    content: "\eaf4";
 }
 .p-minus:before {
-  content: "\eaf5";
+    content: "\eaf5";
 }
 .p-person:before {
-  content: "\eaf6";
+    content: "\eaf6";
 }
 .p-plus:before {
-  content: "\eaf7";
+    content: "\eaf7";
 }
 .p-hamburger:before {
-  content: "\eaf8";
+    content: "\eaf8";
 }
 .p-share1:before {
-  content: "\eaf9";
+    content: "\eaf9";
 }
 .p-back:before {
-  content: "\eafb";
+    content: "\eafb";
 }
 .p-colapse:before {
-  content: "\eafc";
+    content: "\eafc";
 }
 .p-remove:before {
-  content: "\eafd";
+    content: "\eafd";
 }
 .p-trash:before {
-  content: "\eafe";
+    content: "\eafe";
 }
 .p-download:before {
-  content: "\eaff";
+    content: "\e914";
 }
 .p-drag:before {
-  content: "\eb00";
+    content: "\eb00";
 }
 .p-expand:before {
-  content: "\eb01";
+    content: "\eb01";
 }
 .p-forward:before {
-  content: "\eb02";
+    content: "\eb02";
 }
 .p-add:before {
-  content: "\eb03";
+    content: "\eb03";
 }

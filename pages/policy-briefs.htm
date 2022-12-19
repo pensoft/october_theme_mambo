@@ -1,18 +1,19 @@
 title = "Policy briefs"
 layout = "default"
 url = "/media-center/policy-briefs"
+header_image = "media.jpg"
 
 ==
 <?php
-use Pensoft\Media\Models\Graphic;
+use Pensoft\Media\Models\Presentations;
 use System\Models\File;
 
 function onStart(){
-	$this['recordsList'] =  Graphic::get();
+	$this['recordsList'] =  Presentations::get();
 	if(post('download')){
 		$file = File::find((int)post('download'));
 		$file_name = $file->getLocalPath();
-$recordName = post('file_name') ? post('file_name') : 'REST-COAST_policy_brief';
+$recordName = post('file_name') ? post('file_name') : 'MAMBO_policy_brief';
 $ext= $file->getExtension();
 
 if (file_exists($file_name)) {
@@ -37,8 +38,6 @@ return Redirect::to('/media-center/policy-briefs');
 ==
 
 <div class="container presentation">
-    <a href="/media-center" class="back-to"> &#10094; Back to Media center</a><br><br>
-    <h1 class="page_heading">Policy briefs</h1>
     <div class="row">
         {% set records = recordsList %}
         {% set displayColumn = recordsList.displayColumn %}
@@ -51,10 +50,9 @@ return Redirect::to('/media-center/policy-briefs');
         {# Use spaceless tag to remove spaces inside the A tag. #}
         {% spaceless %}
         <div class="col-md-2 col-xs-12 mt-4">
-            <div class="card-container text-center">
+            <div class="text-center">
                 <span class="card_title">{{record.name}}</span><br>
-                <span class="card_image_container" style="background: url({{record.image.thumb(220, 220,{'mode':'crop'})}}) center center no-repeat;" title="{{record.name}}"></span>
-
+                <span class="card_image_container" style="background: url({{record.presentation_image.thumb(220, 220,{'mode':'crop'})}}) center center no-repeat;" title="{{record.name}}"></span>
                 <br><a href="{{ record.file.path }}#{{record.file.file_name}}" target="_blank" title="{{record.name}}" class="btn btn-primary">Download</a>
             </div>
         </div>

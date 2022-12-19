@@ -28,10 +28,14 @@
 }
 
 .media_label{
-  font-family: Oswald;
-  color: @dark-color;
-  font-size: 22px;
-  font-weight: 600;
+  color: white;
+    background: @link-color;
+    border-radius: 30px;
+    width: 300px;
+    max-width: 100vw;
+    display: block;
+    margin-top: 80px;
+    padding: 7px 0!important;
 }
 
 
@@ -43,8 +47,39 @@
 .press-releases .link a{
   margin-right: 20px;
 }
-//.back-to::before{
-//  content: "";
-//  background: url(../../assets/images/Icons/arrow.svg) no-repeat;
-//  transform: rotate(90deg);
-//}
+
+.press-relieses-container{
+    .date{
+        color: @link-color;
+    }
+    .press-relies-item{
+        background: #EFF5F5;
+        padding: 30px!important;
+        margin: 30px 0!important;
+        color: @dark-color!important;
+        font-size: 16px;
+        .rounded(5px);
+        position: relative;
+    }
+}
+
+.media_center_container{
+  .card_image_container{
+    background-color: transparent;
+    //height: 100px;
+    //width: 150px;
+  }
+  .card-container{
+    flex-direction: column!important;
+    display: block;
+    height: unset;
+    width: unset;
+    text-align: left;
+
+
+  }
+  .card_title{
+    font-family: Muli;
+    font-weight: 500;
+  }
+}
