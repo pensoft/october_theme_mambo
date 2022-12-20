@@ -18,6 +18,11 @@ update_selector = "#gdpr-reload"
 [carousel]
 id = 1
 
+[jumbotron]
+jumbotron = "intro"
+background = "transperant"
+templates = "template1"
+description_limit = 0
 ==
 <!DOCTYPE html>
 <html>
@@ -79,7 +84,7 @@ id = 1
         <div class="intro" data-aos="fade-right">
             <div class="logo_main"></div>
             <h1>MODERN APPROACHES TO THE MONITORING OF BIODIVERSITY</h1>
-            <div class="tagline">The MAMBO project will develop, test and implement enabling tools for monitoring conservation status and ecological requirements of species and habitats for which knowledge gaps still exist. MAMBO brings together the technical expertise of computer science, remote sensing, social science expertise on human-technology interactions, environmental economy, and citizen science, with the biological expertise on species, ecology, and conservation biology.</div>
+            <div class="tagline">{% component 'jumbotron' %}</div>
             <div class="intro_btn"><a href="{{about|page}}">More about the project</a> </div>
         </div>
     </div>
