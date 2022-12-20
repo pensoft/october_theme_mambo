@@ -63,12 +63,6 @@ nav:not(.navbar){
       font-weight: 600;
     }
 
-    .card-title:hover{
-      opacity: 0.7;
-    }
-
-
-
     .news-item{
       padding: 0px;
       //position: relative;
@@ -108,8 +102,14 @@ nav:not(.navbar){
       }
 
       .news_column:hover .news-container{
-          opacity: 0.7!important;
+          opacity: 1!important;
       }
+        &:hover{
+            -moz-box-shadow:  0px 0px 26px rgba(68, 208, 189, 0.3);
+            -webkit-box-shadow:  0px 0px 26px rgba(68, 208, 189, 0.3);
+            box-shadow: 0px 0px 26px rgba(68, 208, 189, 0.3);
+        }
+
       .breakpoint-large-down({
         display: flex;
       });
@@ -256,6 +256,9 @@ nav:not(.navbar){
             margin-bottom: 0!important;
             margin-left: 10px;
             justify-content: center;
+            &:hover{
+                background: @dark-color!important;
+            }
         }
     }
 

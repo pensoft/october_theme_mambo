@@ -8,7 +8,7 @@ numberOfLevels = 2
 
 ==
 
-<nav class="navbar {% if this.page.id != 'home' %} fixed pr-1 pl-1{% endif %}" {% if this.page.id == 'home' %}style="z-index: 1030;"{% endif %} id="headernavbar">
+<nav class="navbar fixed pr-1 pl-1" id="headernavbar">
     <div id="menuToggle">
         <input type="checkbox" />
         <span></span>
@@ -17,9 +17,8 @@ numberOfLevels = 2
         {% component 'menu' %}
     </div>
 
-    {% if this.page.id != 'home' %}
-    <a href="{{'home'|page}}" class="navbar-brand" style="background-image: url('{{ this.theme.site_logo.getPath() }}'); background-position: center; background-size: contain;"></a>
-    {% endif %}
+
+    <a href="{{'home'|page}}" class="navbar-brand" id="navbar-brand" style="background-image: url('{{ this.theme.site_logo.getPath() }}'); background-position: center; background-size: contain;"></a>
 
 
     <div class="navbar-collapse collapse end-xs" id="headerNavbarNav" style="display: none;">
@@ -30,7 +29,7 @@ numberOfLevels = 2
             </ul>
         </div>
     </div>
-    <a class="pr p-search large search-btn" onclick="showSearchForm();"></a>
+    <a class="pr p-search middle search-btn" onclick="showSearchForm();"></a>
 
     <div id="search" class="search" style="display: none;">
         <div class="close-search" onclick="hideSearchForm();"></div>

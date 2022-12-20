@@ -5,6 +5,20 @@ var documentHasScroll = function() {
     return window.innerHeight <= document.body.offsetHeight;
 };
 
+window.addEventListener('scroll', function (e) {
+    var headernavbar = document.getElementById("headernavbar");
+    var logo = document.getElementById("navbar-brand");
+    if (window.scrollY > headernavbar.offsetHeight){
+        var headerNavbarNav = document.querySelector('#headerNavbarNav')
+        headernavbar.classList.add('scrolled');
+        logo.classList.add('scrolled');
+    }else{
+        headernavbar.classList.remove('scrolled');
+        logo.classList.remove('scrolled');
+    }
+});
+
+
 $(document).ready(function() {
 	/* MENU */
 	$('.navbar-nav').attr('id', 'menu'); // please don't remove this line
@@ -793,11 +807,13 @@ function handlePilotsSVGMapMouseMove(event) {
 	}
 
 	switch (title) {
-		case 'Berlin':
-		case 'Rotterdam':
-		case 'Barcelona':
-		case 'Sheffield':
-		case 'Boston':
+		case 'Salisbury Plain':
+		case 'French Mediterranean natural reserves':
+		case 'Friedeburg':
+		case 'LTER Petrohan':
+		case 'Mols Bjerge National Park':
+		case 'Oostvaardersplassen Nature Reserve':
+		case 'Island of Comino and surrounding islets':
 			break;
 		default:
 			return tooltip.classList.remove("active");
