@@ -200,18 +200,6 @@ $(document).ready(function() {
 			$content.slideDown({
 				scrollTop: $content.offset().top - $('header').height()
 			}, speed);
-			// var screenSize = getScreenSize();
-			// if (screenSize.width < 800) {
-			// 	// scroll to element
-			// 	$('html, body').animate({
-			// 		scrollTop: $content.offset().top - $('header').height() + 300 // mobile
-			// 	}, speed);
-			// }else{
-			// 	//scroll to element icons top
-			// 	$('html, body').animate({
-			// 		scrollTop:  $content.offset().top - $('header').height() + 300
-			// 	}, speed);
-			// }
 
 			// Prevent the anchor\'s default click action
 			e.preventDefault();
@@ -230,6 +218,7 @@ $(document).ready(function() {
 	$('.about h1.display-1').attr('data-aos', 'fade-up');
 	$('h2.underline').attr('data-aos', 'fade-up');
 	$('.news_column').attr('data-aos', 'fade-up');
+	$('.objectives_list .col-md-4').attr('data-aos', 'fade-up');
 	// $('.timeline-item').attr('data-aos', 'fade-up');
 
 	// about page

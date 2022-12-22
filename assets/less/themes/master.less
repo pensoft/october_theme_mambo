@@ -80,7 +80,7 @@ h1.display-1, h2.underline{
     max-height: 100vh;
     overflow: hidden;
     //background: rgba(42, 58, 78, 0.6);
-    background: rgba(0, 0, 0, 0.6);
+    background: rgba(0, 0, 0, 0.3);
     height: 100vh;
     top: 0;
     left: 0;
@@ -231,8 +231,9 @@ h1.display-1, h2.underline{
 
     .jumbotron{
         width: 100%;
+        max-width: 1600px;
         display: flex;
-        align-items: start;
+        align-items: start!important;
         margin-top: 80px;
 
         .breakpoint-small-down({
@@ -280,8 +281,14 @@ h1.display-1, h2.underline{
         top: 0;
         right: 0;
         width: 50%;
+          height: 680px;
+          max-height: 680px!important;
+          display: flex;
+          align-items: end;
+          justify-content: end;
           .breakpoint-small-down({
-              width: 100%;
+              width: 90%;
+              height: auto;
           });
       }
 
