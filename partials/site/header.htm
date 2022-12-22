@@ -44,20 +44,22 @@ numberOfLevels = 2
 
 
 
-{% if this.theme.header_image %}
+{% if this.theme.header_image and page_id != 'search' %}
 <div class="header-image {{page_id}}">
-    {%if page_id != 'home' and page_id != 'search' %}
-    {%if this.page.header_image %}
-    <div class="header-image-bar" style="background-image: url('{{this.page.header_image|media}}'); background-position: left center;"></div>
-    {%else%}
-    <div class="header-image-bar" style="background-image: url('{{this.theme.header_image.getPath()}}'); background-position: left center;"></div>
-    {%endif%}
-    <div class="jumbotron" data-aos="fade-up">
-        <h1 class="underline white  {% if page_id == 'home'%}home-page-header{% endif %}">{%if page_title%} {{page_title}} {%else%} {{site_name}} {%endif%}</h1>
-        {% if page_id == 'home' and tag_line %}
-        <p>{{tag_line}}</p>
+    {% if page_id != 'search' %}
+        {%if page_id != 'home' and page_id != 'search' %}
+        {%if this.page.header_image %}
+        <div class="header-image-bar" style="background-image: url('{{this.page.header_image|media}}'); background-position: left center;"></div>
+        {%else%}
+        <div class="header-image-bar" style="background-image: url('{{this.theme.header_image.getPath()}}'); background-position: left center;"></div>
+        {%endif%}
+        <div class="jumbotron" data-aos="fade-up">
+            <h1 class="underline white  {% if page_id == 'home'%}home-page-header{% endif %}">{%if page_title%} {{page_title}} {%else%} {{site_name}} {%endif%}</h1>
+            {% if page_id == 'home' and tag_line %}
+            <p>{{tag_line}}</p>
+            {% endif %}
+        </div>
         {% endif %}
-    </div>
     {% endif %}
 </div>
 {% endif %}
