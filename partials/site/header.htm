@@ -46,7 +46,7 @@ numberOfLevels = 2
 
 {% if this.theme.header_image %}
 <div class="header-image {{page_id}}">
-    {%if page_id != 'home' %}
+    {%if page_id != 'home' and page_id != 'search' %}
     {%if this.page.header_image %}
     <div class="header-image-bar" style="background-image: url('{{this.page.header_image|media}}'); background-position: left center;"></div>
     {%else%}
