@@ -17,27 +17,29 @@ function onStart()
 $this['records'] = Article::news()->where('published_at', '<=', 'now()')->where('published', 'true')->orderBy('published_at', 'DESC')->paginate(15, ['*'], 'p');
 
 $this['article'] = Pensoft\Articles\Models\Article::where('slug', $this->param('id'))->where('published', 'true')->first();
+if($this['article']){
+
 $this['is_detail_page'] = $this['article'] ? true : false;
 $this['allow_share'] = $this['article']['allow_share'] == 'yes' ? true : false;
-if($this['is_detail_page'] and $this['allow_share']){
-$this['page_url'] = $this->pageUrl('');
-$this['encoded_title'] = urlencode($this['article']['title']);
-$this['slug'] = $this['article']['slug'];
-\BennoThommo\Meta\Meta::set('twitter:card', 'summary');
-\BennoThommo\Meta\Meta::set('twitter:title', $this['article']['title']);
-\BennoThommo\Meta\Meta::set('twitter:description', str_limit(Html::strip($this['article']['content']), 255));
-\BennoThommo\Meta\Meta::set('og:title', $this['article']['title']);
-\BennoThommo\Meta\Meta::set('og:description', str_limit(Html::strip($this['article']['content']), 255) );
-\BennoThommo\Meta\Meta::set('og:type', 'article');
-\BennoThommo\Meta\Meta::set('og:url', $this->pageUrl(''));
-if($this['article']['cover']){
-\BennoThommo\Meta\Meta::set('twitter:image', $this['article']['cover']->getThumb(300, 300, ['mode' => 'crop']));
+    if($this['is_detail_page'] and $this['allow_share']){
+        $this['page_url'] = $this->pageUrl('');
+        $this['encoded_title'] = urlencode($this['article']['title']);
+        $this['slug'] = $this['article']['slug'];
+        \BennoThommo\Meta\Meta::set('twitter:card', 'summary');
+        \BennoThommo\Meta\Meta::set('twitter:title', $this['article']['title']);
+        \BennoThommo\Meta\Meta::set('twitter:description', str_limit(Html::strip($this['article']['content']), 255));
+        \BennoThommo\Meta\Meta::set('og:title', $this['article']['title']);
+        \BennoThommo\Meta\Meta::set('og:description', str_limit(Html::strip($this['article']['content']), 255) );
+        \BennoThommo\Meta\Meta::set('og:type', 'article');
+        \BennoThommo\Meta\Meta::set('og:url', $this->pageUrl(''));
+        if($this['article']['cover']){
+            \BennoThommo\Meta\Meta::set('twitter:image', $this['article']['cover']->getThumb(300, 300, ['mode' => 'crop']));
 
-\BennoThommo\Meta\Meta::set('og:image', $this['article']['cover']->getThumb(600, 314, ['mode' => 'crop']));
-\BennoThommo\Meta\Meta::set('og:image:width', 600);
-\BennoThommo\Meta\Meta::set('og:image:height', 314);
-}
-
+            \BennoThommo\Meta\Meta::set('og:image', $this['article']['cover']->getThumb(600, 314, ['mode' => 'crop']));
+            \BennoThommo\Meta\Meta::set('og:image:width', 600);
+            \BennoThommo\Meta\Meta::set('og:image:height', 314);
+        }
+    }
 }
 
 if($this['is_detail_page']){
