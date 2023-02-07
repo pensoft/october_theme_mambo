@@ -97,6 +97,9 @@
 .breakpoint-huge(@rules) {
   @media screen and (min-width: @breakpoint-huge-min-width) { @rules(); }
 }
+.breakpoint-screen(@rules) {
+  @media screen and (min-width: @breakpoint-screen-min-width) { @rules(); }
+}
 
 .breakpoint-small-down(@rules) {
   @media screen and (max-width: @breakpoint-small-max-width) { @rules(); }

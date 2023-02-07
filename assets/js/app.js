@@ -264,6 +264,15 @@ $(document).ready(function() {
 
 	$('.see_all_partners_link').hide();
 
+    if (width >= 1024){
+        $('.pilots .key_0, .pilots .key_1, .pilots .key_2, .pilots .key_3, .pilots .key_4, .pilots .key_5, .pilots .key_6, .pilots .key_7, .pilots .key_8, .pilots .key_9, .pilots .key_10').wrapAll('<div class="col-md-12 col-xs-12" />');
+    }
+    if (width < 1024) {
+        $('.key_1, .key_3, .key_5, .key_7, .key_9, .key_11, .key_13').wrapAll('<div class="col-md-6 col-xs-12" />');
+        $('.key_0, .key_2, .key_4, .key_6, .key_8, .key_10, .key_12').wrapAll('<div class="col-md-6 col-xs-12" />');
+        $('.pilots .key_0, .pilots .key_1, .pilots .key_2, .pilots .key_3, .pilots .key_4, .pilots .key_5, .pilots .key_6, .pilots .key_7, .pilots .key_8, .pilots .key_9, .pilots .key_10').wrapAll('<div class="col-md-12 col-xs-12" />');
+    }
+
 
 });
 
