@@ -67,15 +67,13 @@ $this['slug'] = $this->param('slug');
 {% if not slug %}
 <div class="container">
     <div class="tabs">
-        <a class="" href="#calendarView">Calendar view</a>
         <a class="" href="#listView">List view</a>
+        <a class="" href="#calendarView">Calendar view</a>
     </div>
 </div>
 <!--tabs content	-->
     <div class="container">
-        <div class="row" id="calendarView">
-            {% component 'calendar' %}
-        </div>
+        
         <div class="row" id="listView">
             <div class="events_list_container">
                 {% for entry in entries %}
@@ -85,7 +83,7 @@ $this['slug'] = $this->param('slug');
                     <div class="row between-xs time_and_date">
                         <div class="col-md-2 start-md col-xs-12 center-xs">{{entry.event_date}}</div>
                         <div class="col-md-1 start-md col-xs-12 center-xs">{{entry.start|date('l')}}</div>
-                        <div class="col-md start-md col-xs-12 center-xs">{{entry.event_time}}</div>
+                        <div class="col-md start-md col-xs-12 center-xs"></div>
                     </div>
                     <div class="row">
                         <!--<div class="col-xs-1">{{entry.start|date('g:i')}}</div> <div class="col-xs-11">{{entry.title}}</div>-->
@@ -99,6 +97,9 @@ $this['slug'] = $this->param('slug');
                 {{ entries.fragment('listView').render|raw }}
             </div>
 
+        </div>
+        <div class="row" id="calendarView">
+            {% component 'calendar' %}
         </div>
     </div>
 
