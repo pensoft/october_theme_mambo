@@ -74,19 +74,11 @@ description_limit = 0
     </div>
 </div>
 
-
-	<div class="container">
-	<!-- subscribes -->
-	<div class="row between-xs">
-
-        <div class="col-xs-12"><h1 class="display-1">Follow MAMBO</h1></div>
-        <div class="col-lg-6 col-sm-5 col-xs-12">
-			<div class="twitter-widget">
-			    <a class="twitter-timeline" href="https://twitter.com/mambo_eu?ref_src=twsrc%5Etfw">Tweets by mambo_eu</a>
-                <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
-			</div>
-		</div>
-		<div class="col-sm-6 col-xs-12 social-media-container">
+<!-- Subscribe -->
+<div class="container">
+    <div class="col-xs-12"><h1 class="display-1">Follow MAMBO</h1></div>
+    <div class="follow-container">
+        <div class="col-md-6 col-xs-12 social-media-container">
             <div class="subscribe-items">
                 {% if this.theme.twitter_url %}
                 <a href="{{this.theme.twitter_url}}" target="_blank" class="btn p-primary pr p-twitter medium"></a>
@@ -107,7 +99,6 @@ description_limit = 0
                 <a href="{{this.theme.researchgate_url}}" target="_blank" class="btn pr p-primary p-researchgate medium" style="width: 64px;"></a>
                 {% endif %}
             </div>
-		</div>
-	</div>
-
+        </div>
+    </div>
 </div>
