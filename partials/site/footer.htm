@@ -50,6 +50,9 @@ theme = "dark-bottom"
                         <div class="head">GET IN TOUCH
                             <div class="social-networks">
                                 <div class="icons mt-1">
+                                    {% if this.theme.bluesky_url %}
+                                    <a href="{{this.theme.bluesky_url}}" target="_blank" class="pr p-secondary p-bluesky big" target="_blank" style="font-size: 22px;"></a>
+                                    {% endif %}
                                     {% if enable_facebook and facebook_url %}
                                     <a href="{{facebook_url}}" target="_blank" class="pr p-secondary p-facebook big" target="_blank"></a>
                                     {% endif %}
@@ -95,7 +98,7 @@ theme = "dark-bottom"
                     {%endif %}
                 </div>
                 <div class="funding-text">
-                <p>MAMBO receives funding from the European Union's Horizon Europe research and innovation programme under grant agreement No.101060639.</p> 
+                <p>MAMBO receives funding from the European Union's Horizon Europe research and innovation programme under grant agreement No.101060639.</p>
                 <p>Views and opinions expressed are those of the author(s) only and do not necessarily reflect those of the European Union or the European Commission. Neither the EU nor the EC can be held responsible for them.</p>
                 </div>
                 {% endif %}

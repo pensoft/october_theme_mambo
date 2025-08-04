@@ -66,7 +66,7 @@ description_limit = 0
 </div>
 
 <div class="container rio_banner">
-   {% component 'rio_banner' %}     
+   {% component 'rio_banner' %}
 </div>
 
 
@@ -91,6 +91,9 @@ description_limit = 0
     <div class="follow-container">
         <div class="col-md-6 col-xs-12 social-media-container">
             <div class="subscribe-items">
+                {% if this.theme.bluesky_url %}
+                <a href="{{this.theme.bluesky_url}}" target="_blank" class="btn p-primary pr p-bluesky medium"></a>
+                {% endif %}
                 {% if this.theme.twitter_url %}
                 <a href="{{this.theme.twitter_url}}" target="_blank" class="btn p-primary pr p-twitter medium"></a>
                 {% endif %}
