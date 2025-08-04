@@ -1,6 +1,6 @@
-url = "/media-center/logo"
+url = "/media-center/brand-materials"
 layout = "default"
-title = "Logo"
+title = "Brand materials"
 is_hidden = 0
 robot_index = "index"
 robot_follow = "follow"
@@ -64,33 +64,44 @@ return Redirect::to('/media-center/logo');
 	{# Use spaceless tag to remove spaces inside the A tag. #}
 	{% spaceless %}
 	{% if record.logo_image %}
-		<div class="col-md-3 col-xs-12 center-xs">
+		<div class="col-md-3 col-xs-12 center-xs mb-4">
 			<p><img src="{{record.logo_image.path}}" title="{{record.name}}" style="max-width: 250px;"></p>
 
 		{% if record.file_jpg %}
 		<div class="col-xs-12">
 			<div class="text-center">
-				<span class="card_title">JPG, {{record.file_jpg.size}}</span><br>
-				<br><a href="{{ ''| page }}?{{queries}}&download={{record.file_jpg.id}}&file_name={{record.file_jpg.file_name|replace({' ': '_'})}}" title="Logo pack" class="btn btn-primary">Download</a>
+				<span class="card_title">{{record.name}}</span><br>
+				<br><a href="{{ ''| page }}?{{queries}}&download={{record.file_jpg.id}}&file_name={{record.file_jpg.file_name|replace({' ': '_'})}}" title="Brand materials" class="btn btn-primary">Download</a>
 			</div>
 		</div>
 		{% endif %}
 		{% if record.file_png %}
 		<div class="col-xs-12">
 			<div class="text-center">
-				<span class="card_title">PNG, {{record.file_png.size}}</span><br>
-				<br><a href="{{ ''| page }}?{{queries}}&download={{record.file_png.id}}&file_name={{record.file_png.file_name|replace({' ': '_'})}}" title="Logo pack" class="btn btn-primary">Download</a>
+				<span class="card_title">{{record.name}}</span><br>
+				<br><a href="{{ ''| page }}?{{queries}}&download={{record.file_png.id}}&file_name={{record.file_png.file_name|replace({' ': '_'})}}" title="Brand materials" class="btn btn-primary">Download</a>
 			</div>
 		</div>
 		{% endif %}
 		{% if record.file_eps %}
 		<div class="col-xs-12">
 			<div class="text-center">
-				<span class="card_title">SVG, {{record.file_eps.size}}</span><br>
-				<br><a href="{{ ''| page }}?{{queries}}&download={{record.file_eps.id}}&file_name={{record.file_eps.file_name|replace({' ': '_'})}}" title="Logo pack" class="btn btn-primary">Download</a>
+				<span class="card_title">{{record.name}}</span><br>
+				<br><a href="{{ ''| page }}?{{queries}}&download={{record.file_eps.id}}&file_name={{record.file_eps.file_name|replace({' ': '_'})}}" title="Brand materials" class="btn btn-primary">Download</a>
 			</div>
 		</div>
 		{% endif %}
+
+		
+		{% if record.file_pdf %}
+		<div class="col-xs-12">
+			<div class="text-center">
+				<span class="card_title">{{record.name}}</span><br>
+				<br><a href="{{record.file_pdf.path}}" title="Brand materials" class="btn btn-primary">Download</a>
+			</div>
+		</div>
+		{% endif %}
+
         </div>
 	{% endif %}
 

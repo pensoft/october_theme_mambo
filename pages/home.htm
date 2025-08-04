@@ -35,6 +35,12 @@ title = 1
 background = "transperant"
 templates = "template1"
 description_limit = 0
+
+[jumbotron rio_banner]
+jumbotron = "rio-banner"
+background = "transperant"
+templates = "template3"
+description_limit = 0
 ==
 <!-- vision -->
 <div class="container-fluid bg-secondary vision">
@@ -58,6 +64,11 @@ description_limit = 0
             </div>
         </div>
 </div>
+
+<div class="container rio_banner">
+   {% component 'rio_banner' %}     
+</div>
+
 
 <!-- latest from news -->
 <div class="container">

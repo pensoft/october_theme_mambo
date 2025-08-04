@@ -134,7 +134,7 @@ $(document).ready(function() {
 
 	var count = $("h1").text().length;
 
-	$('.tabs').each(function(){
+	$('.events .tabs').each(function(){
 		// For each set of tabs, we want to keep track of
 		// which tab is active and its associated content
 		var $active, $content, $links = $(this).find('a');
@@ -808,7 +808,7 @@ function handlePilotsSVGMapMouseMove(event) {
 	}
 
 	switch (title) {
-		case 'Salisbury Plain':
+		case 'Strawberry Hill':
 		case 'French Mediterranean natural reserves':
 		case 'Friedeburg':
 		case 'LTER Petrohan':

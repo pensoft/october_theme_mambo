@@ -25,8 +25,8 @@ numberOfLevels = 1
 [cookieConsent]
 message = "This website uses cookies to ensure you get the best experience on our website."
 dismiss = "Got it!"
-learnMore = "More info"
-link = "/privacy-policy"
+learnMore = "Opt-out here"
+link = "/privacy-policy#cookies"
 theme = "dark-bottom"
 ==
 <div class="container-fluid border-box subscribe-newsletter-background">
@@ -54,18 +54,18 @@ theme = "dark-bottom"
                                     <a href="{{facebook_url}}" target="_blank" class="pr p-secondary p-facebook big" target="_blank"></a>
                                     {% endif %}
                                     {% if enable_twitter and twitter_url %}
-                                    <a href="{{twitter_url}}" target="_blank" class="pr p-secondary p-twitter big" target="_blank"></a>
+                                    <a href="{{twitter_url}}" target="_blank" class="pr p-secondary p-twitter big" target="_blank" style="font-size: 22px;"></a>
                                     {% endif %}
                                     {% if enable_linkedin and linkedin_url %}
-                                    <a  href="{{linkedin_url}}" target="_blank" class="pr p-secondary p-linkedin big" target="_blank"></a>
+                                    <a  href="{{linkedin_url}}" target="_blank" class="pr p-secondary p-linkedin big" target="_blank" style="font-size: 31px;"></a>
                                     {% endif %}
                                     {% if enable_youtube and youtube_url %}
-                                    <a  href="{{youtube_url}}" target="_blank" class="pr p-secondary p-youtube big" target="_blank"></a>
+                                    <a  href="{{youtube_url}}" target="_blank" class="pr p-secondary p-youtube big" target="_blank" style="font-size: 34px;"></a>
                                     {% endif %}
                                     {% if enable_instagram and instagram_url %}
                                     <a  href="{{instagram_url}}" target="_blank" class="pr p-secondary p-instagram big" target="_blank"></a>
                                     {% endif %}
-                                    <a href="{{'contact'|page}}" class="pr p-secondary p-mail big"></a>
+                                    <a href="{{'contact'|page}}" class="pr p-secondary p-mail big" style="font-size: 16px!important;"></a>
                                 </div>
                             </div>
                         </div>
