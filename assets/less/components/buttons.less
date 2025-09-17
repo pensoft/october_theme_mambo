@@ -54,6 +54,27 @@ button:not(:disabled) {
         });
     }
 
+    &.solutions, &.tutorial{
+        background: url("../../assets/images/button1.jpg") center no-repeat;
+        background-size: cover;
+        color: white;
+        border-radius: 50px;
+        width: 75%;
+        height: 62px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 500;
+        &:hover{
+            opacity: 0.6;
+        }
+    }
+
+    &.tutorial{
+        background: url("../../assets/images/button2.jpg") center no-repeat;
+        background-size: cover;
+    }
+
     &.no-padding {
         padding: 0!important;
     }
