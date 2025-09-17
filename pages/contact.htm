@@ -36,7 +36,7 @@ function onStart(){
 						{% if profile.department %}<p class="contact_affiliation">{{profile.department}}</p>{% endif %}
 						{% if profile.address %}<p class="contact_address"><i class="pr big p-location"></i>{{profile.address}}</p>{% endif %}
 						{% if profile.phone %}<p class="contact_phone"><i class="pr big p-phone"></i>{{profile.phone}}</p>{% endif %}
-						{% if profile.email %}<p class="contact_mail"><i class="pr big p-mail"></i><a href="mailto:{{profile.email}}">E-mail</a></p>{% endif %}
+						{% if profile.email %}<p class="contact_mail"><i class="pr big p-mail"></i><a href="mailto:{{profile.email}}">{{profile.email}}</a></p>{% endif %}
 					</div>
 				</div>
 			</div>
