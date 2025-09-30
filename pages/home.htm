@@ -42,6 +42,17 @@ background = "transperant"
 templates = "template3"
 description_limit = 0
 ==
+<?php
+
+use Pensoft\Calendar\Models\Entry;
+use Carbon\Carbon;
+
+function onStart() {
+    $this['entries'] = Entry::where('end', '>', Carbon::now())->where('show_on_timeline', true)->where('is_internal', false)->orderBy('start', 'asc')->take(3)->get();
+}
+
+?>
+==
 <!-- vision -->
 <div class="container-fluid bg-secondary vision">
 		<div class="row between-md around-xs">
@@ -68,6 +79,41 @@ description_limit = 0
 <div class="container rio_banner">
    {% component 'rio_banner' %}
 </div>
+
+
+{% if entries.count %}
+<div class="container event-items-homepage">
+    <h1 class="display-1">Upcoming MAMBO events</h1>
+    <div class="event-items-homepage2 mb-4">
+        {% for event in entries %}
+            <div class="row middle-xs events_item aos-init aos-animate" data-aos="fade-up">
+                {% if event.cover_image %}
+                <div class="col-md-4 col-xs-12">
+                    <a class="events-image col-xs-12 center-xs" href="{{'events'|page}}/{{event.slug}}">
+                        <img class="events-img" src="{{event.cover_image.path}}">
+                    </a>
+                </div>
+                {% endif %}
+                <div class="col-md col-xs-12">
+                    <div class="events-container row">
+                        <div class="col-md-2 col-xs-12 text-published-dark">{{ event.start|date('H:m') }}</div>
+                        <div class="col-md-2 col-xs-12 text-published">{{ event.start|date('d M Y') }}</div>
+                        <div class="col-md-12 col-xs-12 events-title">
+                            <h3 class="card-title"><a href="{{'events'|page}}/{{event.slug}}">{{ event.title}}</a></h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+    <div class="center-xs">
+        <a class="btn btn-primary view_all" href="{{'events'|page}}">All events</a>
+    </div>
+</div>
+
+
+
+{% endif %}
 
 
 <!-- latest from news -->
