@@ -96,7 +96,7 @@ function onStart() {
                 {% endif %}
                 <div class="col-md col-xs-12">
                     <div class="events-container row">
-                        <div class="col-md-2 col-xs-12 text-published-dark">{{ event.start|date('H:m') }}</div>
+                        <div class="col-md-2 col-xs-12 text-published-dark">{{ event.start|date('H:i') }}</div>
                         <div class="col-md-2 col-xs-12 text-published">{{ event.start|date('d M Y') }}</div>
                         <div class="col-md-12 col-xs-12 events-title">
                             <h3 class="card-title"><a href="{{'events'|page}}/{{event.slug}}">{{ event.title}}</a></h3>
