@@ -4,6 +4,151 @@ url = "/technologies"
 
 [siteSearchInclude]
 ==
+<?php
+function onStart(){
+    use Pensoft\Accordions\Models\Item;
+    $this['records'] = Item::where('category_id', 3)->get();
+}
+?>
+==
 {% component 'siteSearchInclude' %}
 
-<div class="conatiner"></div>
+<div class="container">
+
+    <div class="tabs">
+        <a onclick="animateMap(this, 'green', '#44D0BD');" class="active">Light trap (AMI-trap)</a>
+        <a onclick="animateMap(this, 'red', '#DD3E78');">Pollinator camera</a>
+        <a onclick="animateMap(this, 'yellow', '#C8CE45');">AUDIOMOTHS</a>
+        <a onclick="animateMap(this, 'orange', '#FC7D7D');">Plant Quadrat Image analysis</a>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6 col-xs-12">
+            <div class="tech_items">
+                    <div class="tech_item">
+                        <div class="tech_title">Malta</div>
+                        <div class="tech_desc">
+                            Island of Comino and surrounding islets
+                        </div>
+                        <div class="tech_points">
+                            <span class="green">&nbsp;</span>
+                            <span class="red">&nbsp;</span>
+                            <span class="orange">&nbsp;</span>
+                        </div>
+                    </div>
+
+                    <div class="tech_item">
+                        <div class="tech_title">Denmark</div>
+                        <div class="tech_desc">
+                            Mols Bjerge National Park
+                        </div>
+                        <div class="tech_points">
+                            <span class="green">&nbsp;</span>
+                            <span class="red">&nbsp;</span>
+                            <span class="yellow">&nbsp;</span>
+                            <span class="orange">&nbsp;</span>
+                        </div>
+                    </div>
+
+                    <div class="tech_item">
+                        <div class="tech_title">The Netherlands</div>
+                        <div class="tech_desc">
+                            Oostvaardersplassen Nature Reserve
+                        </div>
+                        <div class="tech_points">
+                            <span class="green">&nbsp;</span>
+                            <span class="red">&nbsp;</span>
+                        </div>
+                    </div>
+
+                    <div class="tech_item">
+                        <div class="tech_title">Germany</div>
+                        <div class="tech_desc">
+                            Friedeburg
+                        </div>
+                        <div class="tech_points">
+                            <span class="green">&nbsp;</span>
+                            <span class="red">&nbsp;</span>
+                        </div>
+                    </div>
+
+                    <div class="tech_item">
+                        <div class="tech_title">Bulgaria</div>
+                        <div class="tech_desc">
+                            LTER Petrohan
+                        </div>
+                        <div class="tech_points">
+                            <span class="red">&nbsp;</span>
+                        </div>
+                    </div>
+
+                    <div class="tech_item">
+                        <div class="tech_title">United Kingdom</div>
+                        <div class="tech_desc">
+                            Strawberry Hill
+                        </div>
+                        <div class="tech_points">
+                            <span class="green">&nbsp;</span>
+                            <span class="red">&nbsp;</span>
+                            <span class="yellow">&nbsp;</span>
+                        </div>
+                    </div>
+
+
+                    <div class="tech_item">
+                        <div class="tech_title">France</div>
+                        <div class="tech_desc">
+                            French Mediterranean natural reserves
+                        </div>
+                        <div class="tech_points">
+                            <span class="green">&nbsp;</span>
+                            <span class="red">&nbsp;</span>
+                            <span class="orange">&nbsp;</span>
+                        </div>
+                    </div>
+            </div>
+        </div>
+        <div class="col-md-6 col-xs-12">
+            {% partial 'components/technologies_map' %}
+        </div>
+    </div>
+
+</div>
+
+
+<div class="container">
+
+    <div class="row">
+        <div class="col-md-12 col-xs-12">
+            {% for key, item in records %}
+            <div class="accordion-border key_{{key}}" role="article">
+                <div class="row middle-xs accordion-toggle"
+                     role="button"
+                     tabindex="0"
+                     aria-expanded="false"
+                     aria-controls="accordion-content-{{key}}"
+                     aria-labelledby="accordion-title-{{key}}">
+<!--                    <div class="col-md-2 col-xs-2 start-md center-xs">-->
+<!--                        <div class="green_bullet" aria-hidden="true">{{item.prefix}}</div>-->
+<!--                    </div>-->
+                    <div class="col-md-12 col-xs-12 accordion_container">
+                        <h2 class="accordion_title" id="accordion-title-{{key}}">{{item.title}}</h2>
+                        <div class="accordion-content"
+                             id="accordion-content-{{key}}"
+                             role="region"
+                             aria-labelledby="accordion-title-{{key}}"
+                             aria-hidden="true"
+                             style="display: none;">
+                            {{item.body|raw}}
+                        </div>
+                        <div class="plusminus" aria-hidden="true">
+                            <span class="plus">Read more</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+</div>

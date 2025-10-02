@@ -5,6 +5,8 @@ var documentHasScroll = function() {
     return window.innerHeight <= document.body.offsetHeight;
 };
 
+var width = window.innerWidth;
+
 window.addEventListener('scroll', function (e) {
     var headernavbar = document.getElementById("headernavbar");
     var logo = document.getElementById("navbar-brand");
@@ -123,6 +125,20 @@ $(document).ready(function() {
             $(this).next(".accordion-content").slideDown(300);
             $(this).children(".plusminus").html('<span>Members</span><span class="minus"></span>');
         }
+    });
+
+    $('body').on('click', '.technologies .accordion-toggle', function () {
+        if ($(this).children().find(".accordion-content").is(':visible')) {
+            $(this).children().find(".accordion-content").slideUp(300);
+            $(this).children().find(".plusminus").html('<span class="plus">Read more</span>');
+        } else {
+            $(this).children().find(".accordion-content").slideDown(300);
+            $(this).children().find(".plusminus").html('<span class="minus">Read less</span>');
+        }
+    });
+
+    $('.technologies .accordion-content').each(function (index, value) {
+        $(value).find('a').attr("onclick", "window.open(this.href, '_blank');")
     });
 
 	onHashChange();
@@ -276,8 +292,29 @@ $(document).ready(function() {
         $('.pilots .key_0, .pilots .key_1, .pilots .key_2, .pilots .key_3, .pilots .key_4, .pilots .key_5, .pilots .key_6, .pilots .key_7, .pilots .key_8, .pilots .key_9, .pilots .key_10').wrapAll('<div class="col-md-12 col-xs-12" />');
     }
 
+    $('#mylibraryForm a:nth-of-type(3)').text('Relevant publications');
+
 
 });
+
+function animateMap(el, colorClass, colorRGB){
+    $('.tabs a').each(function(){
+        $(this).removeClass('active');
+    });
+
+    $(el).addClass('active');
+
+    $('.technologies svg path').each(function(){
+        if(!$(this).hasClass('label') && !$(this).hasClass('text') && !$(this).hasClass('pin')){
+            $(this).css({ fill: '#DAE4E3' });
+        }
+
+        if($(this).hasClass(colorClass)){
+            $(this).css({ fill: colorRGB });
+        }
+    });
+
+}
 
 function onHashChange(){
 	$("path").removeClass('active_path');

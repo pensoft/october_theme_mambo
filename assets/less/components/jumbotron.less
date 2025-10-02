@@ -326,3 +326,122 @@
     }
 
 }
+
+.technologies{
+
+    .tech_items{
+        margin-top: 120px;
+        display: flex;
+        flex-wrap: wrap-reverse;
+        flex-direction: row-reverse;
+        justify-content: flex-end;
+    }
+
+    .tech_item{
+        width: 220px;
+        height: 140px;
+        /* UI Properties */
+        background: #EFF5F5;
+        border-radius: 21px;
+        padding: 30px;
+        margin-bottom: 14px;
+        margin-right: 14px;
+        flex-grow: 1;
+        flex-basis: 50%;
+        max-width: 220px;
+
+        .tech_title{
+            font: normal normal bold 22px/30px Lato;
+            letter-spacing: 0px;
+            color: #35393E;
+            margin-bottom: 7px;
+        }
+        .tech_desc{
+            font: normal normal bold 15px/22px Lato;
+            letter-spacing: 0px;
+            color: #35393E;
+            min-height: 40px;
+            margin-bottom: 28px;
+        }
+
+        .tech_points{
+            display: flex;
+            align-items: center;
+            justify-content: start;
+
+            span{
+                width: 26px;
+                height: 26px;
+                border-radius: 50%;
+                margin-right: 10px;
+                display: inline-flex;
+                background: #44D0BD;
+
+                &.red{
+                    background: #DD3E78;
+                }
+                &.orange{
+                    background: #FC7D7D;
+                }
+                &.yellow{
+                    background: #C8CE45;
+                }
+            }
+        }
+    }
+
+    .tabs{
+        a{
+            font: normal normal bold 32px/30px Lato;
+            color: #35393E;
+            position: relative;
+            padding-left: 36px;
+            margin-right: 54px;
+            cursor: pointer;
+            &:before{
+                width: 26px;
+                height: 26px;
+                content: '';
+                background: #44D0BD;
+                border-radius: 50%;
+                position: absolute;
+                left: 0;
+                top: 7px;
+            }
+            &:after{
+                width: 0;
+                height: 1px;
+                content: '';
+                background: #2A3A4E57;
+                position: absolute;
+                left: 36px;
+                bottom: -12px;
+                transition: all 0.3s ease-in-out;
+            }
+
+            &.active, &:hover{
+                &:after{
+                    width: calc(~'100% - 36px');
+                }
+            }
+
+            &:nth-of-type(2){
+                &:before{
+                    background: #DD3E78;
+                }
+            }
+
+            &:nth-of-type(3){
+                &:before{
+                    background: #C8CE45;
+                }
+            }
+
+            &:nth-of-type(4){
+                &:before{
+                    background: #FC7D7D;
+                }
+            }
+        }
+    }
+}

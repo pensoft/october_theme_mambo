@@ -517,3 +517,130 @@
 }
 
 
+/* technologies */
+
+.technologies .accordion-border{
+    border: none;
+    padding: 40px!important;
+    margin: 0 0 20px 0;
+    font-size: 1em;
+    cursor: pointer;
+    width: calc(~'100% - 80px');
+    background: #EFF5F5;
+    .rounded(70px);
+    position: relative;
+    .breakpoint-small-down({
+        min-height: 79px;
+        max-width: 90%;
+        overflow: hidden;
+    });
+}
+
+.technologies .accordion-toggle{
+    background: none;
+    border: none;
+    border-radius: unset;
+    padding: 0;
+    color: #35393E;
+    font-size: 1em;
+    flex-wrap: nowrap;
+    position: relative;
+
+
+    h2{
+        margin-bottom: 0;
+        font-size: 32px;
+        font-weight: 600;
+        font-family: Montserrat;
+        color: #35393E;
+        text-align: left!important;
+    }
+
+}
+.technologies .accordion-content{
+    padding-top: 80px;
+    line-height: 1.5em!important;
+    width: 100%!important;
+}
+
+
+.technologies .accordion-content p{
+    font-size: 20px;
+    font-family: Lato;
+    .breakpoint-large-down({
+        padding: 0!important;
+        text-align: left!important;
+    });
+}
+
+.technologies .plusminus{
+    max-width: 55px;
+    height: 55px;
+    text-align: right;
+    vertical-align: middle;
+    color: @default-color;
+    font-size: 1em;
+    position: absolute;
+    top: 0px;
+    right: 0px;
+
+    .plus, .minus{
+        text-align: center;
+        vertical-align: middle;
+        color: @default-color;
+        font-size: 25px;
+        font-weight: normal;
+    }
+
+    .plus::before{
+        content: '\002B';
+    }
+    .minus::before{
+        content: '\2212';
+    }
+}
+
+.technologies .plusminus .plus, .technologies .plusminus .minus{
+    color: transparent;
+}
+
+
+.technologies .accordion-border{
+    //.breakpoint-small-down({
+    //    width: 90%;
+    //    margin-bottom: 20px!important;
+    //    padding: 0!important;
+    //    background: #EFF5F5!important;
+    //    .rounded(70px);
+    //    position: relative;
+    //    font-size: 16px;
+    //    padding: 5% !important;
+    //});
+    .accordion-content{
+        h3{
+            font-size: 32px;
+            font-weight: 600;
+        }
+    }
+    //.col-xs.start-xs{
+    //    margin-left: 85px;
+    //    margin-top: 40px;
+    //    font-weight: bold;
+    //    .breakpoint-small-down({
+    //        font-size: 16px;
+    //        margin-left: 70px;
+    //    });
+    //}
+    //
+    //.green_bullet {
+    //
+    //    .breakpoint-small-down{
+    //        background-size: 63px!important;
+    //        font-size: 20px!important;
+    //    }
+    //}
+}
+
+
+
+
