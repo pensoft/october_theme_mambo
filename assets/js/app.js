@@ -293,6 +293,7 @@ $(document).ready(function() {
     }
 
     $('#mylibraryForm a:nth-of-type(3)').text('Relevant publications');
+    $('.library .row.center-xs.mb-1').append('<a href="/media-center/videos" class="videos_tab">Videos</a>');
 
 
 });

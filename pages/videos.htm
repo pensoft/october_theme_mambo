@@ -48,7 +48,27 @@ return Redirect::to('/media-center/videos');
 }
 ?>
 ==
-<div class="container">
+<div class="container library">
+
+<!--    <div class="row">-->
+<!--        <div class="col-xs-12">-->
+<!--            <form method="GET" id="typeForm" action="">-->
+<!--                <div class="tabs" id="mylibraryForm">-->
+<!--                    <a data-type="0" class="active">All documents</a>-->
+<!--                    <a data-type="1">Deliverables</a>-->
+<!--                    <a data-type="2">Relevant publications</a>-->
+<!--                    <a data-type="3">MAMBO publications</a>-->
+
+<!--                </div>-->
+<!--                <input type="hidden" name="type" id="typeInput" value="">-->
+
+<!--            </form>-->
+<!--        </div>-->
+<!--    </div>-->
+
+
+
+
 	<div class="row">
 		{% set records = mediaVideosList %}
 		{% set displayColumn = mediaVideosList.displayColumn %}
