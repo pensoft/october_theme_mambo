@@ -80,7 +80,7 @@ return Redirect::to('/media-center/videos');
 		{% for record in records %}
 		{# Use spaceless tag to remove spaces inside the A tag. #}
 		{% spaceless %}
-		<div class="col-md-6 col-xs-12">
+		<div class="col-md-6 col-xs-12 mb-4">
 			<div class="">
 				<p class="card_title font-weight-bold">{{record.name}}</p>
 
@@ -107,9 +107,9 @@ return Redirect::to('/media-center/videos');
 				{% endif %}
 
                 {% if record.description %}
-                <p>{{record.description|raw}}</p>
+                {{record.description|raw}}
                 {% endif %}
-                
+
 			</div>
 		</div>
 
