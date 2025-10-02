@@ -83,6 +83,9 @@ return Redirect::to('/media-center/videos');
 		<div class="col-md-6 col-xs-12">
 			<div class="">
 				<p class="card_title font-weight-bold">{{record.name}}</p>
+                {% if record.description %}
+                <p>{{record.description|raw}}</p>
+                {% endif %}
 				{% if record.file %}
 				<video controls="" width="100%"><source src="{{record.file.path}}" type="video/mp4"></video>
 
