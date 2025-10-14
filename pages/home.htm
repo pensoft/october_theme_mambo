@@ -45,10 +45,14 @@ description_limit = 0
 ==
 <?php
 use Pensoft\Calendar\Models\Entry;
+use Pensoft\Partners\Models\Partners;
 use Carbon\Carbon;
 
 function onStart() {
     $this['entries'] = Entry::where('end', '>', Carbon::now())->where('show_on_timeline', true)->where('is_internal', false)->orderBy('start', 'asc')->take(3)->get();
+
+    $this['international'] = Partners::where('type',  2)->get();
+    $this['european'] = Partners::where('type',  4)->get();
 }
 ?>
 ==
@@ -129,6 +133,68 @@ function onStart() {
         {% component 'numbers' %}
     </div>
 </div>
+
+
+
+<!--partners-->
+{% if international.count > 0 %}
+<div class="container">
+    <h1 class="display-1">Strategic partners and collaborators</h1>
+    <div class="row">
+        <div class="col-md-6 col-xs-12">
+            <div class="inernational_partners">
+                <div class="partners_title">
+                    International initiatives and networks
+                </div>
+                <div class="row partners_list">
+                    {% for i in international %}
+                        <div class="col-md-6 col-xs-12">
+                            <div class="internal-partner-item">
+                                {% if i.cover %}
+                                <img class="partner_cover" src="{{i.cover.thumb(195, auto, {'mode':'crop'})}}" alt="Logo of {{i.instituion}}" title="{{i.instituion}}">
+                                {% else %}
+                                {{i.instituion}}
+                                {% endif %}
+                            </div>
+                        </div>
+
+                    {% endfor %}
+                    <div class="col-md-6 col-xs-12">
+                        <div class="international_partners_text">
+                            The improved EU-wide framework for the mapping and monitoring of biodiversity and ecosystem services
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 col-xs-12">
+            <div class="inernational_partners">
+                <div class="partners_title">
+                    EU Projects
+                </div>
+                <div class="partners_list">
+                    {% for i in european %}
+                    <div class="col-md-6 col-xs-12">
+                        <div class="internal-partner-item">
+                            {% if i.cover %}
+                            <img class="partner_cover" src="{{i.cover.thumb(195, auto, {'mode':'crop'})}}" alt="Logo of {{i.instituion}}" title="{{i.instituion}}">
+                            {% else %}
+                            {{i.instituion}}
+                            {% endif %}
+
+                            <a href="{{i.instituion_url}}" target="_blank" aria-label="Link to {{i.instituion}} website (opens in new tab)">&nbsp;</a>
+                        </div>
+                    </div>
+
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endif %}
+
+
 
 <!-- Subscribe -->
 <div class="container">
