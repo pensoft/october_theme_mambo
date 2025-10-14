@@ -155,8 +155,9 @@ function onStart() {
                                 {% else %}
                                 {{i.instituion}}
                                 {% endif %}
-
+                                {% if i.instituion_url %}
                                 <a href="{{i.instituion_url}}" target="_blank" aria-label="Link to {{i.instituion}} website (opens in new tab)">&nbsp;</a>
+                                {% endif %}
                             </div>
                         </div>
 
@@ -184,7 +185,9 @@ function onStart() {
                             {{i.instituion}}
                             {% endif %}
 
+                            {% if i.instituion_url %}
                             <a href="{{i.instituion_url}}" target="_blank" aria-label="Link to {{i.instituion}} website (opens in new tab)">&nbsp;</a>
+                            {% endif %}
                         </div>
                     </div>
 
