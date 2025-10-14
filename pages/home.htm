@@ -14,6 +14,7 @@ baseUrl = "/news"
 templates = "template4"
 thumb_width = 440
 thumb_height = 235
+title_max_length = 150
 
 [jumbotron vision]
 jumbotron = "vision"
@@ -43,14 +44,12 @@ templates = "template3"
 description_limit = 0
 ==
 <?php
-
 use Pensoft\Calendar\Models\Entry;
 use Carbon\Carbon;
 
 function onStart() {
     $this['entries'] = Entry::where('end', '>', Carbon::now())->where('show_on_timeline', true)->where('is_internal', false)->orderBy('start', 'asc')->take(3)->get();
 }
-
 ?>
 ==
 <!-- vision -->
@@ -96,7 +95,7 @@ function onStart() {
                 {% endif %}
                 <div class="col-md col-xs-12">
                     <div class="events-container row">
-                        <div class="col-md-2 col-xs-12 text-published-dark">{{ event.start|date('H:i') }}</div>
+                        <!--<div class="col-md-2 col-xs-12 text-published-dark">{{ event.start|date('H:i') }}</div>-->
                         <div class="col-md-2 col-xs-12 text-published">{{ event.start|date('d M Y') }}</div>
                         <div class="col-md-12 col-xs-12 events-title">
                             <h3 class="card-title"><a href="{{'events'|page}}/{{event.slug}}">{{ event.title}}</a></h3>
