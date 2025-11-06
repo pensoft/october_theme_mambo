@@ -1,8 +1,7 @@
-title = "Policy briefs"
-layout = "default"
 url = "/media-center/policy-briefs"
+layout = "default"
+title = "Policy briefs"
 header_image = "media.jpg"
-
 ==
 <?php
 use Pensoft\Media\Models\Presentations;
@@ -36,7 +35,6 @@ return Redirect::to('/media-center/policy-briefs');
 }
 ?>
 ==
-
 <div class="container presentation">
     <div class="row">
         {% set records = recordsList %}
@@ -49,7 +47,7 @@ return Redirect::to('/media-center/policy-briefs');
         {% for record in records %}
         {# Use spaceless tag to remove spaces inside the A tag. #}
         {% spaceless %}
-        <div class="col-md-2 col-xs-12 mt-4">
+        <div class="col-md-4 col-xs-12 mt-4">
             <div class="text-center">
                 <span class="card_title">{{record.name}}</span><br>
                 <span class="card_image_container" style="background: url({{record.presentation_image.thumb(220, 220,{'mode':'crop'})}}) center center no-repeat;" title="{{record.name}}"></span>
