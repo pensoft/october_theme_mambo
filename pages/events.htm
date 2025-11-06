@@ -147,11 +147,11 @@ $this['slug'] = $this->param('slug');
 {% if entry %}
 <article aria-labelledby="event-title">
     <div class="container">
-        <nav aria-label="Breadcrumb">
-            <a href="{{'events'|page}}" class="go-back-link" aria-label="Back to events">
-                Back to events
-            </a>
-        </nav>
+<!--        <nav aria-label="Breadcrumb">-->
+<!--            <a href="{{'events'|page}}" class="go-back-link" aria-label="Back to events">-->
+<!--                Back to events-->
+<!--            </a>-->
+<!--        </nav>-->
 
         <div class="row newslist single-news-item">
             <div class="col-xs-12">
@@ -187,9 +187,8 @@ $this['slug'] = $this->param('slug');
                         <span class="share-label">Share</span>
                     </div>
                     <nav class="col-cx-10 end-xs" aria-label="Share event">
-                        <ul class="share-links">
+                        <div class="share-links">
                             {% if this.theme.twitter %}
-                            <li>
                                 <a href="http://twitter.com/share?text={{entry.title}}&url={{page_url}}"
                                    target="_blank"
                                    rel="noopener noreferrer"
@@ -197,10 +196,8 @@ $this['slug'] = $this->param('slug');
                                    aria-label="Share on Twitter (opens in new window)">
                                     <span class="sr-only">Twitter</span>
                                 </a>
-                            </li>
                             {% endif %}
                             {% if this.theme.facebook %}
-                            <li>
                                 <a href="https://www.facebook.com/sharer/sharer.php?u={{page_url}}&amp;src=sdkpreparse"
                                    target="_blank"
                                    rel="noopener noreferrer"
@@ -208,10 +205,8 @@ $this['slug'] = $this->param('slug');
                                    aria-label="Share on Facebook (opens in new window)">
                                     <span class="sr-only">Facebook</span>
                                 </a>
-                            </li>
                             {% endif %}
                             {% if this.theme.linkedin %}
-                            <li>
                                 <a href="https://www.linkedin.com/sharing/share-offsite/?url={{page_url}}"
                                    target="_blank"
                                    rel="noopener noreferrer"
@@ -219,9 +214,8 @@ $this['slug'] = $this->param('slug');
                                    aria-label="Share on LinkedIn (opens in new window)">
                                     <span class="sr-only">LinkedIn</span>
                                 </a>
-                            </li>
                             {% endif %}
-                        </ul>
+                        </div>
                     </nav>
                 </div>
             </div>
