@@ -48,80 +48,87 @@ return Redirect::to('/media-center/videos');
 }
 ?>
 ==
-<div class="container library">
+<section aria-labelledby="videos-heading">
+    <div class="container library">
+        <h1 id="videos-heading" class="sr-only">Videos</h1>
 
-<!--    <div class="row">-->
-<!--        <div class="col-xs-12">-->
-<!--            <form method="GET" id="typeForm" action="">-->
-<!--                <div class="tabs" id="mylibraryForm">-->
-<!--                    <a data-type="0" class="active">All documents</a>-->
-<!--                    <a data-type="1">Deliverables</a>-->
-<!--                    <a data-type="2">Relevant publications</a>-->
-<!--                    <a data-type="3">MAMBO publications</a>-->
+        <div class="row">
+            {% set records = mediaVideosList %}
+            {% set displayColumn = mediaVideosList.displayColumn %}
+            {% set noRecordsMessage = mediaVideosList.noRecordsMessage %}
+            {% set detailsPage = mediaVideosList.detailsPage %}
+            {% set detailsKeyColumn = mediaVideosList.detailsKeyColumn %}
+            {% set detailsUrlParameter = mediaVideosList.detailsUrlParameter %}
 
-<!--                </div>-->
-<!--                <input type="hidden" name="type" id="typeInput" value="">-->
+            {% for record in records %}
+            {% spaceless %}
+            <article class="col-md-6 col-xs-12 mb-4">
+                <div>
+                    <h2 class="card_title font-weight-bold">{{record.name}}</h2>
 
-<!--            </form>-->
-<!--        </div>-->
-<!--    </div>-->
+                    {% if record.file %}
+                    <video controls
+                           width="100%"
+                           aria-label="{{record.name}}">
+                        <source src="{{record.file.path}}" type="video/mp4">
+                        <p>Your browser doesn't support HTML5 video. <a href="{{record.file.path}}" download>Download the video</a> instead.</p>
+                    </video>
 
+                    <p class="attachment-info">
+                        <strong>Attachment:</strong> {{record.file.file_name}}, {{record.file.size}}
+                    </p>
 
+                    <p>
+                        <a class="btn btn-primary"
+                           href="{{ ''| page }}?{{queries}}&download={{record.file.id}}&file_name={{record.name|replace({' ': '_'})}}"
+                           aria-label="Download {{record.name}} video"
+                           download>
+                            Download
+                        </a>
+                    </p>
+                    {% endif %}
 
+                    {% if record.youtube_url %}
+                    <iframe
+                        src="{{record.youtube_url}}"
+                        width="100%"
+                        height="422"
+                        title="{{record.name}} - YouTube video"
+                        allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                        allowfullscreen
+                        loading="lazy">
+                    </iframe>
+                    {% endif %}
 
-	<div class="row">
-		{% set records = mediaVideosList %}
-		{% set displayColumn = mediaVideosList.displayColumn %}
-		{% set noRecordsMessage = mediaVideosList.noRecordsMessage %}
-		{% set detailsPage = mediaVideosList.detailsPage %}
-		{% set detailsKeyColumn = mediaVideosList.detailsKeyColumn %}
-		{% set detailsUrlParameter = mediaVideosList.detailsUrlParameter %}
+                    {% if record.vimeo_url %}
+                    <iframe
+                        src="{{record.vimeo_url}}"
+                        width="100%"
+                        height="422"
+                        title="{{record.name}} - Vimeo video"
+                        allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                        allowfullscreen
+                        loading="lazy">
+                    </iframe>
+                    {% endif %}
 
-		{% for record in records %}
-		{# Use spaceless tag to remove spaces inside the A tag. #}
-		{% spaceless %}
-		<div class="col-md-6 col-xs-12 mb-4">
-			<div class="">
-				<p class="card_title font-weight-bold">{{record.name}}</p>
+                    {% if record.description %}
+                    <div class="video-description">
+                        {{record.description|raw}}
+                    </div>
+                    {% endif %}
+                </div>
+            </article>
+            {% endspaceless %}
+            {% else %}
+            <div class="col-xs-12">
+                <p>{{ noRecordsMessage ?: 'No videos available at this time.' }}</p>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
 
-				{% if record.file %}
-				<video controls="" width="100%"><source src="{{record.file.path}}" type="video/mp4"></video>
-
-				<p>Attachment: {{record.file.file_name}}, {{record.file.size}}</p>
-
-				<p><a class=" btn btn-primary" href="{{ ''| page }}?{{queries}}&download={{record.file.id}}&file_name={{record.name|replace({' ': '_'})}}">Download</a></p>
-
-				{% endif %}
-
-				{% if record.youtube_url %}
-				<iframe allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="" frameborder="0" src="{{record.youtube_url}}" width="100%" height="422"></iframe>
-
-				<p>&nbsp;</p>
-				{% endif %}
-
-				{% if record.vimeo_url %}
-				<iframe width="100%" height="422" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-						src="{{record.vimeo_url}}">
-				</iframe>
-				<p>&nbsp;</p>
-				{% endif %}
-
-                {% if record.description %}
-                {{record.description|raw}}
-                {% endif %}
-
-			</div>
-		</div>
-
-
-
-
-		{% endspaceless %}
-		{% else %}
-		{{ noRecordsMessage }}
-		{% endfor %}
-		<script>
-			initAccordeon('accordion-documents');
-		</script>
-	</div>
-</div>
+<script>
+    initAccordeon('accordion-documents');
+</script>

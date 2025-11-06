@@ -91,79 +91,119 @@ $this['related'] = $related;
 ==
 <div class="container">
     {% if is_detail_page %}
-    <div class="row single-news-item">
 
+    <article aria-labelledby="article-title">
+<!--        <nav aria-label="Breadcrumb">-->
+<!--            <a href="{{'news'|page}}" class="go-back-link" aria-label="Back to news">-->
+<!--                Back to news-->
+<!--            </a>-->
+<!--        </nav>-->
 
-        <div class="col-xs-12 col-md-7">
-
-
-
-            <div class="news-title">
-                <h1 class="single-new-title">{{article.title}}</h1>
+        <div class="row single-news-item">
+            <div class="col-xs-12 col-md-7">
+                <div class="news-title">
+                    <h1 id="article-title" class="single-new-title">{{article.title}}</h1>
+                </div>
+                <time class="text-published" datetime="{{article.published_at|date('Y-m-d')}}">
+                    {{article.pretty_published_at}}
+                </time>
+                <div class="content">
+                    {{article.content|raw}}
+                </div>
             </div>
-            <div class="text-published">{{article.pretty_published_at}}</div>
-            <div class="content">
-                {{article.content|raw}}
-            </div>
-        </div>
-        <div class="col-xs-12 col-md-5">
-            {% if article.cover %}
-            <div class="row">
-                <img class="content left" src="{{ article.cover|crop_image|resize(673, auto, { mode: 'crop' }) }}" />
-            </div>
-            {% endif %}
-            <div class="row share_container middle-xs">
-                <div class="col-cx-2 start-xs">Share</div>
-                <div class="col-cx-10 end-xs">
-                    {% if this.theme.twitter %}
-                    <a href="http://twitter.com/share?text={{article.title}}&url={{page_url}}" target="_blank" class="btn p-primary pr p-twitter small"></a>
-                    {% endif %}
-                    {% if this.theme.facebook %}
-                    <a href="https://www.facebook.com/sharer/sharer.php?u={{page_url}}&amp;src=sdkpreparse" target="_blank" class="btn pr p-primary p-facebook normal"></a>
-                    {% endif %}
-                    {% if this.theme.linkedin %}
-                    <a href="https://www.linkedin.com/sharing/share-offsite/?url={{page_url}}" target="_blank" class="btn pr p-primary p-linkedin normal"></a>
-                    {% endif %}
+
+            <aside class="col-xs-12 col-md-5">
+                {% if article.cover %}
+                <div class="row">
+                    <img class="content left"
+                         src="{{ article.cover|crop_image|resize(673, auto, { mode: 'crop' }) }}"
+                         alt="{{article.title|striptags}}" />
+                </div>
+                {% endif %}
+
+                <div class="row share_container middle-xs">
+                    <div class="col-cx-2 start-xs">
+                        <span class="share-label">Share</span>
                     </div>
-            </div>
-
+                    <nav class="col-cx-10 end-xs" aria-label="Share article">
+                        <div class="share-links">
+                            {% if this.theme.twitter %}
+                                <a href="http://twitter.com/share?text={{article.title}}&url={{page_url}}"
+                                   target="_blank"
+                                   rel="noopener noreferrer"
+                                   class="btn p-primary pr p-twitter small"
+                                   aria-label="Share on Twitter (opens in new window)">
+                                    <span class="sr-only">Twitter</span>
+                                </a>
+                            {% endif %}
+                            {% if this.theme.facebook %}
+                                <a href="https://www.facebook.com/sharer/sharer.php?u={{page_url}}&amp;src=sdkpreparse"
+                                   target="_blank"
+                                   rel="noopener noreferrer"
+                                   class="btn pr p-primary p-facebook normal"
+                                   aria-label="Share on Facebook (opens in new window)">
+                                    <span class="sr-only">Facebook</span>
+                                </a>
+                            {% endif %}
+                            {% if this.theme.linkedin %}
+                                <a href="https://www.linkedin.com/sharing/share-offsite/?url={{page_url}}"
+                                   target="_blank"
+                                   rel="noopener noreferrer"
+                                   class="btn pr p-primary p-linkedin normal"
+                                   aria-label="Share on LinkedIn (opens in new window)">
+                                    <span class="sr-only">LinkedIn</span>
+                                </a>
+                            {% endif %}
+                        </div>
+                    </nav>
+                </div>
+            </aside>
         </div>
-    </div>
+    </article>
 
     {% else %}
 
-    <div class="row">
-        {% for record in records %}
-        {% spaceless %}
-        <div class="col-xs-12 news-item">
-            <div class="row news_column">
-                <div class="text-published">{{record.published_at | date('d F Y') }}</div>
-                <a href="{{'news'|page}}/{{record.slug}}">
-                    {% if record.cover %}
-                    <div class="news-image col-xs-12 center-xs">
-                        <img class="news-img-top" src="{{record.cover.getThumb(379, 305, {'mode': 'crop'})}}">
-                    </div>
-                    {% endif %}
-                    <div class="news-container col-xs-12">
+    <section aria-labelledby="news-heading">
+        <h1 id="news-heading" class="sr-only">News</h1>
 
-                        <div class="news-title">
-                            <h3 class="card-title">{{record.title}}</h3>
+        <div class="row">
+            {% for record in records %}
+            {% spaceless %}
+            <article class="col-xs-12 news-item">
+                <div class="row news_column">
+                    <time class="text-published" datetime="{{record.published_at|date('Y-m-d')}}">
+                        {{record.published_at | date('d F Y') }}
+                    </time>
+                    <a href="{{'news'|page}}/{{record.slug}}"
+                       aria-label="Read article: {{record.title|striptags}}">
+                        {% if record.cover %}
+                        <div class="news-image col-xs-12 center-xs">
+                            <img class="news-img-top"
+                                 src="{{record.cover.getThumb(379, 305, {'mode': 'crop'})}}"
+                                 alt="{{record.title|striptags}}">
                         </div>
-
-                        <div class="body">{{ record.content|length > 450 ? record.content|striptags|slice(0, 450)|replace({"&nbsp;": " ", ".": ". "}) ~ '...' : record.content|striptags|replace({"&nbsp;": " ", ".": ". "})  }}</div>
-                    </div>
-                </a>
+                        {% endif %}
+                        <div class="news-container col-xs-12">
+                            <h2 class="news-title card-title">{{record.title}}</h2>
+                            <p class="body">
+                                {{ record.content|length > 450 ? record.content|striptags|slice(0, 450)|replace({"&nbsp;": " ", ".": ". "}) ~ '...' : record.content|striptags|replace({"&nbsp;": " ", ".": ". "}) }}
+                            </p>
+                        </div>
+                    </a>
+                </div>
+            </article>
+            {% endspaceless %}
+            {% else %}
+            <div class="col-xs-12">
+                <p>No news available at this time.</p>
             </div>
-
+            {% endfor %}
         </div>
 
-        {% endspaceless %}
-        {% else %}
-        No news
-        {% endfor %}
-    </div>
-    <div class="row container">
-        {{ records.render|raw }}
-    </div>
+        <nav aria-label="News pagination" class="row container">
+            {{ records.render|raw }}
+        </nav>
+    </section>
+
     {% endif %}
 </div>

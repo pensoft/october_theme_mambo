@@ -66,91 +66,168 @@ $this['slug'] = $this->param('slug');
 ?>
 ==
 {% if not slug %}
-<div class="container">
-    <div class="tabs">
-        <a class="" href="#listView">List view</a>
-        <a class="" href="#calendarView">Calendar view</a>
-    </div>
-</div>
-<!--tabs content	-->
+
+<section aria-labelledby="events-heading">
+    <h1 id="events-heading" class="sr-only">Events</h1>
+
     <div class="container">
-        
-        <div class="row" id="listView">
+        <nav aria-label="Event view options" class="tabs" role="tablist">
+            <a href="#listView"
+               id="tab-list"
+               role="tab"
+               aria-controls="listView"
+               aria-selected="true"
+               class="active">
+                List view
+            </a>
+            <a href="#calendarView"
+               id="tab-calendar"
+               role="tab"
+               aria-controls="calendarView"
+               aria-selected="false">
+                Calendar view
+            </a>
+        </nav>
+    </div>
+
+    <div class="container">
+        <div class="row"
+             id="listView"
+             role="tabpanel"
+             aria-labelledby="tab-list">
             <div class="events_list_container">
                 {% for entry in entries %}
                 {% set url = entry.url ?  entry.url : '/events/' ~ entry.slug %}
 
-                <div class="event_list_item">
+                <article class="event_list_item">
                     <div class="row between-xs time_and_date">
-                        <div class="col-md-2 start-md col-xs-12 center-xs">{{entry.event_date}}</div>
-                        <div class="col-md-1 start-md col-xs-12 center-xs">{{entry.start|date('l')}}</div>
+                        <time class="col-md-2 start-md col-xs-12 center-xs"
+                              datetime="{{entry.start|date('Y-m-d')}}">
+                            {{entry.event_date}}
+                        </time>
+                        <div class="col-md-1 start-md col-xs-12 center-xs">
+                            {{entry.start|date('l')}}
+                        </div>
                         <div class="col-md start-md col-xs-12 center-xs"></div>
                     </div>
                     <div class="row">
-                        <!--<div class="col-xs-1">{{entry.start|date('g:i')}}</div> <div class="col-xs-11">{{entry.title}}</div>-->
-                        <div class="col-xs-12"><a class="button" href="{{ url }}" target="_blank">{{entry.title}}</a></div>
+                        <div class="col-xs-12">
+                            <h2 class="event-title">
+                                <a class="button"
+                                   href="{{ url }}"
+                                   {% if entry.url %}target="_blank" rel="noopener noreferrer"{% endif %}
+                                   {% if entry.url %}aria-label="{{entry.title}} (opens in new window)"{% endif %}>
+                                    {{entry.title}}
+                                </a>
+                            </h2>
+                        </div>
                     </div>
-                </div>
+                </article>
 
                 {% endfor %}
             </div>
-            <div class="row container">
-                {{ entries.fragment('listView').render|raw }}
-            </div>
 
+            <nav aria-label="Event list pagination" class="row container">
+                {{ entries.fragment('listView').render|raw }}
+            </nav>
         </div>
-        <div class="row" id="calendarView">
+
+        <div class="row"
+             id="calendarView"
+             role="tabpanel"
+             aria-labelledby="tab-calendar"
+             hidden>
             {% component 'calendar' %}
         </div>
     </div>
-
+</section>
 
 {% else %}
 
 {% if entry %}
-<div class="container">
-    <div class="row newslist single-news-item">
+<article aria-labelledby="event-title">
+    <div class="container">
+        <nav aria-label="Breadcrumb">
+            <a href="{{'events'|page}}" class="go-back-link" aria-label="Back to events">
+                Back to events
+            </a>
+        </nav>
 
-        <div class="col-xs-12">
+        <div class="row newslist single-news-item">
+            <div class="col-xs-12">
+                <div class="news-title">
+                    <h1 id="event-title" class="single-new-title">{{ entry.title }}</h1>
+                </div>
 
-            <div class="news-title">
-                <h1 class="single-new-title">{{ entry.title }}</h1>
+                {% if entry.event_date %}
+                <time class="event-date" datetime="{{entry.start|date('Y-m-d')}}">
+                    {{entry.event_date}}
+                </time>
+                {% endif %}
+
+                <div class="content mt-2 mb-2">
+                    {{ entry.description|raw }}
+                </div>
+
+                {% if entry.url %}
+                <a href="{{entry.url}}"
+                   class="btn btn-primary mb-1 mt-1"
+                   target="_blank"
+                   rel="noopener noreferrer"
+                   aria-label="Go to {{entry.title}} event website (opens in new window)">
+                    Go to event website
+                </a>
+                {% endif %}
+
+                {% set encoded_title = entry.title|url_encode %}
+                {% set slug = entry.slug %}
+
+                <div class="row share_container middle-xs">
+                    <div class="col-cx-2 start-xs">
+                        <span class="share-label">Share</span>
+                    </div>
+                    <nav class="col-cx-10 end-xs" aria-label="Share event">
+                        <ul class="share-links">
+                            {% if this.theme.twitter %}
+                            <li>
+                                <a href="http://twitter.com/share?text={{entry.title}}&url={{page_url}}"
+                                   target="_blank"
+                                   rel="noopener noreferrer"
+                                   class="btn p-primary pr p-twitter normal"
+                                   aria-label="Share on Twitter (opens in new window)">
+                                    <span class="sr-only">Twitter</span>
+                                </a>
+                            </li>
+                            {% endif %}
+                            {% if this.theme.facebook %}
+                            <li>
+                                <a href="https://www.facebook.com/sharer/sharer.php?u={{page_url}}&amp;src=sdkpreparse"
+                                   target="_blank"
+                                   rel="noopener noreferrer"
+                                   class="btn pr p-primary p-facebook normal"
+                                   aria-label="Share on Facebook (opens in new window)">
+                                    <span class="sr-only">Facebook</span>
+                                </a>
+                            </li>
+                            {% endif %}
+                            {% if this.theme.linkedin %}
+                            <li>
+                                <a href="https://www.linkedin.com/sharing/share-offsite/?url={{page_url}}"
+                                   target="_blank"
+                                   rel="noopener noreferrer"
+                                   class="btn pr p-primary p-linkedin normal"
+                                   aria-label="Share on LinkedIn (opens in new window)">
+                                    <span class="sr-only">LinkedIn</span>
+                                </a>
+                            </li>
+                            {% endif %}
+                        </ul>
+                    </nav>
+                </div>
             </div>
-            {% if entry.event_date %}
-            <div class="event-date">
-                {{entry.event_date}}
-            </div>
-            {% endif %}
-
-            <div class="content mt-2 mb-2">
-                {{ entry.description|raw }}
-            </div>
-
-
-            {% if entry.url %}
-            <a href="{{entry.url}}" class="btn btn-primary mb-1 mt-1" target="_blank">Go to event website</a>
-            {% endif %}
-            {% set encoded_title = entry.title|url_encode %}
-            {% set slug = entry.slug %}
-            <div class="row share_container middle-xs">
-                <div class="col-cx-2 start-xs">Share</div>
-                <div class="col-cx-10 end-xs">
-                    {% if this.theme.twitter %}
-                    <a href="http://twitter.com/share?text={{article.title}}&url={{page_url}}" target="_blank" class="btn p-primary pr p-twitter normal"></a>
-                    {% endif %}
-                    {% if this.theme.facebook %}
-                    <a href="https://www.facebook.com/sharer/sharer.php?u={{page_url}}&amp;src=sdkpreparse" target="_blank" class="btn pr p-primary p-facebook normal"></a>
-                    {% endif %}
-                    {% if this.theme.linkedin %}
-                    <a href="https://www.linkedin.com/sharing/share-offsite/?url={page_url}" target="_blank" class="btn pr p-primary p-linkedin normal"></a>
-                    {% endif %}</div>
-            </div>
-
         </div>
-
     </div>
-
-</div>
+</article>
 {% endif %}
 
 {% endif %}

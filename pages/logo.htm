@@ -49,65 +49,79 @@ return Redirect::to('/media-center/logo');
 }
 ?>
 ==
-<div class="container">
+<section aria-labelledby="brand-materials-heading">
+    <div class="container">
+        <h1 id="brand-materials-heading" class="sr-only">Brand Materials</h1>
 
+        {% set records = mediaLogosList %}
+        {% set displayColumn = mediaLogosList.displayColumn %}
+        {% set noRecordsMessage = mediaLogosList.noRecordsMessage %}
+        {% set detailsPage = mediaLogosList.detailsPage %}
+        {% set detailsKeyColumn = mediaLogosList.detailsKeyColumn %}
+        {% set detailsUrlParameter = mediaLogosList.detailsUrlParameter %}
 
-	{% set records = mediaLogosList %}
-	{% set displayColumn = mediaLogosList.displayColumn %}
-	{% set noRecordsMessage = mediaLogosList.noRecordsMessage %}
-	{% set detailsPage = mediaLogosList.detailsPage %}
-	{% set detailsKeyColumn = mediaLogosList.detailsKeyColumn %}
-	{% set detailsUrlParameter = mediaLogosList.detailsUrlParameter %}
+        <div class="row card-container-row mb-4 start-xs">
+            {% for record in records %}
+            {% spaceless %}
+            {% if record.logo_image %}
+            <article class="col-md-3 col-xs-12 center-xs mb-4">
+                <img src="{{record.logo_image.path}}"
+                     alt="{{record.name}}"
+                     style="max-width: 250px;">
 
-	<div class="row card-container-row mb-4 start-xs">
-	{% for record in records %}
-	{# Use spaceless tag to remove spaces inside the A tag. #}
-	{% spaceless %}
-	{% if record.logo_image %}
-		<div class="col-md-3 col-xs-12 center-xs mb-4">
-			<p><img src="{{record.logo_image.path}}" title="{{record.name}}" style="max-width: 250px;"></p>
+                <h2 class="card_title">{{record.name}}</h2>
 
-		{% if record.file_jpg %}
-		<div class="col-xs-12">
-			<div class="text-center">
-				<span class="card_title">{{record.name}}</span><br>
-				<br><a href="{{ ''| page }}?{{queries}}&download={{record.file_jpg.id}}&file_name={{record.file_jpg.file_name|replace({' ': '_'})}}" title="Brand materials" class="btn btn-primary">Download</a>
-			</div>
-		</div>
-		{% endif %}
-		{% if record.file_png %}
-		<div class="col-xs-12">
-			<div class="text-center">
-				<span class="card_title">{{record.name}}</span><br>
-				<br><a href="{{ ''| page }}?{{queries}}&download={{record.file_png.id}}&file_name={{record.file_png.file_name|replace({' ': '_'})}}" title="Brand materials" class="btn btn-primary">Download</a>
-			</div>
-		</div>
-		{% endif %}
-		{% if record.file_eps %}
-		<div class="col-xs-12">
-			<div class="text-center">
-				<span class="card_title">{{record.name}}</span><br>
-				<br><a href="{{ ''| page }}?{{queries}}&download={{record.file_eps.id}}&file_name={{record.file_eps.file_name|replace({' ': '_'})}}" title="Brand materials" class="btn btn-primary">Download</a>
-			</div>
-		</div>
-		{% endif %}
+                {% if record.file_jpg %}
+                <div class="col-xs-12 text-center">
+                    <a href="{{ ''| page }}?{{queries}}&download={{record.file_jpg.id}}&file_name={{record.file_jpg.file_name|replace({' ': '_'})}}"
+                       class="btn btn-primary"
+                       aria-label="Download {{record.name}} as JPG"
+                       download>
+                        Download JPG
+                    </a>
+                </div>
+                {% endif %}
 
-		
-		{% if record.file_pdf %}
-		<div class="col-xs-12">
-			<div class="text-center">
-				<span class="card_title">{{record.name}}</span><br>
-				<br><a href="{{record.file_pdf.path}}" title="Brand materials" class="btn btn-primary">Download</a>
-			</div>
-		</div>
-		{% endif %}
+                {% if record.file_png %}
+                <div class="col-xs-12 text-center">
+                    <a href="{{ ''| page }}?{{queries}}&download={{record.file_png.id}}&file_name={{record.file_png.file_name|replace({' ': '_'})}}"
+                       class="btn btn-primary"
+                       aria-label="Download {{record.name}} as PNG"
+                       download>
+                        Download PNG
+                    </a>
+                </div>
+                {% endif %}
 
+                {% if record.file_eps %}
+                <div class="col-xs-12 text-center">
+                    <a href="{{ ''| page }}?{{queries}}&download={{record.file_eps.id}}&file_name={{record.file_eps.file_name|replace({' ': '_'})}}"
+                       class="btn btn-primary"
+                       aria-label="Download {{record.name}} as EPS"
+                       download>
+                        Download EPS
+                    </a>
+                </div>
+                {% endif %}
+
+                {% if record.file_pdf %}
+                <div class="col-xs-12 text-center">
+                    <a href="{{record.file_pdf.path}}"
+                       class="btn btn-primary"
+                       aria-label="Download {{record.name}} as PDF"
+                       download>
+                        Download PDF
+                    </a>
+                </div>
+                {% endif %}
+            </article>
+            {% endif %}
+            {% endspaceless %}
+            {% else %}
+            <div class="col-xs-12">
+                <p>{{ noRecordsMessage ?: 'No brand materials available at this time.' }}</p>
+            </div>
+            {% endfor %}
         </div>
-	{% endif %}
-
-	{% endspaceless %}
-	{% else %}
-	{{ noRecordsMessage }}
-	{% endfor %}
     </div>
-</div>
+</section>

@@ -26,88 +26,116 @@ function onStart(){
 }
 ?>
 ==
-<div class="container">
-	<div class="row">
-		{% if logos.count() %}
-		<div class="col-md-4 col-sm-6 col-xs-12">
-			<div class="card-container text-center">
-				<a href="{{url('media-center')}}/brand-materials" title="Brand materials">
-					<span class="card_image_container" style="background: url({{'pensoft/logo-pack.svg'|media}}) center center no-repeat;" href="{{url('media-center')}}/brand-materials" title="Brand materials"></span>
-					<span class="media_label">Brand materials</span>
-				</a>
-			</div>
-		</div>
-		{% endif %}
-		{% if flyers.count() %}
-		<div class="col-md-4 col-sm-6 col-xs-12">
-			<div class="card-container text-center">
-				<a href="{{url('media-center')}}/flyer" title="Promotonal materials">
-					<span class="card_image_container" style="background: url({{'pensoft/promo-materials.svg'|media}}) center center no-repeat;" href="{{url('media-center')}}/flyer" title="Promotonal materials"></span>
-					<span class="media_label">Promotonal materials</span>
-				</a>
-			</div>
-		</div>
-		{% endif %}
 
-		{% if pressreleases.count() %}
-		<div class="col-md-4 col-sm-6 col-xs-12">
-			<div class="card-container text-center">
-				<a href="{{url('media-center')}}/press-releases" title="Press releases">
-					<span class="card_image_container" style="background: url({{'pensoft/press-releases.svg'|media}}) center center no-repeat;" href="{{url('media-center')}}/press-releases" title="Press releases"></span>
-					<span class="media_label">Press releases</span>
-				</a>
-			</div>
-		</div>
-		{% endif %}
-        {% if newsletters.count() %}
-        <div class="col-md-4 col-sm-6 col-xs-12">
-            <div class="card-container text-center">
-                <a href="{{url('media-center')}}/newsletters" title="Newsletters">
-                    <span class="card_image_container" style="background: url({{'pensoft/newsletter.svg'|media}}) center center no-repeat;" href="{{url('media-center')}}/newsletters" title="Newsletters"></span>
-                    <span class="media_label">Newsletters</span>
-                </a>
-            </div>
+<section aria-labelledby="media-center-heading">
+    <div class="container">
+        <h1 id="media-center-heading" class="sr-only">Media Center</h1>
+
+        <div class="row">
+            {% if logos.count() %}
+            <article class="col-md-4 col-sm-6 col-xs-12">
+                <div class="card-container text-center">
+                    <a href="{{url('media-center')}}/brand-materials"
+                       aria-label="View brand materials">
+                        <span class="card_image_container"
+                              style="background: url({{'pensoft/logo-pack.svg'|media}}) center center no-repeat;"
+                              role="img"
+                              aria-label="Brand materials icon"></span>
+                        <h2 class="media_label">Brand materials</h2>
+                    </a>
+                </div>
+            </article>
+            {% endif %}
+
+            {% if flyers.count() %}
+            <article class="col-md-4 col-sm-6 col-xs-12">
+                <div class="card-container text-center">
+                    <a href="{{url('media-center')}}/flyer"
+                       aria-label="View promotional materials">
+                        <span class="card_image_container"
+                              style="background: url({{'pensoft/promo-materials.svg'|media}}) center center no-repeat;"
+                              role="img"
+                              aria-label="Promotional materials icon"></span>
+                        <h2 class="media_label">Promotional materials</h2>
+                    </a>
+                </div>
+            </article>
+            {% endif %}
+
+            {% if pressreleases.count() %}
+            <article class="col-md-4 col-sm-6 col-xs-12">
+                <div class="card-container text-center">
+                    <a href="{{url('media-center')}}/press-releases"
+                       aria-label="View press releases">
+                        <span class="card_image_container"
+                              style="background: url({{'pensoft/press-releases.svg'|media}}) center center no-repeat;"
+                              role="img"
+                              aria-label="Press releases icon"></span>
+                        <h2 class="media_label">Press releases</h2>
+                    </a>
+                </div>
+            </article>
+            {% endif %}
+
+            {% if newsletters.count() %}
+            <article class="col-md-4 col-sm-6 col-xs-12">
+                <div class="card-container text-center">
+                    <a href="{{url('media-center')}}/newsletters"
+                       aria-label="View newsletters">
+                        <span class="card_image_container"
+                              style="background: url({{'pensoft/newsletter.svg'|media}}) center center no-repeat;"
+                              role="img"
+                              aria-label="Newsletters icon"></span>
+                        <h2 class="media_label">Newsletters</h2>
+                    </a>
+                </div>
+            </article>
+            {% endif %}
+
+            {% if presentations.count() %}
+            <article class="col-md-4 col-sm-6 col-xs-12">
+                <div class="card-container text-center">
+                    <a href="{{url('media-center')}}/policy-briefs"
+                       aria-label="View policy briefs">
+                        <span class="card_image_container"
+                              style="background: url({{'pensoft/policy-briefs.svg'|media}}) center center no-repeat;"
+                              role="img"
+                              aria-label="Policy briefs icon"></span>
+                        <h2 class="media_label">Policy briefs</h2>
+                    </a>
+                </div>
+            </article>
+            {% endif %}
+
+            {% if videos.count() %}
+            <article class="col-md-4 col-sm-6 col-xs-12">
+                <div class="card-container text-center">
+                    <a href="{{url('media-center')}}/videos"
+                       aria-label="Watch videos">
+                        <span class="card_image_container"
+                              style="background: url({{'pensoft/videos.svg'|media}}) center center no-repeat;"
+                              role="img"
+                              aria-label="Videos icon"></span>
+                        <h2 class="media_label">Videos</h2>
+                    </a>
+                </div>
+            </article>
+            {% endif %}
+
+            {% if graphics.count() %}
+            <article class="col-md-4 col-sm-6 col-xs-12">
+                <div class="card-container text-center">
+                    <a href="{{url('media-center')}}/graphics"
+                       aria-label="View graphics">
+                        <span class="card_image_container"
+                              style="background: url({{'pensoft/press_releases.svg'|media}}) center center no-repeat;"
+                              role="img"
+                              aria-label="Graphics icon"></span>
+                        <h2 class="media_label">Graphics</h2>
+                    </a>
+                </div>
+            </article>
+            {% endif %}
         </div>
-        {% endif %}
-
-
-        <!--        //Policy briefs-->
-		{% if presentations.count() %}
-		<div class="col-md-4 col-sm-6 col-xs-12">
-			<div class="card-container text-center">
-				<a href="{{url('media-center')}}/policy-briefs" title="Policy briefs">
-					<span class="card_image_container" style="background: url({{'pensoft/policy-briefs.svg'|media}}) center center no-repeat;" href="{{url('media-center')}}/policy-briefs" title="Policy briefs"></span>
-					<span class="media_label">Policy briefs</span>
-				</a>
-			</div>
-		</div>
-		{% endif %}
-		{% if videos.count() %}
-		<div class="col-md-4 col-sm-6 col-xs-12">
-			<div class="card-container text-center">
-				<a href="{{url('media-center')}}/videos" title="Videos">
-					<span class="card_image_container" style="background: url({{'pensoft/videos.svg'|media}}) center center no-repeat;" href="{{url('media-center')}}/videos" title="Videos"></span>
-					<span class="media_label">Videos</span>
-				</a>
-			</div>
-		</div>
-		{% endif %}
-
-
-
-
-
-		{% if graphics.count() %}
-		<div class="col-md-4 col-sm-6 col-xs-12">
-			<div class="card-container text-center">
-				<a href="{{url('media-center')}}/policy-briefs" title="Policy briefs">
-					<span class="card_image_container" style="background: url({{'pensoft/press_releases.svg'|media}}) center center no-repeat;" href="{{url('media-center')}}/policy-briefs" title="Policy briefs"></span>
-					<span class="media_label">Policy briefs</span>
-				</a>
-			</div>
-		</div>
-		{% endif %}
-
-	</div>
-	<p>&nbsp;</p>
-</div>
+    </div>
+</section>

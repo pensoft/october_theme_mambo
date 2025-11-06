@@ -42,26 +42,48 @@ return Profiles::where('partner_id', $id)->where('category_id',  1)->get();
 }
 ?>
 ==
-<div class="container-fluid partners_background">
-    <div class="svg_map">
-        {% partial 'components/svg' %}
-    </div>
-    <div class="container">
-        <span class="tooltiptext" id="tooltip">Bulgaria</span>
-        <div class="row">
-            <div class="col-md-6 col-xs-12 partners_list">
-                {% for partner in partners %}
-                <a class="parener_logo" onclick="onCustomSinglePartner({{partner.id}});" title="{{partner.instituion}}"><img class="partner_cover" src="{{partner.cover.thumb(150, auto, {'mode':'crop'})}}"></a>
-                {% endfor %}
+<section aria-labelledby="partners-map-heading">
+    <div class="container-fluid partners_background">
+        <h1 id="partners-map-heading" class="sr-only">Partners Map</h1>
+
+        <div class="svg_map" role="img" aria-label="Interactive map of partner locations">
+            {% partial 'components/svg' %}
+        </div>
+
+        <div class="container">
+            <div id="tooltip" class="tooltiptext" role="tooltip" aria-hidden="true">
+                Bulgaria
             </div>
-            <div class="col-md-6 col-xs-12"></div>
+
+            <div class="row">
+                <nav class="col-md-6 col-xs-12 partners_list" aria-label="Partner organizations">
+                    <ul class="partners-grid">
+                        {% for partner in partners %}
+                        <li>
+                            <a href="javascript:void(0);"
+                               class="parener_logo"
+                               onclick="onCustomSinglePartner({{partner.id}});"
+                               role="button"
+                               aria-label="View {{partner.instituion}} details">
+                                <img class="partner_cover"
+                                     src="{{partner.cover.thumb(150, auto, {'mode':'crop'})}}"
+                                     alt="{{partner.instituion}} logo">
+                            </a>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </nav>
+                <div class="col-md-6 col-xs-12"></div>
+            </div>
         </div>
 
-    </div>
-    <div class="container partners-map-container">
-        <div id="mycomponentpartners" class="row">
-
-
+        <div class="container partners-map-container">
+            <div id="mycomponentpartners"
+                 class="row"
+                 role="region"
+                 aria-live="polite"
+                 aria-label="Partner details">
+            </div>
         </div>
     </div>
-</div>
+</section>

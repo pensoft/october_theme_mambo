@@ -35,31 +35,43 @@ return Redirect::to('/media-center/policy-briefs');
 }
 ?>
 ==
-<div class="container presentation">
-    <div class="row">
-        {% set records = recordsList %}
-        {% set displayColumn = recordsList.displayColumn %}
-        {% set noRecordsMessage = recordsList.noRecordsMessage %}
-        {% set detailsPage = recordsList.detailsPage %}
-        {% set detailsKeyColumn = recordsList.detailsKeyColumn %}
-        {% set detailsUrlParameter = recordsList.detailsUrlParameter %}
+<section aria-labelledby="presentations-heading">
+    <div class="container presentation">
+        <h1 id="presentations-heading" class="sr-only">Policy Briefs</h1>
 
-        {% for record in records %}
-        {# Use spaceless tag to remove spaces inside the A tag. #}
-        {% spaceless %}
-        <div class="col-md-4 col-xs-12 mt-4">
-            <div class="text-center">
-                <span class="card_title">{{record.name}}</span><br>
-                <span class="card_image_container" style="background: url({{record.presentation_image.thumb(220, 220,{'mode':'crop'})}}) center center no-repeat;" title="{{record.name}}"></span>
-                <br><a href="{{ record.file.path }}#{{record.file.file_name}}" target="_blank" title="{{record.name}}" class="btn btn-primary">Download</a>
+        <div class="row">
+            {% set records = recordsList %}
+            {% set displayColumn = recordsList.displayColumn %}
+            {% set noRecordsMessage = recordsList.noRecordsMessage %}
+            {% set detailsPage = recordsList.detailsPage %}
+            {% set detailsKeyColumn = recordsList.detailsKeyColumn %}
+            {% set detailsUrlParameter = recordsList.detailsUrlParameter %}
+
+            {% for record in records %}
+            {% spaceless %}
+            <article class="col-md-4 col-xs-12 mt-4">
+                <div class="text-center">
+                    <h2 class="card_title">{{record.name}}</h2>
+                    <span class="card_image_container"
+                          style="background: url({{record.presentation_image.thumb(220, 220,{'mode':'crop'})}}) center center no-repeat;"
+                          role="img"
+                          aria-label="{{record.name}} preview"></span>
+                    <a href="{{ record.file.path }}#{{record.file.file_name}}"
+                       target="_blank"
+                       rel="noopener noreferrer"
+                       class="btn btn-primary"
+                       aria-label="Download {{record.name}} (opens in new window)"
+                       download>
+                        Download
+                    </a>
+                </div>
+            </article>
+            {% endspaceless %}
+            {% else %}
+            <div class="col-xs-12">
+                <p>{{ noRecordsMessage ?: 'No policy briefs available at this time.' }}</p>
             </div>
+            {% endfor %}
         </div>
-
-
-
-        {% endspaceless %}
-        {% else %}
-        {{ noRecordsMessage }}
-        {% endfor %}
     </div>
-</div>
+</section>

@@ -6,62 +6,110 @@ primaryClasses = "navbar-nav"
 secondaryClasses = "dropdown-menu"
 numberOfLevels = 2
 ==
-<nav class="navbar fixed pr-1 pl-1" id="headernavbar">
-    <div id="menuToggle">
-        <input type="checkbox" />
-        <span></span>
-        <span></span>
-        <span></span>
+<nav class="navbar fixed pr-1 pl-1" id="headernavbar" aria-label="Main navigation">
+    <a
+        id="menuToggle"
+        class="mobile-menu-toggle"
+        aria-expanded="false"
+        aria-controls="mobileMenu"
+        aria-label="Toggle navigation menu">
+        <span class="sr-only">Menu</span>
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+    </a>
+
+    <div id="mobileMenu" class="mobile-menu" hidden>
         {% component 'menu' %}
     </div>
 
+    <a href="{{'home'|page}}"
+       class="navbar-brand"
+       id="navbar-brand"
+       style="background-image: url('{{ this.theme.site_logo.getPath() }}'); background-position: center; background-size: contain;"
+       aria-label="{{site_name}} home">
+        <span class="sr-only">{{site_name}}</span>
+    </a>
 
-    <a href="{{'home'|page}}" class="navbar-brand" id="navbar-brand" style="background-image: url('{{ this.theme.site_logo.getPath() }}'); background-position: center; background-size: contain;"></a>
-
-
-    <div class="navbar-collapse collapse end-xs" id="headerNavbarNav" style="display: none;">
+    <div class="navbar-collapse collapse end-xs" id="headerNavbarNav">
         {% component 'menu' %}
         <div id="headerNavbarLogin">
-            <ul class="navbar-nav" style="padding: 0; margin: 0;">
-
+            <ul class="navbar-nav">
             </ul>
         </div>
     </div>
-    <a class="pr p-search middle search-btn" onclick="showSearchForm();"></a>
 
-    <div id="search" class="search" style="display: none;">
-        <div class="close-search" onclick="hideSearchForm();"></div>
+    <a href="javascript:void(0);"
+       class="pr p-search middle search-btn"
+       onclick="showSearchForm();"
+       role="button"
+       aria-label="Open search"
+       aria-expanded="false"
+       aria-controls="search"
+    >
+        <span class="sr-only">Search</span>
+    </a>
+
+    <div id="search" class="search" role="search" hidden>
+        <a href="javascript:void(0);"
+           class="close-search"
+           onclick="hideSearchForm();"
+           role="button"
+           aria-label="Close search">
+            <span class="sr-only">Close</span>
+        </a>
         <form class="input-group align-items-start" action="{{ url('search')}}" method="get">
-            <input class="form-control search_input" style="color: #000;" name="q" type="text" autocomplete="on" placeholder="Search">
-            <button class="btn btn-link pr p-search big text-grey-search-btn" type="submit"></button>
+            <label for="search-input" class="sr-only">Search</label>
+            <input id="search-input"
+                   class="form-control search_input"
+                   style="color: #000;"
+                   name="q"
+                   type="search"
+                   autocomplete="off"
+                   placeholder="Search"
+                   aria-label="Search">
+            <button class="btn btn-link pr p-search big text-grey-search-btn"
+                    type="submit"
+                    aria-label="Submit search">
+                <span class="sr-only">Search</span>
+            </button>
         </form>
     </div>
-
 </nav>
 
-
-
-
 {% if this.theme.header_image and page_id != 'search' %}
-<div class="header-image {{page_id}}">
+<div class="header-image {{page_id}}" role="banner">
     {% if page_id != 'search' %}
-        {%if page_id != 'home' and page_id != 'search' %}
-        {%if this.page.header_image %}
-        <div class="header-image-bar" style="background-image: url('{{this.page.header_image|media}}'); background-position: left center;"></div>
-        {%else%}
-        <div class="header-image-bar" style="background-image: url('{{this.theme.header_image.getPath()}}'); background-position: left center;"></div>
-        {%endif%}
-        <div class="jumbotron" data-aos="fade-up">
-            <h1 class="underline white  {% if page_id == 'home'%}home-page-header{% endif %}">{%if page_title%} {{page_title}} {%else%} {{site_name}} {%endif%}</h1>
-            {% if page_id == 'home' and tag_line %}
-            <p>{{tag_line}}</p>
-            {% endif %}
-        </div>
+    {% if page_id != 'home' and page_id != 'search' %}
+    {% if this.page.header_image %}
+    <div class="header-image-bar"
+         style="background-image: url('{{this.page.header_image|media}}'); background-position: left center;"
+         role="img"
+         aria-label="{{page_title ?: site_name}} header image">
+    </div>
+    {% else %}
+    <div class="header-image-bar"
+         style="background-image: url('{{this.theme.header_image.getPath()}}'); background-position: left center;"
+         role="img"
+         aria-label="{{page_title ?: site_name}} header image">
+    </div>
+    {% endif %}
+    <div class="jumbotron" data-aos="fade-up">
+        <h1 class="underline white {% if page_id == 'home'%}home-page-header{% endif %}">
+            {% if page_title %}{{page_title}}{% else %}{{site_name}}{% endif %}
+        </h1>
+        {% if page_id == 'home' and tag_line %}
+        <p>{{tag_line}}</p>
         {% endif %}
+    </div>
+    {% endif %}
     {% endif %}
 </div>
 {% endif %}
 
 {% if page_id == 'home' and tag_line %}
-<p>{{tag_line}}</p>
+<section aria-labelledby="tagline-heading">
+    <h2 id="tagline-heading" class="sr-only">Welcome</h2>
+    <p>{{tag_line}}</p>
+</section>
 {% endif %}

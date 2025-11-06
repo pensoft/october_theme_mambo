@@ -49,33 +49,46 @@ return Redirect::to('/media-center/flyer');
 }
 ?>
 ==
-<div class="container">
-	<div class="row">
-		{% set records = mediaFlyersList %}
-		{% set displayColumn = mediaFlyersList.displayColumn %}
-		{% set noRecordsMessage = mediaFlyersList.noRecordsMessage %}
-		{% set detailsPage = mediaFlyersList.detailsPage %}
-		{% set detailsKeyColumn = mediaFlyersList.detailsKeyColumn %}
-		{% set detailsUrlParameter = mediaFlyersList.detailsUrlParameter %}
+<section aria-labelledby="flyers-heading">
+    <div class="container">
+        <h1 id="flyers-heading" class="sr-only">Promotional Materials</h1>
 
-		{% for record in records %}
-		{# Use spaceless tag to remove spaces inside the A tag. #}
-		{% spaceless %}
-		{% if record.flyer_image %}
-		<div class="col-md-4 col-sm-6 col-xs-12">
-			<div class="text-center">
-				<span class="card_image_container" style="background: url({{record.flyer_image.thumb(220,220,{'mode':'crop'})}}) center center no-repeat;" title="{{record.name}}"></span>
-				<span class="card_title">{{record.name}}, {{record.file.size}}</span><br>
-				<br><a href="{{ record.file.path }}#{{record.file.file_name}}" target="_blank" title="{{record.name}}" class="btn btn-primary">Download</a>
-			</div>
-		</div>
+        <div class="row">
+            {% set records = mediaFlyersList %}
+            {% set displayColumn = mediaFlyersList.displayColumn %}
+            {% set noRecordsMessage = mediaFlyersList.noRecordsMessage %}
+            {% set detailsPage = mediaFlyersList.detailsPage %}
+            {% set detailsKeyColumn = mediaFlyersList.detailsKeyColumn %}
+            {% set detailsUrlParameter = mediaFlyersList.detailsUrlParameter %}
 
-
-		{% endif %}
-
-		{% endspaceless %}
-		{% else %}
-		{{ noRecordsMessage }}
-		{% endfor %}
-	</div>
-</div>
+            {% for record in records %}
+            {% spaceless %}
+            {% if record.flyer_image %}
+            <article class="col-md-4 col-sm-6 col-xs-12">
+                <div class="text-center">
+                    <span class="card_image_container"
+                          style="background: url({{record.flyer_image.thumb(220,220,{'mode':'crop'})}}) center center no-repeat;"
+                          role="img"
+                          aria-label="{{record.name}} preview"></span>
+                    <h2 class="card_title">{{record.name}}</h2>
+                    <p class="file-size">{{record.file.size}}</p>
+                    <a href="{{ record.file.path }}#{{record.file.file_name}}"
+                       target="_blank"
+                       rel="noopener noreferrer"
+                       class="btn btn-primary"
+                       aria-label="Download {{record.name}} (opens in new window)"
+                       download>
+                        Download
+                    </a>
+                </div>
+            </article>
+            {% endif %}
+            {% endspaceless %}
+            {% else %}
+            <div class="col-xs-12">
+                <p>{{ noRecordsMessage ?: 'No promotional materials available at this time.' }}</p>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
