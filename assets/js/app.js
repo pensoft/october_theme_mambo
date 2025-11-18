@@ -413,7 +413,7 @@ function showSearchForm(){
 	// }
 	// $('#menu').hide();
 	$('#layout-header').toggleClass('full-width');
-	$('#search').toggle();
+	$('#search').show();
 	$('#menu li').hide();
 	$('nav a:not(.navbar-brand)').hide();
 }
