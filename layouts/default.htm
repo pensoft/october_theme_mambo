@@ -42,6 +42,7 @@ description_limit = 0
     <link href="{{ 'assets/css/bootstrap.min.css'|theme }}" rel="stylesheet">
     {% endif %}
     <script src="{{ 'assets/js/jquery.js'|theme }}"></script>
+    <script src="{{ 'assets/js/translation.js'|theme }}"></script>
     {% if this.page.id == 'home' %}
     <script src="{{ 'assets/js/bootstrap.min.js'|theme }}"></script>
     <script src="{{ 'assets/js/anime.js'|theme }}"></script>
@@ -57,12 +58,19 @@ description_limit = 0
     <script src="{{ 'assets/js/ckeditor/ckeditor.js'|theme}}"></script>
 
 
+    <script src="https://cdn.userway.org/widget.js" data-account="dHcqEw1u9a"></script>
+
+    <!-- Hidden element for Google Translate API access -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.5.0/css/flag-icon.min.css">
+    <div id="google_translate_element_hidden" style="display: none;"></div>
+
+
     {% if this.page.id == 'news' and is_detail_page %}
         {% component 'metaList' includePageMeta=false %}
     {% else %}
         {% component 'metaList' %}
     {% endif %}
-    
+
     {% framework extras %}
     {% styles %}
     {% scripts %}
