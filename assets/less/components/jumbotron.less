@@ -386,17 +386,20 @@
                 &.yellow{
                     background: #C8CE45;
                 }
+                &.blue{
+                    background: #2a3a4e;
+                }
             }
         }
     }
 
     .tabs{
         a{
-            font: normal normal bold 32px/30px Lato;
+            font: normal normal bold 22px/22px Lato;
             color: #35393E;
             position: relative;
             padding-left: 36px;
-            margin-right: 54px;
+            margin-right: 34px;
             cursor: pointer;
             &:before{
                 width: 26px;
@@ -406,7 +409,7 @@
                 border-radius: 50%;
                 position: absolute;
                 left: 0;
-                top: 7px;
+                top: 1px;
             }
             &:after{
                 width: 0;
@@ -440,6 +443,12 @@
             &:nth-of-type(4){
                 &:before{
                     background: #FC7D7D;
+                }
+            }
+
+            &:nth-of-type(5){
+                &:before{
+                    background: #2a3a4e;
                 }
             }
         }
