@@ -389,18 +389,27 @@
                 &.blue{
                     background: #2a3a4e;
                 }
+                &.pink{
+                    background: #693f4e;
+                }
             }
         }
     }
 
     .tabs{
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px;
         a{
             font: normal normal bold 22px/22px Lato;
             color: #35393E;
             position: relative;
             padding-left: 36px;
-            margin-right: 34px;
             cursor: pointer;
+            width: fit-content;
+            //width: calc(100% / 3 - 14px);
+            box-sizing: border-box;
+            margin-bottom: 10px;
             &:before{
                 width: 26px;
                 height: 26px;
@@ -449,6 +458,12 @@
             &:nth-of-type(5){
                 &:before{
                     background: #2a3a4e;
+                }
+            }
+
+            &:nth-of-type(6){
+                &:before{
+                    background: #693f4e;
                 }
             }
         }
