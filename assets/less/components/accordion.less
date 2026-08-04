@@ -398,11 +398,21 @@
         font-weight: 500;
 
         width: 719px;
+        max-width: 100%;
         height: 147px;
         /* UI Properties */
         //background: #2A3A4E 0% 0% no-repeat padding-box;
         border-radius: 74px;
         //opacity: 0.74;
+        .breakpoint-large-down({
+            height: unset;
+        });
+
+        a{
+            .breakpoint-large-down({
+                font-size: 14px;
+            });
+        }
 
     }
 
@@ -435,7 +445,7 @@
     .col-md-6.col-xs-12:nth-of-type(2){
         .breakpoint-small-down({
             order: 1;
-            margin-bottom: 50px;
+            margin-bottom: 20px;
         });
     }
 }
@@ -498,6 +508,12 @@
 
 /* technologies */
 
+.techs{
+    .breakpoint-large-down({
+        display: none;
+    });
+}
+
 .technologies .accordion-border{
     border: none;
     padding: 40px!important;
@@ -508,10 +524,14 @@
     background: #EFF5F5;
     .rounded(70px);
     position: relative;
-    .breakpoint-small-down({
+    .breakpoint-large-down({
         min-height: 79px;
-        max-width: 90%;
+        //max-width: 90%;
+        width: calc(~'100% - 60px');
         overflow: hidden;
+        display: flex;
+        align-items: center;
+        padding: 30px!important;
     });
 }
 
@@ -533,6 +553,11 @@
         font-family: Montserrat;
         color: #35393E;
         text-align: left!important;
+
+        .breakpoint-large-down({
+            font-size: 26px!important;
+            width: 93%;
+        });
     }
 
 }
@@ -540,6 +565,10 @@
     padding-top: 80px;
     line-height: 1.5em!important;
     width: 100%!important;
+
+    img{
+        max-width: 890px;
+    }
 }
 
 
@@ -562,6 +591,10 @@
     position: absolute;
     top: 0px;
     right: 0px;
+
+    .breakpoint-large-down({
+        width: 25px;
+    });
 
     .plus, .minus{
         text-align: center;
