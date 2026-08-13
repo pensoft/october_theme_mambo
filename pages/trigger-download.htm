@@ -12,7 +12,11 @@ use System\Models\File;
 
 function onStart()
 {
-	$files = Session::get('files');
+	// Ids may arrive as a GET list (?files=1,2,3) so the trigger can be a plain
+	// link that Matomo is able to track. The session variant is kept as a
+	// fallback for any handler still redirecting here with ->with('files', ...).
+	$files = $this->filesFromQuery() ?: (Session::get('files') ?: []);
+
 	if(count($files)){
 		if(count($files) == 1){ // single file download
 			$fileId = $files[0]['id'];
@@ -54,8 +58,38 @@ function onStart()
 			exit();
 		}
 	}
-	return Redirect::refresh();
+	// Refreshing would loop when the ids came in on the query string.
+	return get('files') ? Redirect::back() : Redirect::refresh();
 
+}
+
+/**
+ * Resolves ?files=1,2,3 into the same shape the session used to hold.
+ * Only files attached to internal repository folders are accepted, so the
+ * link cannot be used to enumerate unrelated attachments.
+ */
+function filesFromQuery()
+{
+	$requested = get('files');
+	if (!$requested) {
+		return [];
+	}
+
+	$ids = array_filter(array_map('intval', explode(',', $requested)));
+	if (!count($ids)) {
+		return [];
+	}
+
+	return File::whereIn('id', $ids)
+		->get()
+		->filter(function ($file) {
+			return strtolower(class_basename($file->attachment_type)) === 'subfolders';
+		})
+		->map(function ($file) {
+			return ['id' => $file->id, 'file_name' => $file->file_name];
+		})
+		->values()
+		->all();
 }
 ?>
 ==

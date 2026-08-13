@@ -31,7 +31,7 @@
 					{% endif %}
 
 
-					<a href="javascript:;" data-request="onDownloadHandler" data-request-data="files:  [{{file}}]" target="_blank" class="download-icon">Download</a>
+					<a href="{{ file.path }}" download="{{ file.file_name }}" target="_blank" rel="noopener noreferrer" class="download-icon matomo_download piwik_download">Download</a>
 				{% endif %}
 
 			</h4>
