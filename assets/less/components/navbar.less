@@ -1,16 +1,23 @@
+// Figma "menu" 4:175 — 24px top + 33px logo + 23px bottom
+@navbar-height: 80px;
 
 .navbar {
     position: absolute;
-    width: 100vw;
-    height: 85px;
+    // 100% (not 100vw) so a visible scrollbar can't push the right-hand
+    // controls under it, or force a horizontal scroll
+    width: 100%;
+    height: @navbar-height;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
     align-items: center;
+    padding-left: @padding-base-space;
+    padding-right: @padding-base-space;
     color: @navbar-color;
     //background-color: transparent;
     transition: background-color 0.3s;
     box-sizing: border-box;
+    background: @dark-color!important;
 
     a {
         color: @navbar-font-color;
@@ -26,13 +33,24 @@
         background: @dark-color;
     }
 
+    // every size has to fit inside the @navbar-height bar, so height is capped
     .navbar-brand {
       display: flex;
-      flex-basis: 255px;
-      height: 90px;
+      flex-basis: 180px;
+      width: 180px;
+      height: 40px;
+      flex-shrink: 0;
       background-repeat: no-repeat;
+      // Figma "MAMBO_white (1) 1" 4:177
+      .breakpoint-screen({
+        flex-basis: 149px;
+        width: 149px;
+        height: 33px;
+      });
       .breakpoint-small-down({
-        flex-basis: 205px;
+        flex-basis: 140px;
+        width: 140px;
+        height: 31px;
       });
     }
 
@@ -44,6 +62,7 @@
       .dropdown-menu{
         background: @link-color;
           border-radius: 10px;
+          list-style-type: none;
       }
     }
 
@@ -117,6 +136,10 @@
 
     .breakpoint-screen({
         flex-wrap: nowrap;
+        // Figma "menu" 4:175 — 57px left / 44px right
+        padding-left: 57px;
+        padding-right: 44px;
+
         input[type='checkbox']{
           display: none;
         }
@@ -131,20 +154,38 @@
             -ms-flex-positive: 1;
             -ms-flex-align: center;
             align-items: center;
+            // Figma "menu" 4:175 — the logo sits left, the navigation hugs the right edge
+            justify-content: flex-end;
             flex-direction: row;
             padding-left: 0;
             padding-right: 0;
             width: 100%;
 
             .navbar-nav {
-                justify-content: flex-start;
+                // Figma "Navigation" 4:178 — right aligned, 28px between links
+                justify-content: flex-end;
+                align-items: center;
+                gap: 28px;
                 flex-direction: row;
                 width: 100%;
-                .font-size(1);
+                padding-left: 0;
+                padding-right: 0;
+                font-family: 'Montserrat', Arial, sans-serif;
+                font-weight: 500;
+                font-size: 13px;
+                line-height: 19.5px;
 
 
                 .nav-item {
                     text-align: left;
+
+                    // gap owns the horizontal rhythm — keep only the vertical hit area
+                    &>a {
+                        margin-left: 0;
+                        margin-right: 0;
+                        padding-left: 0;
+                        padding-right: 0;
+                    }
 
                     &.dropdown {
                          &:hover > .dropdown-menu {
@@ -157,7 +198,7 @@
                         position: absolute;
                         top: 60px;
                         padding: 15px 85px 15px 19px!important;
-                        margin-left: 15px;
+                        margin-left: 0;
                             a{
                                 padding: 0!important;
                                 font-size: 16px;
@@ -176,14 +217,42 @@
     });
 
 
-  .breakpoint-small-down({
-    justify-content: flex-start;
-  });
+    // ---- burger row, below @breakpoint-screen-min-width
+    .breakpoint-screen-down({
+        flex-wrap: nowrap;
+        justify-content: flex-start;
+        gap: 16px;
+        padding-left: @margin-base-space;
+        padding-right: @margin-base-space;
+
+        // the horizontal menu is desktop-only; the burger panel replaces it.
+        // Stated here rather than relying on the inline display:none that
+        // bootstrap's collapse plugin happens to set on the home page.
+        .navbar-collapse {
+            display: none;
+        }
+
+        .navbar-brand {
+            margin-right: auto;
+        }
+
+        // the burger and the language pill ride in the flex row instead of
+        // being absolutely positioned on top of each other
+        #google_translate_element {
+            order: 8;
+            flex-shrink: 0;
+            margin: 0;
+        }
+
+        #menuToggle {
+            order: 9;
+        }
+    });
 }
 
 .home{
     .navbar-brand {
-        display: none!important;
+        display: flex!important;
         &.scrolled{
             display: flex!important;
         }
@@ -191,7 +260,7 @@
     }
     .navbar{
         &.fixed {
-             background: none;
+            background: @dark-color;
             &.scrolled {
                 background: @dark-color;
             }
@@ -295,6 +364,9 @@
 
 
   nav .pr.p-search.middle.search-btn{
+    // Figma "IconSearch" 4:194 — 18x18
+    font-size: 18px;
+    line-height: 18px;
     .breakpoint-screen-down({
       display: none;
     })
@@ -304,22 +376,30 @@
     margin-right: 20px;
     cursor: pointer;
 
+    // the navbar's 44px right padding places the icon in the design
+    .breakpoint-screen({
+      margin-right: 0;
+    });
   }
 
   #menuToggle{
     display: none;
   }
 
-  @media (max-width:1590px) {
+  .breakpoint-screen-down({
 
     /* menu toggle effect mobile */
 
   #menuToggle {
     display: flex;
     flex-direction: column;
-    position: absolute;
-    right: 24px;
-    top: 40px;
+    justify-content: center;
+    position: relative;
+    right: auto;
+    top: auto;
+    width: 29px;
+    height: 21px;       // three 2px bars, 5px apart
+    flex-shrink: 0;
     z-index: 1;
     -webkit-user-select: none;
     user-select: none;
@@ -328,9 +408,11 @@
   #menuToggle input
   {
     display: flex;
-    width: 40px;
-    height: 32px;
+    width: 41px;
+    height: 33px;
     position: absolute;
+    top: -6px;
+    left: -6px;
     cursor: pointer;
     opacity: 0;
     z-index: 2;
@@ -383,17 +465,24 @@
     background: @white-color;
   }
 
+  // Anchored to the viewport under the bar, so it no longer needs the
+  // -93vw/-86vw/-81vw margin hacks that only lined up at three widths.
   #menu
   {
-    position: absolute;
-    width: 100vw;
-    height: 100vh;
-    margin: -40px 0 0 -93vw;
-    padding: 50px 0 0 0;
+    position: fixed;
+    top: @navbar-height;
+    left: 0;
+    width: 100%;
+    height: calc(~"100vh - @{navbar-height}");
+    margin: 0;
+    padding: 16px 0 40px;
+    box-sizing: border-box;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
     background-color: @dark-color;
     color: @white-color!important;
-    font-size: 28px!important;
     -webkit-font-smoothing: antialiased;
+    list-style-type: none;
     transform-origin: 0% 0%;
     transform: translate(100%, 0);
     transition: transform 0.5s cubic-bezier(0.77,0.2,0.05,1.0);
@@ -403,20 +492,18 @@
 
   #menu li
   {
-    //padding: 24px  0 0 0;
-    transition-delay: 2s;
+    padding: 0;
     text-align: center;
-    .breakpoint-screen-down({
-      padding: 18px  0 0 0;
-    })
   }
 
+  // block, not float — a floated link collapses its <ul> to zero height
   #menu li a{
+    display: block;
+    float: none;
+    width: 100%;
+    padding: 14px 0;
     color: @white-color;
     font-size: 22px;
-    padding: 24px 0 0 0;
-    float: left;
-    width: 100%;
   }
 
   #menu{
@@ -426,13 +513,18 @@
       background-size: contain;
     }
       .dropdown-menu{
+              // on the dark panel a sub-list reads as an indent, not a teal card
+              background: none!important;
+              border-radius: 0;
+              margin-top: 0;
               padding-left: 0!important;
       }
   }
 
   #menu .dropdown-menu li a{
-    padding: 5px 0 0 0;
+    padding: 6px 0;
     font-size: 16px;
+    color: #efefef;
   }
 
   #menu li.sign-in a{
@@ -450,34 +542,12 @@
 
   #menuToggle .dropdown-menu{
     list-style-type: none!important;
-    font-size: 0.8em;
-    margin-top: 10px;
-
-    li{
-      padding-right: 0!important;
-      padding-top: 0!important;
-      a{
-        color: #efefef;
-      }
-    }
   }
 
   #menuToggle .dropdown  span{
     display: none;
   }
-}
-
-@media (max-width:800px) {
-  #menu {
-    margin: -40px 0 0 -86vw;
-
-  }
-}
-@media (max-width:300px) {
-  #menu {
-    margin: -40px 0 0 -81vw;
-  }
-}
+  });
 
 
 .nav-item.search_field{
@@ -504,6 +574,12 @@
 
 #google_translate_element {
     margin-right: 20px;
+
+    // sits in the same 28px rhythm as the navigation links
+    .breakpoint-screen({
+        margin-left: 28px;
+        margin-right: 28px;
+    });
     //position: absolute;
     //min-height: 40px;
     ////display: block !important;
@@ -511,12 +587,8 @@
     ///* width: 100%; */
     //left: 90%;
     //top: 26px;
-    //
-    .breakpoint-large-down({
-        margin-right: 0;
-        margin-left: 63%;
-        margin-top: -85px;
-    });
+    // (the old .breakpoint-large-down margin-left:63%/margin-top:-80px hack is
+    //  gone — the burger row now places this element with flex order instead)
 
     // Hide Google's default UI elements
     .goog-te-gadget,

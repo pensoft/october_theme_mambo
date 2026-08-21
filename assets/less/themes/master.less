@@ -98,6 +98,10 @@ h1.display-1, h2.underline{
     padding-right: 0;
     .intro{
         padding: 0 10%;
+        // without an explicit width the flex item sizes to max-content, so a
+        // long headline word pushes past the container and gets clipped
+        width: 100%;
+        box-sizing: border-box;
         .logo_main{
             background: url("../../assets/images/MAMBO_white.svg") left no-repeat;
             background-size: contain;
@@ -108,8 +112,9 @@ h1.display-1, h2.underline{
                 height: 76px;
             });
             .breakpoint-small-down({
-                width: 85%;
-                height: 104px;
+                width: 100%;
+                height: 64px;
+                background-position: center;
             });
         }
         h1{
@@ -119,6 +124,7 @@ h1.display-1, h2.underline{
             font-family: Montserrat;
             margin: 40px 0;
             text-align: left!important;
+            text-transform: uppercase;
 
             .breakpoint-laptop-down({
                 font-size: 43px;
@@ -147,7 +153,9 @@ h1.display-1, h2.underline{
                 display: none;
             }
             .breakpoint-small-down({
-                display: none;
+                font-size: 16px;
+                line-height: 26px;
+                text-align: center;
             });
         }
         .intro_btn{
@@ -178,17 +186,24 @@ h1.display-1, h2.underline{
         });
     }
 
+    // the bar is fixed and opaque, so centre the content in the space below it
+    // rather than pinning it to y=0 where the logo disappears behind the bar
     .breakpoint-laptop-down({
         width: 50%;
         align-items: start;
-        justify-content: start;
+        justify-content: center;
+        // !important only to beat this block's own `padding-top: unset!important`
+        padding-top: @navbar-height!important;
+        box-sizing: border-box;
     });
     .breakpoint-small-down({
         width: 100%;
         display: flex;
         align-items: start;
-        justify-content: start;
+        justify-content: center;
+        // no blur on phones, so the scrim alone has to carry the contrast
         backdrop-filter: none;
+        background: rgba(0, 0, 0, 0.45);
     });
 
 

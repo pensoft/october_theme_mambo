@@ -1,0 +1,46 @@
+// Figma "Container" 3:65 — homepage legacy notice, sits directly under the hero
+
+.legacy-banner {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    min-height: 42px;               // 12px top + 18px line + 12px bottom
+    padding: 12px @margin-base-space;
+    box-sizing: border-box;
+    text-align: center;
+    text-decoration: none;
+    background: linear-gradient(90deg, #2CBFAD 0%, #1C2D3C 124.3%);
+
+    .legacy-banner-text {
+        font-family: 'Montserrat', Arial, sans-serif;
+        font-weight: 500;
+        font-size: 12px;
+        line-height: 18px;
+        letter-spacing: 0.3px;
+        color: @white-color;
+    }
+
+    // Figma "Group 2" 4:18 — the 6.667x10 down arrow laid on its side to point right
+    .legacy-banner-arrow {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+        width: 10px;
+        height: 6.667px;
+
+        img {
+            width: 7.667px;         // the asset's own box; the stroked path inside is 6.667x10
+            height: 11px;
+            flex-shrink: 0;
+            transform: rotate(-90deg);
+        }
+    }
+
+    &:hover {
+        .legacy-banner-text {
+            opacity: 0.8;
+        }
+    }
+}

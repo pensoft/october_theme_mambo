@@ -1,0 +1,264 @@
+// Site footer — Figma "Footer" 3:216
+// Note the ground is #1C2D3C, a shade darker than @dark-color (#2A3A4E), and
+// the same value the legacy banner's gradient ends on.
+
+@footer-ground: #1C2D3C;
+@footer-rule: rgba(255, 255, 255, 0.1);
+@footer-dim: rgba(255, 255, 255, 0.35);
+@footer-muted: rgba(255, 255, 255, 0.45);
+@footer-legal: #ADADAD;
+
+@footer-shell: 1280px;   // centred container — 74px margins at the 1428px design width
+@footer-gutter: 48px;    // leaves the same 1184px content column the page uses
+
+.site-footer {
+    background: @footer-ground;
+    font-family: 'Montserrat', Arial, sans-serif;
+
+    &__inner {
+        box-sizing: border-box;
+        width: 100%;
+        max-width: @footer-shell;
+        margin: 0 auto;
+        padding: 64px @footer-gutter 40px;
+
+        // match the 20px side gutter the page sections use on phones
+        .breakpoint-medium-down({
+            padding: 48px @margin-base-space 32px;
+        });
+    }
+
+    // Figma "Container" 3:218 — 12 columns, spans 3 / 5 / 4
+    &__top {
+        display: grid;
+        grid-template-columns: repeat(12, minmax(0, 1fr));
+        gap: @footer-gutter;
+        padding-bottom: 48px;
+        border-bottom: 1px solid @footer-rule;
+
+        .breakpoint-laptop-down({
+            grid-template-columns: repeat(6, minmax(0, 1fr));
+            gap: 40px @footer-gutter;
+        });
+        .breakpoint-medium-down({
+            grid-template-columns: minmax(0, 1fr);
+            gap: 40px;
+        });
+    }
+
+    &__brand {
+        grid-column: span 3;
+
+        .breakpoint-laptop-down({ grid-column: span 2; });
+        .breakpoint-medium-down({ grid-column: auto; });
+    }
+
+    &__logo {
+        display: block;
+        width: 149px;
+        height: 33px;
+    }
+
+    // "GET IN TOUCH" — Figma 3:229
+    &__label {
+        margin: 0;
+        padding-top: 32px;
+        font-family: 'Montserrat', Arial, sans-serif;
+        font-weight: 700;
+        font-size: 11px;
+        line-height: 16.5px;
+        letter-spacing: 1.98px;
+        text-transform: uppercase;
+        text-align: left !important;
+        color: @white-color !important;
+    }
+
+    // Figma "Container" 3:231 — five 36px circles, 10px apart
+    &__social {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        padding-top: 16px;
+
+        // the icomoon glyphs match the design's exports one-for-one; only the
+        // colour and the ring around them are ours. Qualified with the tag so
+        // it outranks icons.less's `.pr.p-bluesky { color: @link-color!important }`
+        a.site-footer__social-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            width: 36px;
+            height: 36px;
+            box-sizing: border-box;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            font-size: 16px;
+            line-height: 1;
+            color: @white-color !important;
+
+            &:hover {
+                border-color: rgba(255, 255, 255, 0.5);
+            }
+        }
+    }
+
+    // Figma "Container" 3:244
+    &__nav {
+        grid-column: span 5;
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 24px;
+
+        .breakpoint-laptop-down({ grid-column: span 4; });
+        .breakpoint-medium-down({
+            grid-column: auto;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 32px 24px;
+        });
+    }
+
+    // ABOUT / LATEST / RESOURCES — Figma 3:247
+    &__heading {
+        margin: 0;
+        font-family: 'Montserrat', Arial, sans-serif;
+        font-weight: 700;
+        font-size: 11px;
+        line-height: 16.5px;
+        letter-spacing: 1.98px;
+        text-transform: uppercase;
+        text-align: left !important;
+        color: @footer-dim !important;
+    }
+
+    // the three menu components all render ul.footer-menu > li.footer-menu-item
+    .footer-menu {
+        list-style: none;
+        margin: 0;
+        padding: 20px 0 0;
+
+        .footer-menu-item {
+            margin: 0;
+            // pages/news.less sets `nav:not(.navbar) ul li { display: inline }`,
+            // which otherwise runs these columns together on one line
+            display: block;
+
+            + .footer-menu-item {
+                padding-top: 12px;
+            }
+        }
+
+        a {
+            font-family: 'Montserrat', Arial, sans-serif;
+            font-weight: 400;
+            font-size: 13px;
+            line-height: 19.5px;
+            color: @white-color !important;
+            text-decoration: none;
+        }
+    }
+
+    // Figma "Container" 3:288
+    &__funding {
+        grid-column: span 4;
+        padding-left: 32px;
+        border-left: 1px solid @footer-rule;
+
+        .breakpoint-laptop-down({
+            grid-column: span 6;
+            padding-left: 0;
+            padding-top: 40px;
+            border-left: 0;
+            border-top: 1px solid @footer-rule;
+        });
+        .breakpoint-medium-down({ grid-column: auto; });
+    }
+
+    // the "Funded by the European Union" lockup — flag plus the CMS caption,
+    // sized to the 181x39 the design reserves for it
+    &__lockup {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        min-height: 39px;
+    }
+
+    &__flag {
+        width: auto;
+        height: 39px;
+        flex-shrink: 0;
+    }
+
+    &__lockup-text {
+        font-family: 'Montserrat', Arial, sans-serif;
+        font-weight: 700;
+        font-size: 12px;
+        line-height: 16px;
+        color: @white-color;
+    }
+
+    &__funding-text {
+        max-width: 330px;
+        margin: 0;
+        padding-top: 20px;
+        font-family: 'Montserrat', Arial, sans-serif;
+        font-weight: 400;
+        font-size: 12px;
+        line-height: 21.6px;
+        color: @footer-muted;
+    }
+
+    // Figma "Container" 3:309
+    &__bottom {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 24px;
+        padding-top: 24px;
+
+        .breakpoint-medium-down({
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 16px;
+        });
+    }
+
+    &__credit {
+        display: flex;
+        align-items: center;
+        gap: 7px;
+        margin: 0;
+        font-family: 'Montserrat', Arial, sans-serif;
+        font-weight: 400;
+        font-size: 12px;
+        line-height: 18px;
+        color: @white-color;
+        white-space: nowrap;
+    }
+
+    &__pensoft {
+        display: block;
+        width: 71px;
+        height: 17px;
+    }
+
+}
+
+// Scoped and tag-qualified so it outranks pages/news.less's
+// `nav:not(.navbar) { width: 100% }`, which would otherwise stretch this nav
+// and strand the links next to the credit instead of at the right edge.
+.site-footer__bottom nav.site-footer__legal {
+    display: flex;
+    gap: 21px;
+    width: auto;
+
+    a {
+        font-family: 'Montserrat', Arial, sans-serif;
+        font-weight: 600;
+        font-size: 12px;
+        line-height: 18px;
+        color: @footer-legal !important;
+        text-decoration: none;
+        white-space: nowrap;
+    }
+}

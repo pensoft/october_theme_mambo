@@ -1,0 +1,405 @@
+// Homepage layout content — Figma "Page Design Update" 3:3
+// Sections 3:317 (intro + stats), 3:118 (policy band), 4:262 (RIO), 8:2 (news).
+// The header (nav + carousel + legacy banner) and the footer are styled elsewhere.
+
+@home-teal: #2CBFAD;
+@home-ink: #101828;
+@home-muted: #6A7282;
+@home-label: #99A1AF;
+
+@home-shell: 1280px;    // centred container — 74px margins at the 1428px design width
+@home-gutter: 48px;     // leaves a 1184px content column, which every section shares
+
+
+// ---------------------------------------------------------------- shared bits
+
+.home-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 9px;
+    box-sizing: border-box;
+    padding: 10px 20px;
+    font-family: 'Montserrat', Arial, sans-serif;
+    font-weight: 600;
+    font-size: 13px;
+    line-height: 19.5px;
+    text-align: center;
+    text-decoration: none;
+    white-space: nowrap;
+
+    &--solid {
+        background: @home-teal;
+        border-radius: 100px;
+        color: @white-color;
+
+        &:hover {
+            background: darken(#2CBFAD, 8%);
+        }
+    }
+
+    &--link {
+        color: @home-teal !important;
+
+        &:hover {
+            opacity: 0.75;
+        }
+    }
+
+    // Figma "Button" 3:134 — ghost button on the teal band
+    &--outline {
+        gap: 10px;
+        min-width: 226px;
+        height: 52px;
+        border: 2px solid rgba(255, 255, 255, 0.3);
+        border-radius: 100px;
+        font-weight: 700;
+        color: @white-color;
+
+        &:hover {
+            border-color: rgba(255, 255, 255, 0.6);
+        }
+    }
+}
+
+// Figma "Group 1" 4:14 / 4:269 — a 6.667x10 down arrow laid on its side to point right
+.home-arrow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    width: 10px;
+    height: 6.667px;
+
+    img {
+        width: 7.667px;     // the asset's own box; the stroked path inside is 6.667x10
+        height: 11px;
+        flex-shrink: 0;
+        transform: rotate(-90deg);
+    }
+
+    // the 1.5px stroke bleeds further, so its asset box is a touch larger
+    &--bold img {
+        width: 8.167px;
+        height: 11.5px;
+    }
+}
+
+
+// ------------------------------------------------- Figma "Section" 3:317
+
+.home-intro {
+    display: flex;
+    justify-content: center;
+
+    &__inner {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 64px;
+        box-sizing: border-box;
+        width: 100%;
+        max-width: @home-shell;
+        padding: 96px @home-gutter;
+
+        .breakpoint-laptop-down({
+            grid-template-columns: minmax(0, 1fr);
+            gap: 56px;
+            padding: 64px @margin-base-space;
+        });
+    }
+
+    &__body {
+        align-self: center;
+    }
+
+    &__title {
+        margin: 0;
+        font-family: 'Montserrat', Arial, sans-serif;
+        font-weight: 500;
+        font-size: 32px;
+        line-height: 44px;
+        color: @home-ink !important;
+        text-align: left !important;
+
+        .breakpoint-small-down({
+            font-size: 26px;
+            line-height: 36px;
+        });
+    }
+
+    &__text {
+        margin: 0;
+        padding-top: 20px;
+        font-family: 'Montserrat', Arial, sans-serif;
+        font-weight: 400;
+        font-size: 13.5px;
+        line-height: 24.975px;
+        color: @home-muted;
+    }
+
+    &__actions {
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 12px;
+        padding-top: 32px;
+    }
+
+    &__stats {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+}
+
+// Figma "Container" 4:309 — 2x2 grid of 179px cells, 18px apart across and 40px down
+.home-stats {
+    display: grid;
+    grid-template-columns: repeat(2, 179px);
+    column-gap: 18px;
+    row-gap: 40px;
+    margin: 0;
+    padding: 0;
+
+    .breakpoint-small-down({
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        row-gap: 24px;
+    });
+
+    &__item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    &__value {
+        margin: 0;
+        padding-bottom: 8px;
+        font-family: 'Montserrat', Arial, sans-serif;
+        font-weight: 700;
+        font-size: 72px;
+        line-height: 72px;
+        text-align: center;
+        color: @home-teal;
+    }
+
+    &__label {
+        font-family: 'Montserrat', Arial, sans-serif;
+        font-weight: 600;
+        font-size: 11px;
+        line-height: 16.5px;
+        text-align: center;
+        text-transform: uppercase;
+        color: @home-label;
+    }
+}
+
+
+// ------------------------------------------------- Figma "Section" 3:118
+
+.home-impact {
+    background: @home-teal;
+    padding: 55px @margin-base-space 54px;
+
+    &__inner {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 40px;
+        box-sizing: border-box;
+        width: 100%;
+        max-width: @home-shell - (@home-gutter * 2);
+        margin: 0 auto;
+
+        .breakpoint-laptop-down({
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 32px;
+        });
+    }
+
+    &__text {
+        max-width: 672px;
+        margin: 0;
+        font-family: 'Montserrat', Arial, sans-serif;
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 26.825px;
+        color: @white-color;
+    }
+}
+
+
+// ------------------------------------------------- Figma "Container" 4:262
+
+.home-rio {
+    position: relative;
+    display: flex;
+    box-sizing: border-box;
+    width: calc(100% - (@margin-base-space * 2));
+    max-width: @home-shell - (@home-gutter * 2);
+    min-height: 334px;
+    margin: 70px auto 0;
+    overflow: hidden;
+    background: #EFF5F5;
+
+    .breakpoint-laptop-down({
+        flex-direction: column;
+        min-height: 0;
+    });
+
+    // Full-bleed on mobile. Contained, the panel's own side margin stacked on
+    // top of __body's padding and pushed the text 40px in, while every other
+    // section starts at 20px — reads as a too-narrow column.
+    .breakpoint-medium-down({
+        width: 100%;
+        max-width: none;
+    });
+
+    // the rotated cover is anchored to the panel, so it keeps its designed crop
+    &__media {
+        position: relative;
+        flex-shrink: 0;
+        width: 432px;
+
+        img {
+            position: absolute;
+            left: 96.3px;       // 69px box + half the 288.585x377.603 rotation bleed
+            top: 49.3px;        // 32px box + half the rotation bleed
+            width: 234px;
+            height: 343px;
+            object-fit: cover;
+            transform: rotate(-9.73deg);
+            box-shadow: 0 4px 77px 0 rgba(137, 137, 137, 0.25);
+        }
+
+        .breakpoint-laptop-down({
+            width: 100%;
+            height: 420px;
+
+            img {
+                left: 50%;
+                margin-left: -117px;
+            }
+        });
+    }
+
+    &__body {
+        flex: 1;
+        min-width: 0;
+        padding: 54px 71px 40px 0;
+
+        .breakpoint-laptop-down({
+            padding: 32px @margin-base-space 40px;
+        });
+    }
+
+    &__title {
+        margin: 0;
+        font-family: 'Montserrat', Arial, sans-serif;
+        font-weight: 500;
+        font-size: 17.6px;
+        line-height: 24.2px;
+        color: @home-ink !important;
+        text-align: left !important;
+    }
+
+    &__text {
+        max-width: 681px;
+        margin: 0;
+        padding-top: 12px;
+        font-family: 'Montserrat', Arial, sans-serif;
+        font-weight: 400;
+        font-size: 13.5px;
+        line-height: 24.975px;
+        color: @home-muted;
+    }
+
+    .home-btn {
+        margin-top: 25px;
+    }
+}
+
+
+// ------------------------------------------------- Figma "News" 8:2
+
+.home-news {
+    box-sizing: border-box;
+    width: calc(100% - (@margin-base-space * 2));
+    max-width: @home-shell - (@home-gutter * 2);
+    margin: 92px auto 94px;
+
+    &__title {
+        margin: 0 0 30px;
+        font-family: 'Montserrat', Arial, sans-serif;
+        font-weight: 500;
+        font-size: 32px;
+        line-height: 48px;
+        color: @home-ink !important;
+        text-align: center !important;
+
+        .breakpoint-small-down({
+            font-size: 26px;
+            line-height: 36px;
+        });
+    }
+
+    &__grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 32px;
+
+        .breakpoint-large-down({
+            grid-template-columns: minmax(0, 1fr);
+        });
+    }
+
+    &__item {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    &__media {
+        display: block;
+        width: 100%;
+        height: 200px;
+        margin-bottom: 16px;
+        border-radius: 12px;
+        overflow: hidden;
+
+        img {
+            display: block;
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+    }
+
+    &__heading {
+        margin: 0 0 16px;
+        font-family: 'Montserrat', Arial, sans-serif;
+        font-weight: 500;
+        font-size: 13.5px;
+        line-height: 18.563px;
+        text-align: left;
+        color: @home-ink !important;
+
+        a {
+            color: @home-ink !important;
+            text-decoration: none;
+
+            &:hover {
+                color: @home-teal !important;
+            }
+        }
+    }
+
+    &__date {
+        font-family: 'Montserrat', Arial, sans-serif;
+        font-weight: 600;
+        font-size: 12px;
+        line-height: 18px;
+        color: @home-teal;
+    }
+}

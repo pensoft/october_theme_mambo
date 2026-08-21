@@ -1,0 +1,306 @@
+url = "/"
+layout = "default"
+title = "MAMBO"
+is_hidden = 0
+meta_description = "homepage desc"
+seo_keywords = "keywords"
+robot_index = "index"
+robot_follow = "follow"
+
+[article_highlights]
+maxItems = 3
+title = "Latest news"
+baseUrl = "/news"
+templates = "template4"
+thumb_width = 440
+thumb_height = 235
+title_max_length = 150
+
+[jumbotron vision]
+jumbotron = "vision"
+title = 1
+background = "transperant"
+templates = "template1"
+description_limit = 0
+
+[jumbotron mission]
+jumbotron = "mission"
+title = 1
+background = "transperant"
+templates = "template1"
+description_limit = 0
+
+[jumbotron numbers]
+jumbotron = "numbers"
+title = 1
+background = "transperant"
+templates = "template1"
+description_limit = 0
+
+[jumbotron rio_banner]
+jumbotron = "rio-banner"
+background = "transperant"
+templates = "template3"
+description_limit = 0
+==
+<?php
+use Pensoft\Calendar\Models\Entry;
+use Pensoft\Partners\Models\Partners;
+use Carbon\Carbon;
+
+function onStart() {
+    $this['entries'] = Entry::where('end', '>', Carbon::now())->where('show_on_timeline', true)->where('is_internal', false)->orderBy('start', 'asc')->take(3)->get();
+
+    $this['international'] = Partners::where('type',  2)->get();
+    $this['european'] = Partners::where('type',  4)->get();
+}
+?>
+==
+<section aria-labelledby="vision-heading">
+    <div class="container-fluid bg-secondary vision">
+        <div class="row between-md around-xs">
+            <div class="col-sm-6 col-xs-12">
+                <h2 id="vision-heading" class="sr-only">Vision</h2>
+                {% component 'vision' %}
+            </div>
+            <div class="col-sm-6 col-xs-12 vision_bg" aria-hidden="true">
+            </div>
+        </div>
+    </div>
+</section>
+
+<section aria-labelledby="mission-heading">
+    <div class="container-fluid bg-secondary mission">
+        <div class="row between-md around-xs">
+            <div class="col-sm-6 col-xs-12 mission_bg" aria-hidden="true">
+            </div>
+            <div class="col-sm-6 col-xs-12">
+                <h2 id="mission-heading" class="sr-only">Mission</h2>
+                {% component 'mission' %}
+            </div>
+        </div>
+    </div>
+</section>
+
+<section aria-labelledby="rio-banner-heading">
+    <div class="container rio_banner">
+        <h2 id="rio-banner-heading" class="sr-only">Featured Content</h2>
+        {% component 'rio_banner' %}
+    </div>
+</section>
+
+{% if entries.count %}
+<section aria-labelledby="events-heading">
+    <div class="container event-items-homepage">
+        <h2 id="events-heading">Upcoming MAMBO events</h2>
+        <div class="event-items-homepage2 mb-4">
+            {% for event in entries %}
+            <article class="row middle-xs events_item aos-init aos-animate" data-aos="fade-up">
+                {% if event.cover_image %}
+                <div class="col-md-4 col-xs-12">
+                    <a class="events-image col-xs-12 center-xs"
+                       href="{{'events'|page}}/{{event.slug}}"
+                       aria-label="View {{event.title}} event details">
+                        <img class="events-img"
+                             src="{{event.cover_image.path}}"
+                             alt="{{event.title}}">
+                    </a>
+                </div>
+                {% endif %}
+                <div class="col-md col-xs-12">
+                    <div class="events-container row">
+                        <time class="col-md-2 col-xs-12 text-published" datetime="{{event.start|date('Y-m-d')}}">
+                            {{ event.start|date('d M Y') }}
+                        </time>
+                        <div class="col-md-12 col-xs-12 events-title">
+                            <h3 class="card-title">
+                                <a href="{{'events'|page}}/{{event.slug}}">{{ event.title}}</a>
+                            </h3>
+                        </div>
+                    </div>
+                </div>
+            </article>
+            {% endfor %}
+        </div>
+        <div class="center-xs">
+            <a class="btn btn-primary view_all"
+               href="{{'events'|page}}"
+               aria-label="View all MAMBO events">
+                All events
+            </a>
+        </div>
+    </div>
+</section>
+{% endif %}
+
+<section aria-labelledby="news-heading">
+    <div class="container">
+        <h2 id="news-heading" class="sr-only">Latest News</h2>
+        {% component 'article_highlights' %}
+        <div class="row">
+            <div class="col-xs-12 center-xs">
+                <a href="{{'news'|page}}"
+                   class="btn btn-primary all-news-btn"
+                   aria-label="View all MAMBO news">
+                    All news
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section aria-labelledby="numbers-heading">
+    <div class="container-fluid bg-secondary">
+        <h2 id="numbers-heading" class="sr-only">Key Statistics</h2>
+        <div class="numbers_container">
+            {% component 'numbers' %}
+        </div>
+    </div>
+</section>
+
+{% if international.count > 0 %}
+<section aria-labelledby="partners-heading">
+    <div class="container mt-4">
+        <h2 id="partners-heading">Strategic partners and collaborators</h2>
+        <div class="row">
+            <div class="col-md-6 col-xs-12 mb-4">
+                <div class="inernational_partners">
+                    <h3 class="partners_title">
+                        International initiatives and networks
+                    </h3>
+                    <div class="row partners_list">
+                        {% for i in international %}
+                        <div class="col-md-6 col-xs-12">
+                            <div class="internal-partner-item">
+                                {% if i.cover %}
+                                <img class="partner_cover"
+                                     src="{{i.cover.thumb(195, auto, {'mode':'crop'})}}"
+                                     alt="{{i.instituion}} logo">
+                                {% else %}
+                                <p>{{i.instituion}}</p>
+                                {% endif %}
+                                {% if i.instituion_url %}
+                                <a href="{{i.instituion_url}}"
+                                   target="_blank"
+                                   rel="noopener noreferrer"
+                                   aria-label="Visit {{i.instituion}} website (opens in new window)">
+                                    <span class="sr-only">{{i.instituion}}</span>
+                                </a>
+                                {% endif %}
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-xs-12 mb-4">
+                <div class="inernational_partners">
+                    <h3 class="partners_title">
+                        EU Projects
+                    </h3>
+                    <div class="partners_list">
+                        {% for i in european %}
+                        <div class="col-md-6 col-xs-12">
+                            <div class="internal-partner-item">
+                                {% if i.cover %}
+                                <img class="partner_cover"
+                                     src="{{i.cover.thumb(195, auto, {'mode':'crop'})}}"
+                                     alt="{{i.instituion}} logo">
+                                {% else %}
+                                <p>{{i.instituion}}</p>
+                                {% endif %}
+                                {% if i.instituion_url %}
+                                <a href="{{i.instituion_url}}"
+                                   target="_blank"
+                                   rel="noopener noreferrer"
+                                   aria-label="Visit {{i.instituion}} website (opens in new window)">
+                                    <span class="sr-only">{{i.instituion}}</span>
+                                </a>
+                                {% endif %}
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endif %}
+
+<section aria-labelledby="follow-heading">
+    <div class="container">
+        <div class="col-xs-12">
+            <h2 id="follow-heading">Follow MAMBO</h2>
+        </div>
+        <div class="follow-container">
+            <nav class="col-md-6 col-xs-12 social-media-container" aria-label="MAMBO social media">
+                <div class="subscribe-items">
+                    {% if this.theme.bluesky_url %}
+                        <a href="{{this.theme.bluesky_url}}"
+                           target="_blank"
+                           rel="noopener noreferrer"
+                           class="btn p-primary pr p-bluesky medium"
+                           aria-label="Follow MAMBO on Bluesky (opens in new window)">
+                            <span class="sr-only">Bluesky</span>
+                        </a>
+                    {% endif %}
+                    {% if this.theme.twitter_url %}
+                        <a href="{{this.theme.twitter_url}}"
+                           target="_blank"
+                           rel="noopener noreferrer"
+                           class="btn p-primary pr p-twitter medium"
+                           aria-label="Follow MAMBO on Twitter (opens in new window)">
+                            <span class="sr-only">Twitter</span>
+                        </a>
+                    {% endif %}
+                    {% if this.theme.facebook_url %}
+                        <a href="{{this.theme.facebook_url}}"
+                           target="_blank"
+                           rel="noopener noreferrer"
+                           class="btn pr p-primary p-facebook medium"
+                           aria-label="Follow MAMBO on Facebook (opens in new window)">
+                            <span class="sr-only">Facebook</span>
+                        </a>
+                    {% endif %}
+                    {% if this.theme.linkedin_url %}
+                        <a href="{{this.theme.linkedin_url}}"
+                           target="_blank"
+                           rel="noopener noreferrer"
+                           class="btn pr p-primary p-linkedin medium"
+                           aria-label="Follow MAMBO on LinkedIn (opens in new window)">
+                            <span class="sr-only">LinkedIn</span>
+                        </a>
+                    {% endif %}
+                    {% if this.theme.youtube_url %}
+                        <a href="{{this.theme.youtube_url}}"
+                           target="_blank"
+                           rel="noopener noreferrer"
+                           class="btn pr p-primary p-youtube medium"
+                           aria-label="Follow MAMBO on YouTube (opens in new window)">
+                            <span class="sr-only">YouTube</span>
+                        </a>
+                    {% endif %}
+                    {% if this.theme.instagram_url %}
+                        <a href="{{this.theme.instagram_url}}"
+                           target="_blank"
+                           rel="noopener noreferrer"
+                           class="btn pr p-primary p-instagram medium"
+                           aria-label="Follow MAMBO on Instagram (opens in new window)">
+                            <span class="sr-only">Instagram</span>
+                        </a>
+                    {% endif %}
+                    {% if this.theme.researchgate_url %}
+                        <a href="{{this.theme.researchgate_url}}"
+                           target="_blank"
+                           rel="noopener noreferrer"
+                           class="btn pr p-primary p-researchgate medium researchgate-btn"
+                           aria-label="Follow MAMBO on ResearchGate (opens in new window)">
+                            <span class="sr-only">ResearchGate</span>
+                        </a>
+                    {% endif %}
+                </div>
+            </nav>
+        </div>
+    </div>
+</section>

@@ -51,150 +51,138 @@ theme = "dark-bottom"
     </div>
 </section>
 
-<footer>
-    <div class="container-fluid border-box dark-background">
-        {% component 'cookieConsent' %}
-        <div class="container">
-            <div class="row top-xs between-xs footer-menu-container">
-                <div class="col-md-6 col-xs-12 footer-right-border">
-                    <div class="row">
-                        <div class="col-xs-12">
-                            <img class="project_footer_logo"
-                                 src="{{ 'assets/images/MAMBO_white.svg'|theme }}"
-                                 alt="MAMBO project logo" />
-                        </div>
-                    </div>
-                    <div class="row between-xs">
-                        <section class="col-xs-12 col-md-3 start-md center-xs col-sm-6 start-sm" aria-labelledby="social-heading">
-                            <h3 id="social-heading" class="head">Get in touch</h3>
-                            <nav class="social-networks" aria-label="Social media links">
-                                <div class="icons mt-1">
-                                    {% if this.theme.bluesky_url %}
+{# Figma "Footer" 3:216 #}
+<footer class="site-footer">
+    {% component 'cookieConsent' %}
+    <div class="site-footer__inner">
+        <div class="site-footer__top">
 
-                                        <a href="{{this.theme.bluesky_url}}"
-                                           target="_blank"
-                                           rel="noopener noreferrer"
-                                           class="pr p-secondary p-bluesky big social-bluesky"
-                                           aria-label="Follow us on Bluesky (opens in new window)">
-                                            <span class="sr-only">Bluesky</span>
-                                        </a>
+            {# Figma "Container" 3:219 — brand + social #}
+            <div class="site-footer__brand">
+                <img class="site-footer__logo"
+                     src="{{ 'assets/images/MAMBO_white.svg'|theme }}"
+                     alt="MAMBO project logo" />
 
-                                    {% endif %}
-                                    {% if enable_facebook and facebook_url %}
+                <h2 class="site-footer__label" id="footer-social-heading">Get in touch</h2>
 
-                                        <a href="{{facebook_url}}"
-                                           target="_blank"
-                                           rel="noopener noreferrer"
-                                           class="pr p-secondary p-facebook big"
-                                           aria-label="Follow us on Facebook (opens in new window)">
-                                            <span class="sr-only">Facebook</span>
-                                        </a>
-
-                                    {% endif %}
-                                    {% if enable_twitter and twitter_url %}
-                                        <a href="{{twitter_url}}"
-                                           target="_blank"
-                                           rel="noopener noreferrer"
-                                           class="pr p-secondary p-twitter big social-twitter"
-                                           aria-label="Follow us on Twitter (opens in new window)">
-                                            <span class="sr-only">Twitter</span>
-                                        </a>
-                                    {% endif %}
-                                    {% if enable_linkedin and linkedin_url %}
-                                        <a href="{{linkedin_url}}"
-                                           target="_blank"
-                                           rel="noopener noreferrer"
-                                           class="pr p-secondary p-linkedin big social-linkedin"
-                                           aria-label="Follow us on LinkedIn (opens in new window)">
-                                            <span class="sr-only">LinkedIn</span>
-                                        </a>
-                                    {% endif %}
-                                    {% if enable_youtube and youtube_url %}
-                                        <a href="{{youtube_url}}"
-                                           target="_blank"
-                                           rel="noopener noreferrer"
-                                           class="pr p-secondary p-youtube big social-youtube"
-                                           aria-label="Follow us on YouTube (opens in new window)">
-                                            <span class="sr-only">YouTube</span>
-                                        </a>
-                                    {% endif %}
-                                    {% if enable_instagram and instagram_url %}
-                                        <a href="{{instagram_url}}"
-                                           target="_blank"
-                                           rel="noopener noreferrer"
-                                           class="pr p-secondary p-instagram big"
-                                           aria-label="Follow us on Instagram (opens in new window)">
-                                            <span class="sr-only">Instagram</span>
-                                        </a>
-                                    {% endif %}
-                                        <a href="{{'contact'|page}}"
-                                           class="pr p-secondary p-mail big social-mail"
-                                           aria-label="Contact us">
-                                            <span class="sr-only">Contact</span>
-                                        </a>
-                                </div>
-                            </nav>
-                        </section>
-
-                        <nav class="col-xs-12 col-md-3 start-md center-xs col-sm-6 start-sm" aria-labelledby="about-heading">
-                            <h3 id="about-heading" class="head">About</h3>
-                            {% component 'about_menu' %}
-                        </nav>
-
-                        <nav class="col-xs-12 col-md-3 start-md center-xs col-sm-6 start-sm" aria-labelledby="latest-heading">
-                            <h3 id="latest-heading" class="head">Latest</h3>
-                            {% component 'latest_menu' %}
-                        </nav>
-
-                        <nav class="col-xs-12 col-md-3 start-md center-xs col-sm-6 start-sm" aria-labelledby="resources-heading">
-                            <h3 id="resources-heading" class="head">Resources</h3>
-                            {% component 'resources_menu' %}
-                        </nav>
-                    </div>
-                </div>
-
-                <section class="col-md-6 col-xs-12" aria-labelledby="funding-heading">
-                    <h2 id="funding-heading" class="sr-only">Funding Information</h2>
-                    {% if (footer_funds_flag != null or footer_funds_text != '') %}
-                    <div class="funding flex-column my-1 my-lg-0 flex-lg-row px-1 align-items-center col-sm col-xs-12">
-                        {% if footer_funds_flag %}
-                        <img class="text mr-0 mr-lg-1 funding-flag"
-                             src="{{ footer_funds_flag }}"
-                             alt="European Union flag"/>
-                        {% endif %}
-                        {% if footer_funds_text %}
-                        <p class="align-items-center mt-sm-0 mt-1">{{footer_funds_text}}</p>
-                        {% endif %}
-                    </div>
-                    <div class="funding-text">
-                        <p>MAMBO receives funding from the European Union's Horizon Europe research and innovation programme under grant agreement No.101060639.</p>
-                        <p>Views and opinions expressed are those of the author(s) only and do not necessarily reflect those of the European Union or the European Commission. Neither the EU nor the EC can be held responsible for them.</p>
-                    </div>
+                <nav class="site-footer__social" aria-labelledby="footer-social-heading">
+                    {% if this.theme.bluesky_url %}
+                    <a href="{{this.theme.bluesky_url}}"
+                       target="_blank"
+                       rel="noopener noreferrer"
+                       class="site-footer__social-link pr p-bluesky"
+                       aria-label="Follow us on Bluesky (opens in new window)">
+                        <span class="sr-only">Bluesky</span>
+                    </a>
                     {% endif %}
-
-                    <div class="row between-xs middle-xs">
-                        <div class="col-md-7 col-xs-12">
-                            <div class="powered-by my-1 my-lg-0 px-1 start-sm center-xs">
-                                <p>
-                                    Designed and powered by
-                                    <a href="https://pensoft.net/"
-                                       target="_blank"
-                                       rel="noopener noreferrer"
-                                       aria-label="Pensoft (opens in new window)">
-                                        <img class="pensoft_logo"
-                                             src="{{ 'assets/images/pensoft-logo.svg'|theme }}"
-                                             alt="Pensoft" />
-                                    </a>
-                                </p>
-                            </div>
-                        </div>
-                        <nav class="col-sm-5 col-xs-12 center-xs" aria-label="Legal links">
-                            <a href="/privacy-policy" class="privacy-link">Privacy Policy</a> &nbsp;  &nbsp; 
-                            <a href="/accessibility-policy">Accessibility Policy</a>
-                        </nav>
-                    </div>
-                </section>
+                    {% if enable_twitter and twitter_url %}
+                    <a href="{{twitter_url}}"
+                       target="_blank"
+                       rel="noopener noreferrer"
+                       class="site-footer__social-link pr p-twitter"
+                       aria-label="Follow us on X (opens in new window)">
+                        <span class="sr-only">X</span>
+                    </a>
+                    {% endif %}
+                    {% if enable_linkedin and linkedin_url %}
+                    <a href="{{linkedin_url}}"
+                       target="_blank"
+                       rel="noopener noreferrer"
+                       class="site-footer__social-link pr p-linkedin"
+                       aria-label="Follow us on LinkedIn (opens in new window)">
+                        <span class="sr-only">LinkedIn</span>
+                    </a>
+                    {% endif %}
+                    {% if enable_youtube and youtube_url %}
+                    <a href="{{youtube_url}}"
+                       target="_blank"
+                       rel="noopener noreferrer"
+                       class="site-footer__social-link pr p-youtube"
+                       aria-label="Follow us on YouTube (opens in new window)">
+                        <span class="sr-only">YouTube</span>
+                    </a>
+                    {% endif %}
+                    {% if enable_facebook and facebook_url %}
+                    <a href="{{facebook_url}}"
+                       target="_blank"
+                       rel="noopener noreferrer"
+                       class="site-footer__social-link pr p-facebook"
+                       aria-label="Follow us on Facebook (opens in new window)">
+                        <span class="sr-only">Facebook</span>
+                    </a>
+                    {% endif %}
+                    {% if enable_instagram and instagram_url %}
+                    <a href="{{instagram_url}}"
+                       target="_blank"
+                       rel="noopener noreferrer"
+                       class="site-footer__social-link pr p-instagram"
+                       aria-label="Follow us on Instagram (opens in new window)">
+                        <span class="sr-only">Instagram</span>
+                    </a>
+                    {% endif %}
+                    <a href="{{'contact'|page}}"
+                       class="site-footer__social-link pr p-mail"
+                       aria-label="Contact us">
+                        <span class="sr-only">Contact</span>
+                    </a>
+                </nav>
             </div>
+
+            {# Figma "Container" 3:244 — three link columns #}
+            <div class="site-footer__nav">
+                <nav class="site-footer__col" aria-labelledby="footer-about-heading">
+                    <h2 id="footer-about-heading" class="site-footer__heading">About</h2>
+                    {% component 'about_menu' %}
+                </nav>
+                <nav class="site-footer__col" aria-labelledby="footer-latest-heading">
+                    <h2 id="footer-latest-heading" class="site-footer__heading">Latest</h2>
+                    {% component 'latest_menu' %}
+                </nav>
+                <nav class="site-footer__col" aria-labelledby="footer-resources-heading">
+                    <h2 id="footer-resources-heading" class="site-footer__heading">Resources</h2>
+                    {% component 'resources_menu' %}
+                </nav>
+            </div>
+
+            {# Figma "Container" 3:288 — funding #}
+            <section class="site-footer__funding" aria-labelledby="footer-funding-heading">
+                <h2 id="footer-funding-heading" class="sr-only">Funding</h2>
+                {% if footer_funds_flag or footer_funds_text %}
+                <div class="site-footer__lockup">
+                    {% if footer_funds_flag %}
+                    <img class="site-footer__flag" src="{{ footer_funds_flag }}" alt="European Union flag" />
+                    {% endif %}
+                    {% if footer_funds_text %}
+                    <span class="site-footer__lockup-text">{{ footer_funds_text }}</span>
+                    {% endif %}
+                </div>
+                {% endif %}
+                <p class="site-footer__funding-text">
+                    MAMBO receives funding from the European Union's Horizon Europe research and innovation
+                    programme under grant agreement No.101060639. Views and opinions expressed are those of the
+                    author(s) only and do not necessarily reflect those of the European Union or the European
+                    Commission. Neither the EU nor the EC can be held responsible for them.
+                </p>
+            </section>
+        </div>
+
+        {# Figma "Container" 3:309 — credit row #}
+        <div class="site-footer__bottom">
+            <p class="site-footer__credit">
+                Designed and powered by
+                <a href="https://pensoft.net/"
+                   target="_blank"
+                   rel="noopener noreferrer"
+                   aria-label="Pensoft (opens in new window)">
+                    <img class="site-footer__pensoft"
+                         src="{{ 'assets/images/pensoft-logo.svg'|theme }}"
+                         alt="Pensoft" />
+                </a>
+            </p>
+            <nav class="site-footer__legal" aria-label="Legal links">
+                <a href="/accessibility-policy">Accessibility Policy</a>
+                <a href="/privacy-policy">Privacy Policy</a>
+            </nav>
         </div>
     </div>
 </footer>

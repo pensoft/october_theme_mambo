@@ -6,301 +6,125 @@ meta_description = "homepage desc"
 seo_keywords = "keywords"
 robot_index = "index"
 robot_follow = "follow"
-
-[article_highlights]
-maxItems = 3
-title = "Latest news"
-baseUrl = "/news"
-templates = "template4"
-thumb_width = 440
-thumb_height = 235
-title_max_length = 150
-
-[jumbotron vision]
-jumbotron = "vision"
-title = 1
-background = "transperant"
-templates = "template1"
-description_limit = 0
-
-[jumbotron mission]
-jumbotron = "mission"
-title = 1
-background = "transperant"
-templates = "template1"
-description_limit = 0
-
-[jumbotron numbers]
-jumbotron = "numbers"
-title = 1
-background = "transperant"
-templates = "template1"
-description_limit = 0
-
-[jumbotron rio_banner]
-jumbotron = "rio-banner"
-background = "transperant"
-templates = "template3"
-description_limit = 0
 ==
 <?php
-use Pensoft\Calendar\Models\Entry;
-use Pensoft\Partners\Models\Partners;
-use Carbon\Carbon;
+use Pensoft\Articles\Models\Article;
 
 function onStart() {
-    $this['entries'] = Entry::where('end', '>', Carbon::now())->where('show_on_timeline', true)->where('is_internal', false)->orderBy('start', 'asc')->take(3)->get();
-
-    $this['international'] = Partners::where('type',  2)->get();
-    $this['european'] = Partners::where('type',  4)->get();
+    $this['news'] = Article::news()
+        ->where('published_at', '<=', 'now()')
+        ->where('published', 'true')
+        ->orderBy('published_at', 'DESC')
+        ->take(3)
+        ->get();
 }
 ?>
 ==
-<section aria-labelledby="vision-heading">
-    <div class="container-fluid bg-secondary vision">
-        <div class="row between-md around-xs">
-            <div class="col-sm-6 col-xs-12">
-                <h2 id="vision-heading" class="sr-only">Vision</h2>
-                {% component 'vision' %}
-            </div>
-            <div class="col-sm-6 col-xs-12 vision_bg" aria-hidden="true">
-            </div>
-        </div>
-    </div>
-</section>
-
-<section aria-labelledby="mission-heading">
-    <div class="container-fluid bg-secondary mission">
-        <div class="row between-md around-xs">
-            <div class="col-sm-6 col-xs-12 mission_bg" aria-hidden="true">
-            </div>
-            <div class="col-sm-6 col-xs-12">
-                <h2 id="mission-heading" class="sr-only">Mission</h2>
-                {% component 'mission' %}
-            </div>
-        </div>
-    </div>
-</section>
-
-<section aria-labelledby="rio-banner-heading">
-    <div class="container rio_banner">
-        <h2 id="rio-banner-heading" class="sr-only">Featured Content</h2>
-        {% component 'rio_banner' %}
-    </div>
-</section>
-
-{% if entries.count %}
-<section aria-labelledby="events-heading">
-    <div class="container event-items-homepage">
-        <h2 id="events-heading">Upcoming MAMBO events</h2>
-        <div class="event-items-homepage2 mb-4">
-            {% for event in entries %}
-            <article class="row middle-xs events_item aos-init aos-animate" data-aos="fade-up">
-                {% if event.cover_image %}
-                <div class="col-md-4 col-xs-12">
-                    <a class="events-image col-xs-12 center-xs"
-                       href="{{'events'|page}}/{{event.slug}}"
-                       aria-label="View {{event.title}} event details">
-                        <img class="events-img"
-                             src="{{event.cover_image.path}}"
-                             alt="{{event.title}}">
-                    </a>
-                </div>
-                {% endif %}
-                <div class="col-md col-xs-12">
-                    <div class="events-container row">
-                        <time class="col-md-2 col-xs-12 text-published" datetime="{{event.start|date('Y-m-d')}}">
-                            {{ event.start|date('d M Y') }}
-                        </time>
-                        <div class="col-md-12 col-xs-12 events-title">
-                            <h3 class="card-title">
-                                <a href="{{'events'|page}}/{{event.slug}}">{{ event.title}}</a>
-                            </h3>
-                        </div>
-                    </div>
-                </div>
-            </article>
-            {% endfor %}
-        </div>
-        <div class="center-xs">
-            <a class="btn btn-primary view_all"
-               href="{{'events'|page}}"
-               aria-label="View all MAMBO events">
-                All events
-            </a>
-        </div>
-    </div>
-</section>
-{% endif %}
-
-<section aria-labelledby="news-heading">
-    <div class="container">
-        <h2 id="news-heading" class="sr-only">Latest News</h2>
-        {% component 'article_highlights' %}
-        <div class="row">
-            <div class="col-xs-12 center-xs">
-                <a href="{{'news'|page}}"
-                   class="btn btn-primary all-news-btn"
-                   aria-label="View all MAMBO news">
-                    All news
+{# Figma "Section" 3:317 #}
+<section class="home-intro" aria-labelledby="home-intro-heading">
+    <div class="home-intro__inner">
+        <div class="home-intro__body">
+            <h2 id="home-intro-heading" class="home-intro__title">
+                A pan-European consortium advancing the next generation of biodiversity monitoring
+            </h2>
+            <p class="home-intro__text">
+                Over four years and across seven European countries, the MAMBO consortium developed, tested and
+                demonstrated a new generation of monitoring tools that combine artificial intelligence, computer
+                vision, bioacoustics, remote sensing (including LiDAR), drones and citizen science. By applying
+                these tools across a diverse set of European demonstration sites, we have produced high&#8209;resolution,
+                harmonised data and indicators for species and habitats where knowledge gaps have long limited
+                effective conservation action.
+            </p>
+            <div class="home-intro__actions">
+                <a class="home-btn home-btn--solid" href="{{ 'library'|page }}">Browse all outputs</a>
+                <a class="home-btn home-btn--link" href="{{ 'pilots'|page }}">
+                    <span>Explore the demonstration sites</span>
+                    <span class="home-arrow" aria-hidden="true">
+                        <img src="{{ 'assets/images/arrow_down_thin_teal.svg'|theme }}" alt="">
+                    </span>
                 </a>
             </div>
         </div>
-    </div>
-</section>
 
-<section aria-labelledby="numbers-heading">
-    <div class="container-fluid bg-secondary">
-        <h2 id="numbers-heading" class="sr-only">Key Statistics</h2>
-        <div class="numbers_container">
-            {% component 'numbers' %}
-        </div>
-    </div>
-</section>
-
-{% if international.count > 0 %}
-<section aria-labelledby="partners-heading">
-    <div class="container mt-4">
-        <h2 id="partners-heading">Strategic partners and collaborators</h2>
-        <div class="row">
-            <div class="col-md-6 col-xs-12 mb-4">
-                <div class="inernational_partners">
-                    <h3 class="partners_title">
-                        International initiatives and networks
-                    </h3>
-                    <div class="row partners_list">
-                        {% for i in international %}
-                        <div class="col-md-6 col-xs-12">
-                            <div class="internal-partner-item">
-                                {% if i.cover %}
-                                <img class="partner_cover"
-                                     src="{{i.cover.thumb(195, auto, {'mode':'crop'})}}"
-                                     alt="{{i.instituion}} logo">
-                                {% else %}
-                                <p>{{i.instituion}}</p>
-                                {% endif %}
-                                {% if i.instituion_url %}
-                                <a href="{{i.instituion_url}}"
-                                   target="_blank"
-                                   rel="noopener noreferrer"
-                                   aria-label="Visit {{i.instituion}} website (opens in new window)">
-                                    <span class="sr-only">{{i.instituion}}</span>
-                                </a>
-                                {% endif %}
-                            </div>
-                        </div>
-                        {% endfor %}
-                    </div>
+        <div class="home-intro__stats">
+            <div class="home-stats">
+                <div class="home-stats__item">
+                    <span class="home-stats__value">10</span>
+                    <span class="home-stats__label">Partners</span>
                 </div>
-            </div>
-            <div class="col-md-6 col-xs-12 mb-4">
-                <div class="inernational_partners">
-                    <h3 class="partners_title">
-                        EU Projects
-                    </h3>
-                    <div class="partners_list">
-                        {% for i in european %}
-                        <div class="col-md-6 col-xs-12">
-                            <div class="internal-partner-item">
-                                {% if i.cover %}
-                                <img class="partner_cover"
-                                     src="{{i.cover.thumb(195, auto, {'mode':'crop'})}}"
-                                     alt="{{i.instituion}} logo">
-                                {% else %}
-                                <p>{{i.instituion}}</p>
-                                {% endif %}
-                                {% if i.instituion_url %}
-                                <a href="{{i.instituion_url}}"
-                                   target="_blank"
-                                   rel="noopener noreferrer"
-                                   aria-label="Visit {{i.instituion}} website (opens in new window)">
-                                    <span class="sr-only">{{i.instituion}}</span>
-                                </a>
-                                {% endif %}
-                            </div>
-                        </div>
-                        {% endfor %}
-                    </div>
+                <div class="home-stats__item">
+                    <span class="home-stats__value">7</span>
+                    <span class="home-stats__label">Countries</span>
+                </div>
+                <div class="home-stats__item">
+                    <span class="home-stats__value">7</span>
+                    <span class="home-stats__label">Demo sites</span>
+                </div>
+                <div class="home-stats__item">
+                    <span class="home-stats__value">4</span>
+                    <span class="home-stats__label">Years</span>
                 </div>
             </div>
         </div>
+    </div>
+</section>
+
+{# Figma "Section" 3:118 #}
+<section class="home-impact" aria-labelledby="home-impact-heading">
+    <h2 id="home-impact-heading" class="sr-only">Policy impact</h2>
+    <div class="home-impact__inner">
+        <p class="home-impact__text">
+            In the course of four years, MAMBO's partners actively worked to ensure that the project's tools and
+            insights are directly relevant to European priorities, including the EU Biodiversity Strategy for 2030,
+            and can be integrated into existing monitoring schemes and research infrastructures.
+        </p>
+        <a class="home-btn home-btn--outline" href="{{ 'policy-briefs'|page }}">
+            <span>Discover policy briefs</span>
+            <span class="home-arrow home-arrow--bold" aria-hidden="true">
+                <img src="{{ 'assets/images/arrow_down_bold_white.svg'|theme }}" alt="">
+            </span>
+        </a>
+    </div>
+</section>
+
+{# Figma "Container" 4:262 #}
+<section class="home-rio" aria-labelledby="home-rio-heading">
+    <div class="home-rio__media" aria-hidden="true">
+        <img src="{{ 'assets/images/rio_collection_cover.jpg'|theme }}" alt="">
+    </div>
+    <div class="home-rio__body">
+        <h2 id="home-rio-heading" class="home-rio__title">MAMBO's Topical Collection in the RIO Journal</h2>
+        <p class="home-rio__text">
+            MAMBO's topical collection in the RIO Journal hosts significant findings and outcomes from the project
+            &mdash; from data papers and methods to software descriptions, project reports and research articles.
+            This collection provides a transparent and lasting record of the project's work and ensures that MAMBO's
+            results will remain accessible to researchers, practitioners and decision-makers well beyond the
+            lifetime of the project.
+        </p>
+        <a class="home-btn home-btn--solid" href="{{ 'library'|page }}">RIO Collection</a>
+    </div>
+</section>
+
+{# Figma "News" 8:2 #}
+{% if news.count %}
+<section class="home-news" aria-labelledby="home-news-heading">
+    <h2 id="home-news-heading" class="home-news__title">Browse updates throughout its duration</h2>
+    <div class="home-news__grid">
+        {% for item in news %}
+        <article class="home-news__item">
+            {% if item.cover %}
+            <a class="home-news__media" href="{{'news'|page}}/{{item.slug}}" tabindex="-1" aria-hidden="true">
+                <img src="{{ item.cover.thumb(747, 400, {'mode':'crop'}) }}" alt="">
+            </a>
+            {% endif %}
+            <h3 class="home-news__heading">
+                <a href="{{'news'|page}}/{{item.slug}}">{{ item.title|striptags }}</a>
+            </h3>
+            <time class="home-news__date" datetime="{{ item.published_at|date('Y-m-d') }}">
+                {{ item.published_at|date('d.m.Y') }}
+            </time>
+        </article>
+        {% endfor %}
     </div>
 </section>
 {% endif %}
-
-<section aria-labelledby="follow-heading">
-    <div class="container">
-        <div class="col-xs-12">
-            <h2 id="follow-heading">Follow MAMBO</h2>
-        </div>
-        <div class="follow-container">
-            <nav class="col-md-6 col-xs-12 social-media-container" aria-label="MAMBO social media">
-                <div class="subscribe-items">
-                    {% if this.theme.bluesky_url %}
-                        <a href="{{this.theme.bluesky_url}}"
-                           target="_blank"
-                           rel="noopener noreferrer"
-                           class="btn p-primary pr p-bluesky medium"
-                           aria-label="Follow MAMBO on Bluesky (opens in new window)">
-                            <span class="sr-only">Bluesky</span>
-                        </a>
-                    {% endif %}
-                    {% if this.theme.twitter_url %}
-                        <a href="{{this.theme.twitter_url}}"
-                           target="_blank"
-                           rel="noopener noreferrer"
-                           class="btn p-primary pr p-twitter medium"
-                           aria-label="Follow MAMBO on Twitter (opens in new window)">
-                            <span class="sr-only">Twitter</span>
-                        </a>
-                    {% endif %}
-                    {% if this.theme.facebook_url %}
-                        <a href="{{this.theme.facebook_url}}"
-                           target="_blank"
-                           rel="noopener noreferrer"
-                           class="btn pr p-primary p-facebook medium"
-                           aria-label="Follow MAMBO on Facebook (opens in new window)">
-                            <span class="sr-only">Facebook</span>
-                        </a>
-                    {% endif %}
-                    {% if this.theme.linkedin_url %}
-                        <a href="{{this.theme.linkedin_url}}"
-                           target="_blank"
-                           rel="noopener noreferrer"
-                           class="btn pr p-primary p-linkedin medium"
-                           aria-label="Follow MAMBO on LinkedIn (opens in new window)">
-                            <span class="sr-only">LinkedIn</span>
-                        </a>
-                    {% endif %}
-                    {% if this.theme.youtube_url %}
-                        <a href="{{this.theme.youtube_url}}"
-                           target="_blank"
-                           rel="noopener noreferrer"
-                           class="btn pr p-primary p-youtube medium"
-                           aria-label="Follow MAMBO on YouTube (opens in new window)">
-                            <span class="sr-only">YouTube</span>
-                        </a>
-                    {% endif %}
-                    {% if this.theme.instagram_url %}
-                        <a href="{{this.theme.instagram_url}}"
-                           target="_blank"
-                           rel="noopener noreferrer"
-                           class="btn pr p-primary p-instagram medium"
-                           aria-label="Follow MAMBO on Instagram (opens in new window)">
-                            <span class="sr-only">Instagram</span>
-                        </a>
-                    {% endif %}
-                    {% if this.theme.researchgate_url %}
-                        <a href="{{this.theme.researchgate_url}}"
-                           target="_blank"
-                           rel="noopener noreferrer"
-                           class="btn pr p-primary p-researchgate medium researchgate-btn"
-                           aria-label="Follow MAMBO on ResearchGate (opens in new window)">
-                            <span class="sr-only">ResearchGate</span>
-                        </a>
-                    {% endif %}
-                </div>
-            </nav>
-        </div>
-    </div>
-</section>
