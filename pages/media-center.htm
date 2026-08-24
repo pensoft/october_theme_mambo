@@ -14,10 +14,12 @@ use Pensoft\Media\Models\Presentations;
 use Pensoft\Media\Models\Pressreleases;
 use Pensoft\Media\Models\Videos;
 use Pensoft\Media\Models\Graphic;
+use Pensoft\Media\Models\Documents;
 
 function onStart(){
 	$this['logos'] =  MediaLogos::get();
 	$this['flyers'] =  Flyers::get();
+	$this['factsheets'] =  Documents::get();
 	$this['newsletters'] =  Newsletters::get();
 	$this['presentations'] =  Presentations::get();
 	$this['pressreleases'] =  Pressreleases::get();
@@ -61,6 +63,7 @@ function onStart(){
                 </div>
             </article>
             {% endif %}
+
 
             {% if pressreleases.count() %}
             <article class="col-md-4 col-sm-6 col-xs-12">
@@ -136,6 +139,22 @@ function onStart(){
                 </div>
             </article>
             {% endif %}
+
+            {% if factsheets.count() %}
+            <article class="col-md-4 col-sm-6 col-xs-12">
+                <div class="card-container text-center">
+                    <a href="{{url('media-center')}}/factsheets"
+                       aria-label="View factsheets">
+                        <span class="card_image_container"
+                              style="background: url({{'pensoft/promo-materials.svg'|media}}) center center no-repeat;"
+                              role="img"
+                              aria-label="Factsheets icon"></span>
+                        <h2 class="media_label">Factsheets</h2>
+                    </a>
+                </div>
+            </article>
+            {% endif %}
+
         </div>
     </div>
 </section>

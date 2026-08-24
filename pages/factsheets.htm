@@ -1,0 +1,54 @@
+url = "/media-center/factsheets"
+layout = "default"
+title = "Factsheets"
+is_hidden = 0
+robot_index = "index"
+robot_follow = "follow"
+header_image = "media.jpg"
+==
+<?php
+use Pensoft\Media\Models\Documents;
+
+function onStart(){
+	$this['factsheets'] = Documents::get();
+}
+?>
+==
+<section aria-labelledby="factsheets-heading">
+    <div class="container">
+        <h1 id="factsheets-heading" class="sr-only">Factsheets</h1>
+
+        <div class="row">
+            {% for record in factsheets %}
+            {% spaceless %}
+            <article class="col-md-4 col-sm-6 col-xs-12">
+                <div class="text-center">
+                    {% if record.image %}
+                    <span class="card_image_container"
+                          style="background: url({{record.image.thumb(220,220,{'mode':'crop'})}}) center center no-repeat;"
+                          role="img"
+                          aria-label="{{record.title}} preview"></span>
+                    {% endif %}
+                    <h2 class="card_title">{{record.title}}</h2>
+                    {% if record.file %}
+                    <p class="file-size">{{record.file.size}}</p>
+                    <a href="{{ record.file.path }}#{{record.file.file_name}}"
+                       target="_blank"
+                       rel="noopener noreferrer"
+                       class="btn btn-primary"
+                       aria-label="Download {{record.title}} (opens in new window)"
+                       download>
+                        Download
+                    </a>
+                    {% endif %}
+                </div>
+            </article>
+            {% endspaceless %}
+            {% else %}
+            <div class="col-xs-12">
+                <p>No factsheets available at this time.</p>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
