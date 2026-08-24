@@ -1,5 +1,8 @@
 // Figma "menu" 4:175 — 24px top + 33px logo + 23px bottom
 @navbar-height: 80px;
+// a lower bar on the home page, so the hero and the legacy banner under it get
+// more of the first screen
+@navbar-height-home: 56px;
 
 .navbar {
     position: absolute;
@@ -251,14 +254,9 @@
 }
 
 .home{
-    .navbar-brand {
-        display: flex!important;
-        &.scrolled{
-            display: flex!important;
-        }
-
-    }
     .navbar{
+        height: @navbar-height-home;
+
         &.fixed {
             background: @dark-color;
             &.scrolled {
@@ -267,6 +265,14 @@
          }
 
     }
+
+    .breakpoint-screen-down({
+        // the burger panel hangs off the shorter bar
+        #menu {
+            top: @navbar-height-home;
+            height: calc(~"100vh - @{navbar-height-home}");
+        }
+    });
 }
 
 .full-width .search {

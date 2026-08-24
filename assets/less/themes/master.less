@@ -74,14 +74,61 @@ h1.display-1, h2.underline{
   });
 }
 
+// The home page header is a column exactly one screen tall: the legacy banner
+// takes the height its text needs — three lines on a phone, one on a desktop —
+// and the hero gets whatever is left, so the banner is in view on first paint
+// at every width without hard-coding how many lines it wraps to.
+.home {
+    #layout-header {
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+    }
+
+    // containing block for the .container.homepage scrim, which must stop where
+    // the hero stops rather than covering the banner underneath it
+    .home-hero {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        flex: 1 1 auto;
+        min-height: 0;
+    }
+
+    .carousel {
+        display: flex;
+        flex-direction: column;
+        flex: 1 1 auto;
+        min-height: 0;
+    }
+
+    // left block-level on purpose: mid-transition two slides are shown at once,
+    // and stacked blocks are clipped by its overflow instead of splitting the
+    // height between them the way flex items would
+    .carousel-inner {
+        flex: 1 1 auto;
+        min-height: 0;
+    }
+
+    .carousel-inner > .item,
+    .carousel-inner > .item > img {
+        height: calc(~'100vh - 42px');
+        min-height: 0;
+    }
+
+    .legacy-banner {
+        flex: 0 0 auto;
+    }
+}
+
 .container.homepage{
     position: absolute;
     width: 50%;
-    max-height: 100vh;
+    max-height: none;
     overflow: hidden;
     //background: rgba(42, 58, 78, 0.6);
     background: rgba(0, 0, 0, 0.3);
-    height: 100vh;
+    height: 100%;
     top: 0;
     left: 0;
     color: white;
@@ -102,21 +149,6 @@ h1.display-1, h2.underline{
         // long headline word pushes past the container and gets clipped
         width: 100%;
         box-sizing: border-box;
-        .logo_main{
-            background: url("../../assets/images/MAMBO_white.svg") left no-repeat;
-            background-size: contain;
-            width: 100%;
-            height: 147px;
-            .breakpoint-laptop-down({
-                width: 40%;
-                height: 76px;
-            });
-            .breakpoint-small-down({
-                width: 100%;
-                height: 64px;
-                background-position: center;
-            });
-        }
         h1{
             font-size: 46px;
             color: @white-color;
@@ -187,13 +219,13 @@ h1.display-1, h2.underline{
     }
 
     // the bar is fixed and opaque, so centre the content in the space below it
-    // rather than pinning it to y=0 where the logo disappears behind the bar
+    // rather than pinning it to y=0 where the headline runs behind the bar
     .breakpoint-laptop-down({
         width: 50%;
         align-items: start;
         justify-content: center;
         // !important only to beat this block's own `padding-top: unset!important`
-        padding-top: @navbar-height!important;
+        padding-top: @navbar-height-home!important;
         box-sizing: border-box;
     });
     .breakpoint-small-down({
@@ -838,7 +870,7 @@ footer .align-items-center{
 
 .carousel-inner>.item{
     width: 100%!important;
-    height: 100vh;
+    height: calc(~'100vh - 42px');
     overflow: hidden;
     &:first-of-type{
         img{

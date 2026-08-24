@@ -118,7 +118,16 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         page_id=this.page.id
         %}
         {% if this.page.id == 'home' %}
-        {% component 'carousel' %}
+        <div class="home-hero">
+            {% component 'carousel' %}
+            <div class="container homepage">
+                <div class="intro" data-aos="fade-right">
+                    <h1>Four years of advancing biodiversity monitoring</h1>
+                    <div class="tagline">{% component 'jumbotron' %}</div>
+                    <div class="intro_btn"><a href="{{'about'|page}}">More about the project</a> </div>
+                </div>
+            </div>
+        </div>
         <a class="legacy-banner" href="https://drive.google.com/file/d/1O4t5OdG66R_aqJxgnsnnrBXYMhqlhRcN/view?usp=sharing" target="_blank">
             <span class="legacy-banner-text">MAMBO has concluded after four years of research - explore the derived outputs and learn more about the project's impact in the legacy brochure</span>
             <span class="legacy-banner-arrow" aria-hidden="true">
@@ -127,17 +136,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         </a>
         {% endif %}
     </header>
-    {% if this.page.id == 'home' %}
-    <div class="container homepage">
-        <div class="intro" data-aos="fade-right">
-            <div class="logo_main"></div>
-            <h1>Four years of advancing biodiversity monitoring</h1>
-            <div class="tagline">{% component 'jumbotron' %}</div>
-            <div class="intro_btn"><a href="{{'about'|page}}">More about the project</a> </div>
-        </div>
-    </div>
-    {% endif %}
-
 
     <!-- Content -->
     <section id="layout-content" class="{{this.page.id}}" >
