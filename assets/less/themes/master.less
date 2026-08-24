@@ -154,7 +154,7 @@ h1.display-1, h2.underline{
             color: @white-color;
             line-height: 66px;
             font-family: Montserrat;
-            margin: 40px 0;
+            margin: 40px 0 16px;
             text-align: left!important;
             text-transform: uppercase;
 
@@ -184,6 +184,11 @@ h1.display-1, h2.underline{
             p:has(a.edit-link){
                 display: none;
             }
+            // the button owns the gap below the description, so the trailing
+            // paragraph must not add the global 20px on top of it
+            p:last-child{
+                margin-bottom: 0;
+            }
             .breakpoint-small-down({
                 font-size: 16px;
                 line-height: 26px;
@@ -198,7 +203,7 @@ h1.display-1, h2.underline{
             border-radius: 50px;
             text-align: center;
             color: @white-color;
-            margin-top: 50px;
+            margin-top: 32px;
             background: rgba(0, 0, 0, 0.3);
             //backdrop-filter: blur(30px);
             a{
@@ -209,7 +214,7 @@ h1.display-1, h2.underline{
             }
 
             .breakpoint-small-down({
-                margin: 20px auto;
+                margin: 32px auto;
             });
         }
 
